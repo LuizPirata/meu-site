@@ -1,11 +1,11 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-// Configuração do Supabase
-const supabaseUrl = 'https://mdaqzciffsgupzbfxzgf.supabase.co';
-const supabaseKey = 'sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY';
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(
+  'https://mdaqzciffsgupzbfxzgf.supabase.co',
+  'sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY'
+);
 
-// Função para cadastrar usuário
+// CADASTRO
 async function cadastrar() {
   const email = document.getElementById('email').value;
   const senha = document.getElementById('senha').value;
@@ -15,17 +15,26 @@ async function cadastrar() {
     return;
   }
 
-  const { error } = await supabase.auth.signUp({ email, password: senha });
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password: senha
+  });
 
   if (error) {
-    alert('Erro ao cadastrar: ' + error.message);
-  } else {
-    alert('Usuário cadastrado com sucesso! Verifique seu email.');
-    window.location.href = 'perfil.html';
+    alert("Erro ao cadastrar: " + error.message);
+    return;
   }
+
+  // Se a confirmação de email estiver DESATIVADA → redireciona
+  if (data.user) {
+    window.location.href = "perfil.html";
+  }
+
+  // Senão, pede verificação
+  alert("Cadastro realizado! Verifique seu e-mail para confirmar.");
 }
 
-// Função para login
+// LOGIN
 async function logar() {
   const email = document.getElementById('email').value;
   const senha = document.getElementById('senha').value;
@@ -41,14 +50,13 @@ async function logar() {
   });
 
   if (error) {
-    alert('Erro ao logar: ' + error.message);
-  } else {
-    alert('Login realizado com sucesso!');
-    window.location.href = 'perfil.html';
+    alert("Erro ao logar: " + error.message);
+    return;
   }
+
+  window.location.href = "perfil.html";
 }
 
-// Eventos
 document.getElementById('btn-cadastrar').addEventListener('click', cadastrar);
 document.getElementById('btn-login').addEventListener('click', logar);
 

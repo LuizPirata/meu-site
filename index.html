@@ -28,7 +28,67 @@
     </div>
   </div>
 
-  <script type="module" src="app.js"></script>
+  <!-- Supabase -->
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+    const supabase = createClient(
+      "https://mdaqzciffsgupzbfxzgf.supabase.co",
+      "sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY"
+    );
+
+    const emailInput = document.getElementById("email");
+    const senhaInput = document.getElementById("senha");
+
+    document.getElementById("btn-cadastrar").addEventListener("click", cadastrar);
+    document.getElementById("btn-login").addEventListener("click", login);
+
+    async function cadastrar() {
+      const email = emailInput.value;
+      const senha = senhaInput.value;
+
+      if (!email || !senha) {
+        alert("Preencha todos os campos!");
+        return;
+      }
+
+      const { error } = await supabase.auth.signUp({
+        email,
+        password: senha
+      });
+
+      if (error) {
+        alert("Erro ao cadastrar: " + error.message);
+      } else {
+        alert("Cadastro realizado! Redirecionando...");
+        window.location.href = "perfil.html";
+      }
+    }
+
+    async function login() {
+      const email = emailInput.value;
+      const senha = senhaInput.value;
+
+      if (!email || !senha) {
+        alert("Preencha todos os campos!");
+        return;
+      }
+
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password: senha
+      });
+
+      if (error) {
+        alert("Erro ao logar: " + error.message);
+      } else {
+        alert("Login realizado! Redirecionando...");
+        window.location.href = "perfil.html";
+      }
+    }
+  </script>
+
 </body>
 </html>
+
 

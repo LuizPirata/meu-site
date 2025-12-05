@@ -14,15 +14,19 @@
     <button id="btn-logout">Logout</button>
   </div>
 
+  <!-- Supabase -->
   <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
     const supabase = createClient(
       "https://mdaqzciffsgupzbfxzgf.supabase.co",
       "sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY"
     );
 
-    async function loadProfile() {
+    const emailBox = document.getElementById("user-email");
+    const logoutBtn = document.getElementById("btn-logout");
+
+    async function carregarPerfil() {
       const { data, error } = await supabase.auth.getUser();
 
       if (error || !data.user) {
@@ -30,8 +34,7 @@
         return;
       }
 
-      document.getElementById("user-email").textContent =
-        `Bem-vindo, ${data.user.email}`;
+      emailBox.textContent = `Bem-vindo, ${data.user.email}`;
     }
 
     async function logout() {
@@ -39,9 +42,9 @@
       window.location.href = "index.html";
     }
 
-    document.getElementById("btn-logout").addEventListener("click", logout);
+    logoutBtn.addEventListener("click", logout);
 
-    loadProfile();
+    carregarPerfil();
   </script>
 
 </body>
