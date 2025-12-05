@@ -1,69 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bolão da Copa 2026</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bolão da Copa 2026</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
+  <div class="container">
 
-        <div class="login-card">
-            <h1>Bem-vindo ao Bolão da Copa do Mundo FIFA 2026!</h1>
+    <div class="login-card">
+      <h1>Bem-vindo ao Bolão da Copa<br>2026!</h1>
+      <p>Faça seu cadastro ou login para continuar.</p>
 
-            <!-- LOGO AGORA ABAIXO DO TÍTULO -->
-            <img src="logo.jpg" alt="Logo" class="logo" onerror="this.style.display='none'">
-            <p>Faça seu cadastro ou login para continuar.</p>
+      <form id="login-form" style="max-width:360px;margin:0 auto;">
+        <input type="email" id="email" placeholder="Seu e-mail" required class="login-input">
+        <input type="password" id="password" placeholder="Senha" required class="login-input">
 
-            <form id="login-form">
+        <!-- BOTÕES: use IDs para o script -->
+        <button type="button" id="btn-login" class="menu-btn login-input">Login</button>
+        <button type="button" id="btn-cadastrar" class="menu-btn login-input">Cadastrar</button>
 
-                <!-- EMAIL -->
-                <input 
-                    type="email" 
-                    id="email" 
-                    placeholder="Seu e-mail" 
-                    required 
-                    class="login-input"
-                >
-
-                <!-- SENHA -->
-                <input 
-                    type="password" 
-                    id="password" 
-                    placeholder="Senha" 
-                    required 
-                    class="login-input"
-                >
-
-                <!-- BOTÃO LOGIN -->
-                <button 
-                    type="submit" 
-                    class="menu-btn login-input"
-                >
-                    Login
-                </button>
-
-                <!-- BOTÃO CADASTRAR -->
-                <button 
-                    type="button" 
-                    class="menu-btn login-input"
-                    onclick="window.location.href='cadastro.html'"
-                >
-                    Cadastrar
-                </button>
-
-            </form>
-
-        </div>
-
+        <p id="msg" style="margin-top:12px; text-align:center; font-size:14px;"></p>
+      </form>
     </div>
 
-    <script type="module" src="login.js"></script>
+  </div>
 
-
+  <!-- script em módulo que contém a lógica de login/cadastro -->
+  <script type="module" src="login.js"></script>
 </body>
 </html>
-
 
