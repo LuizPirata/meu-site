@@ -11,37 +11,40 @@
   <div class="header-container">
     <h1 class="main-title">Meu Perfil</h1>
     <p id="user-email" class="welcome-text"></p>
-    <button onclick="logout()">Logout</button>
+    <button id="btn-logout">Logout</button>
   </div>
 
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-    const supabaseUrl = 'SUA_URL_SUPABASE';
-    const supabaseKey = 'SUA_CHAVE_ANON';
-    const supabase = createClient(supabaseUrl, supabaseKey);
+    const supabase = createClient(
+      "https://mdaqzciffsgupzbfxzgf.supabase.co",
+      "sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY"
+    );
 
-    // Carrega dados do usuário logado
     async function loadProfile() {
-      const user = supabase.auth.user();
-      if (!user) {
-        window.location.href = 'index.html';
-      } else {
-        document.getElementById('user-email').textContent = `Bem-vindo, ${user.email}`;
+      const { data, error } = await supabase.auth.getUser();
+
+      if (error || !data.user) {
+        window.location.href = "index.html";
+        return;
       }
+
+      document.getElementById("user-email").textContent =
+        `Bem-vindo, ${data.user.email}`;
     }
 
     async function logout() {
-      const { error } = await supabase.auth.signOut();
-      if (error) {
-        alert('Erro ao sair: ' + error.message);
-      } else {
-        window.location.href = 'index.html';
-      }
+      await supabase.auth.signOut();
+      window.location.href = "index.html";
     }
+
+    document.getElementById("btn-logout").addEventListener("click", logout);
 
     loadProfile();
   </script>
 
 </body>
 </html>
+
+

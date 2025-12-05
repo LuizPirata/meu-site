@@ -1,6 +1,6 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-// Substitua pelos seus dados do Supabase
+// Configuração do Supabase
 const supabaseUrl = 'https://mdaqzciffsgupzbfxzgf.supabase.co';
 const supabaseKey = 'sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY';
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -15,7 +15,7 @@ async function cadastrar() {
     return;
   }
 
-  const { data, error } = await supabase.auth.signUp({ email, password: senha });
+  const { error } = await supabase.auth.signUp({ email, password: senha });
 
   if (error) {
     alert('Erro ao cadastrar: ' + error.message);
@@ -35,7 +35,10 @@ async function logar() {
     return;
   }
 
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password: senha });
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password: senha
+  });
 
   if (error) {
     alert('Erro ao logar: ' + error.message);
@@ -45,17 +48,7 @@ async function logar() {
   }
 }
 
-// Função de logout
-async function sair() {
-  const { error } = await supabase.auth.signOut();
-  if (error) {
-    alert('Erro ao sair: ' + error.message);
-  } else {
-    window.location.href = 'index.html';
-  }
-}
-
-// Adiciona event listeners aos botões
+// Eventos
 document.getElementById('btn-cadastrar').addEventListener('click', cadastrar);
 document.getElementById('btn-login').addEventListener('click', logar);
-document.getElementById('btn-logout').addEventListener('click', sair);
+
