@@ -17,18 +17,42 @@
             <p>Faça seu cadastro ou login para continuar.</p>
 
             <form id="login-form">
-                <input type="email" id="email" placeholder="Seu e-mail" required>
-                <input type="password" id="password" placeholder="Senha" required>
 
-                <!-- BOTÕES NO MESMO ESTILO DO PERFIL -->
-                <button type="submit" class="menu-btn" style="width:100%; margin-top:10px;">
+                <!-- EMAIL -->
+                <input 
+                    type="email" 
+                    id="email" 
+                    placeholder="Seu e-mail" 
+                    required 
+                    class="login-input"
+                >
+
+                <!-- SENHA -->
+                <input 
+                    type="password" 
+                    id="password" 
+                    placeholder="Senha" 
+                    required 
+                    class="login-input"
+                >
+
+                <!-- BOTÃO LOGIN -->
+                <button 
+                    type="submit" 
+                    class="menu-btn login-input"
+                >
                     Login
                 </button>
 
-                <button type="button" class="menu-btn" style="width:100%; margin-top:10px;"
-                        onclick="window.location.href='cadastro.html'">
+                <!-- BOTÃO CADASTRAR -->
+                <button 
+                    type="button" 
+                    class="menu-btn login-input"
+                    onclick="window.location.href='cadastro.html'"
+                >
                     Cadastrar
                 </button>
+
             </form>
 
         </div>
@@ -39,4 +63,5 @@
 
 </body>
 </html>
+
 
