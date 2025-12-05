@@ -1,91 +1,115 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Bolão da Copa 2026</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolão da Copa 2026</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="container">
+    <div class="container">
 
-    <div class="login-card">
-  <h1>Bem-vindo ao Bolão da Copa<br>2026!</h1>
+        <div class="login-card">
 
-  <!-- 🌟 SUA LOGO AQUI -->
-  <img src="logo.jpg" alt="Logo" style="width:160px; display:block; margin:15px auto;">
+            <h1>Bem-vindo ao Bolão da Copa<br>2026!</h1>
+            <p>Faça seu cadastro ou login para continuar.</p>
 
-  <p>Faça seu cadastro ou login para continuar.</p>
+            <!-- LOGO -->
+            <img src="logo.png" alt="Logo" class="logo">
 
-  <form id="login-form" style="max-width:360px;margin:0 auto;">
-    <input type="email" id="email" placeholder="Seu e-mail" required class="login-input">
-    <input type="password" id="password" placeholder="Senha" required class="login-input">
+            <form id="login-form">
+                <input type="email" id="email" placeholder="Seu e-mail" required>
+                <input type="password" id="password" placeholder="Senha" required>
 
-    <button type="button" id="btn-login" class="menu-btn login-input">Login</button>
-    <button type="button" id="btn-cadastrar" class="menu-btn login-input">Cadastrar</button>
+                <!-- Botões -->
+                <button type="submit" class="menu-btn" id="btn-login">Login</button>
+                <button type="button" class="menu-btn" id="btn-cadastro">Cadastrar</button>
+            </form>
 
-    <p id="msg" style="margin-top:12px; text-align:center; font-size:14px;"></p>
-  </form>
-</div>
+        </div>
 
+    </div>
 
-  </div>
+    <!-- SCRIPT LOGIN & CADASTRO -->
+    <script type="module">
+        import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
-  <!-- script em módulo que contém a lógica de login/cadastro -->
-  <script type="module">
-    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+        const supabase = createClient(
+            "https://mdaqzciffsgupzbfxzgf.supabase.co",
+            "sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY"
+        );
 
-    const supabase = createClient(
-        "https://mdaqzciffsgupzbfxzgf.supabase.co",
-        "sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY"
-    );
+        // LOGIN
+        document.getElementById("btn-login").addEventListener("click", async (e) => {
+            e.preventDefault();
 
-    document.getElementById("btn-cadastro").addEventListener("click", cadastrar);
+            const email = document.getElementById("email").value.trim();
+            const senha = document.getElementById("password").value.trim();
 
-    async function cadastrar() {
-        const email = document.getElementById("email").value.trim();
-        const senha = document.getElementById("password").value.trim();
+            if (!email || !senha) {
+                alert("Preencha email e senha!");
+                return;
+            }
 
-        if (!email || !senha) {
-            alert("Preencha email e senha!");
-            return;
-        }
+            const { error } = await supabase.auth.signInWithPassword({
+                email,
+                password: senha
+            });
 
-        // Primeiro: verificar se já existe usuário
-        const { data: usuariosExistentes } = await supabase
-            .from("usuarios")
-            .select("*")
-            .eq("email", email);
+            if (error) {
+                alert("Erro ao logar: " + error.message);
+                return;
+            }
 
-        if (usuariosExistentes && usuariosExistentes.length > 0) {
-            alert("Usuário já cadastrado!");
-            return;
-        }
-
-        // Criar conta supabase auth
-        const { data, error } = await supabase.auth.signUp({
-            email,
-            password: senha
+            window.location.href = "perfil.html";
         });
 
-        if (error) {
-            alert("Erro ao cadastrar: " + error.message);
-            return;
-        }
+        // CADASTRO
+        document.getElementById("btn-cadastro").addEventListener("click", async () => {
+            const email = document.getElementById("email").value.trim();
+            const senha = document.getElementById("password").value.trim();
 
-        // Criar username automático
-        const username = email.split("@")[0];
+            if (!email || !senha) {
+                alert("Preencha email e senha!");
+                return;
+            }
 
-        // Salvar no banco "usuarios"
-        await supabase.from("usuarios").insert([
-            { email: email, username: username }
-        ]);
+            // Verificar se já existe usuário na tabela
+            const { data: usuariosExistentes } = await supabase
+                .from("usuarios")
+                .select("*")
+                .eq("email", email);
 
-        // Redirecionar para página dinâmica
-        window.location.href = `usuario.html?user=${encodeURIComponent(username)}`;
-    }
-</script>
+            if (usuariosExistentes && usuariosExistentes.length > 0) {
+                alert("Usuário já cadastrado!");
+                return;
+            }
+
+            // Criar conta no Supabase Auth
+            const { data, error } = await supabase.auth.signUp({
+                email,
+                password: senha
+            });
+
+            if (error) {
+                alert("Erro ao cadastrar: " + error.message);
+                return;
+            }
+
+            // Criar username automático
+            const username = email.split("@")[0];
+
+            // Salvar na tabela "usuarios"
+            await supabase.from("usuarios").insert([
+                { email: email, username: username }
+            ]);
+
+            // Redirecionar para a página dinâmica
+            window.location.href = `usuario.html?user=${encodeURIComponent(username)}`;
+        });
+
+    </script>
 
 </body>
 </html>
