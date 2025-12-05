@@ -52,3 +52,10 @@ body {
     display: block;
     box-sizing: border-box;
 }
+
+.logo {
+    display: block;
+    margin: 10px auto 20px auto;
+    width: 120px;
+    height: auto;
+}
