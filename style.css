@@ -20,10 +20,11 @@ body {
   text-align: center;
   margin: 20px 0;
   font-weight: bold;
-  background: linear-gradient(90deg, #ffd700, #ff0000, #008000, #1e90ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  color: #fff; /* texto branco */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* opcional, para destaque */
+  background: none; /* remove o gradiente */
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
 }
 
 /* Container que centraliza o formulário */
