@@ -1,19 +1,26 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu Site com Supabase</title>
+  <title>Meu Site</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Login / Cadastro</h1>
+  <div class="container">
+    <h1>Bem-vindo!</h1>
+    
+    <div class="form-container">
+      <input type="email" id="email" placeholder="Email">
+      <input type="password" id="senha" placeholder="Senha">
 
-  <input id="email" type="email" placeholder="Email"><br>
-  <input id="senha" type="password" placeholder="Senha"><br>
-
-  <button onclick="cadastrar()">Cadastrar</button>
-  <button onclick="logar()">Login</button>
-  <button onclick="sair()">Logout</button>
+      <div class="buttons">
+        <button onclick="cadastrar()">Cadastrar</button>
+        <button onclick="logar()">Login</button>
+        <button onclick="sair()">Logout</button>
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="app.js"></script>
 </body>
