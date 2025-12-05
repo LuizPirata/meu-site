@@ -50,13 +50,12 @@ body {
   margin-bottom: 20px; /* Espaço entre texto e formulário */
 }
 
-/* Container que centraliza o formulário */
-.container {
-  flex: 1;
+/* Container do formulário */
+.form-block {
   display: flex;
   justify-content: center;
-  align-items: center;
   width: 100%;
+  margin-bottom: 50px; /* Espaçamento final consistente com topo e blocos anteriores */
 }
 
 /* Formulário */
@@ -64,12 +63,12 @@ body {
   display: flex;
   flex-direction: column;
   width: 300px;
+  gap: 15px; /* Espaçamento uniforme entre inputs e botões */
 }
 
 input {
   width: 100%;
   padding: 12px;
-  margin: 10px 0;
   border-radius: 10px;
   border: 1px solid #555;
   background-color: #1a1a1a; /* fundo escuro */
@@ -84,7 +83,6 @@ input::placeholder {
 button {
   width: 100%;
   padding: 12px;
-  margin-top: 10px;
   border: none;
   border-radius: 10px;
   background: linear-gradient(90deg, #ffcc00, #ff0000);
