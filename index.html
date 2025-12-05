@@ -33,7 +33,60 @@
   </div>
 
   <!-- script em módulo que contém a lógica de login/cadastro -->
-  <script type="module" src="login.js"></script>
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+    const supabase = createClient(
+        "https://mdaqzciffsgupzbfxzgf.supabase.co",
+        "sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY"
+    );
+
+    document.getElementById("btn-cadastro").addEventListener("click", cadastrar);
+
+    async function cadastrar() {
+        const email = document.getElementById("email").value.trim();
+        const senha = document.getElementById("password").value.trim();
+
+        if (!email || !senha) {
+            alert("Preencha email e senha!");
+            return;
+        }
+
+        // Primeiro: verificar se já existe usuário
+        const { data: usuariosExistentes } = await supabase
+            .from("usuarios")
+            .select("*")
+            .eq("email", email);
+
+        if (usuariosExistentes && usuariosExistentes.length > 0) {
+            alert("Usuário já cadastrado!");
+            return;
+        }
+
+        // Criar conta supabase auth
+        const { data, error } = await supabase.auth.signUp({
+            email,
+            password: senha
+        });
+
+        if (error) {
+            alert("Erro ao cadastrar: " + error.message);
+            return;
+        }
+
+        // Criar username automático
+        const username = email.split("@")[0];
+
+        // Salvar no banco "usuarios"
+        await supabase.from("usuarios").insert([
+            { email: email, username: username }
+        ]);
+
+        // Redirecionar para página dinâmica
+        window.location.href = `usuario.html?user=${encodeURIComponent(username)}`;
+    }
+</script>
+
 </body>
 </html>
 
