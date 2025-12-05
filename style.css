@@ -7,7 +7,7 @@
 
 body {
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #1c1c1c, #000); /* Fundo preto com leve gradiente */
+  background: linear-gradient(135deg, #1c1c1c, #000); /* Fundo preto */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -19,8 +19,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px; /* Espaço do topo da página */
-  margin-bottom: 50px; /* Espaço entre imagem/texto e formulário */
+  margin-top: 50px; 
+  margin-bottom: 50px;
 }
 
 /* Título */
@@ -30,7 +30,7 @@ body {
   font-weight: bold;
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-  margin-bottom: 30px; /* Espaço entre título e imagem */
+  margin-bottom: 30px;
 }
 
 /* Imagem */
@@ -38,7 +38,7 @@ body {
   display: block;
   max-width: 200px;
   height: auto;
-  margin-bottom: 30px; /* Espaço entre imagem e texto de boas-vindas */
+  margin-bottom: 30px;
 }
 
 /* Texto de boas-vindas */
@@ -47,7 +47,7 @@ body {
   color: #fff;
   text-align: center;
   font-weight: bold;
-  margin-bottom: 20px; /* Espaço entre texto e formulário */
+  margin-bottom: 20px;
 }
 
 /* Container do formulário */
@@ -55,7 +55,7 @@ body {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-bottom: 50px; /* Espaçamento final consistente com topo e blocos anteriores */
+  margin-bottom: 50px;
 }
 
 /* Formulário */
@@ -63,7 +63,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 300px;
-  gap: 15px; /* Espaçamento uniforme entre inputs e container de botões */
+  gap: 15px;
 }
 
 input {
@@ -71,8 +71,8 @@ input {
   padding: 12px;
   border-radius: 10px;
   border: 1px solid #555;
-  background-color: #1a1a1a; /* fundo escuro */
-  color: #fff; /* texto branco */
+  background-color: #1a1a1a;
+  color: #fff;
   font-size: 16px;
 }
 
@@ -83,8 +83,8 @@ input::placeholder {
 /* Container dos botões */
 .buttons {
   display: flex;
-  flex-direction: column; /* empilha os botões */
-  gap: 10px; /* espaço entre cada botão */
+  flex-direction: column; 
+  gap: 10px; /* Espaçamento entre botões */
 }
 
 button {
@@ -106,7 +106,6 @@ button:hover {
   box-shadow: 0 6px 8px rgba(0,0,0,0.5);
 }
 
-/* Responsividade para telas pequenas */
 @media (max-width: 400px) {
   .form-container {
     width: 90%;

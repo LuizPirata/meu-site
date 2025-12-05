@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil do Usuário</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="header-container">
+    <h1 class="main-title">Meu Perfil</h1>
+    <p id="user-email" class="welcome-text"></p>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const supabaseUrl = 'SUA_URL_SUPABASE';
+    const supabaseKey = 'SUA_CHAVE_ANON';
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    // Carrega dados do usuário logado
+    async function loadProfile() {
+      const user = supabase.auth.user();
+      if (!user) {
+        window.location.href = 'index.html';
+      } else {
+        document.getElementById('user-email').textContent = `Bem-vindo, ${user.email}`;
+      }
+    }
+
+    async function logout() {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        alert('Erro ao sair: ' + error.message);
+      } else {
+        window.location.href = 'index.html';
+      }
+    }
+
+    loadProfile();
+  </script>
+
+</body>
+</html>
