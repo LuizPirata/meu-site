@@ -55,7 +55,7 @@ async function sair() {
   }
 }
 
-// Torna as funções disponíveis para os botões no HTML
-window.cadastrar = cadastrar;
-window.logar = logar;
-window.sair = sair;
+// Adiciona event listeners aos botões
+document.getElementById('btn-cadastrar').addEventListener('click', cadastrar);
+document.getElementById('btn-login').addEventListener('click', logar);
+document.getElementById('btn-logout').addEventListener('click', sair);
