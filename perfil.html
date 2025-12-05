@@ -5,82 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Perfil</title>
     <link rel="stylesheet" href="style.css">
-
-    <style>
-        /* Botões estilo Logout */
-        .btn-orange {
-            background: linear-gradient(to right, #ffa500, #ff0000);
-            color: white;
-            padding: 12px 22px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.2s;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-        }
-
-        .btn-orange:hover {
-            opacity: 0.85;
-        }
-
-        /* Navbar */
-        nav {
-            width: 100%;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            background-color: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
-            margin-bottom: 30px;
-        }
-
-        /* Centralização do conteúdo */
-        .container {
-            text-align: center;
-            margin-top: 20px;
-        }
-    </style>
-
 </head>
 <body>
 
-    <!-- NAVBAR SUPERIOR -->
-    <nav>
-        <a href="index.html" class="btn-orange">Página Inicial</a>
-        <a href="simulacao.html" class="btn-orange">Simulação</a>
-        <a href="classificacao.html" class="btn-orange">Classificação</a>
-        <a href="artilharia.html" class="btn-orange">Artilharia</a>
-        <a href="regras.html" class="btn-orange">Regras</a>
+    <!-- MENU SUPERIOR -->
+    <nav class="menu">
+        <a href="perfil.html" class="menu-btn">Acompanhamento</a>
+        <a href="simulacao.html" class="menu-btn">Simulação</a>
+        <a href="classificacao.html" class="menu-btn">Classificação</a>
+        <a href="artilharia.html" class="menu-btn">Artilharia</a>
+        <a href="regras.html" class="menu-btn">Regras</a>
+        <button id="logoutBtn" class="menu-btn logout-btn">Logout</button>
     </nav>
 
     <div class="container">
         <h1>Meu Perfil</h1>
-        <p id="user-email">Carregando usuário...</p>
-
-        <!-- Logout abaixo do Bem-vindo -->
-        <button id="logout" class="btn-orange">Logout</button>
+        <p id="userEmail">Carregando usuário...</p>
     </div>
 
     <script type="module">
-        import { supabase } from "./app.js";
+        import { auth, onAuthStateChanged, signOut } from "./firebase.js";
 
-        // Verifica usuário
-        supabase.auth.getUser().then(({ data }) => {
-            if (!data.user) {
-                window.location.href = "index.html";
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById("userEmail").textContent = user.email;
             } else {
-                document.getElementById("user-email").innerText =
-                    "Bem-vindo, " + data.user.email;
+                window.location.href = "index.html";
             }
         });
 
-        // Logout
-        document.getElementById("logout").addEventListener("click", async () => {
-            await supabase.auth.signOut();
+        document.getElementById("logoutBtn").addEventListener("click", async () => {
+            await signOut(auth);
             window.location.href = "index.html";
         });
     </script>
