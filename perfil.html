@@ -10,20 +10,13 @@
 
     <!-- MENU SUPERIOR -->
     <nav class="menu">
-        <a href="perfil.html" class="menu-btn">Palpites</a>
+        <a href="perfil.html" class="menu-btn">Acompanhamento</a>
         <a href="simulacao.html" class="menu-btn">Simulação</a>
         <a href="classificacao.html" class="menu-btn">Classificação</a>
         <a href="artilharia.html" class="menu-btn">Artilharia</a>
         <a href="regras.html" class="menu-btn">Regras</a>
         <button id="logoutBtn" class="menu-btn logout-btn">Logout</button>
     </nav>
-
-    <div class="container">
-        <h1>Meu Perfil</h1>
-
-        <!-- Aqui será mostrado o username -->
-        <p id="nome-usuario" style="font-size: 1.2rem; color: #fff;">Carregando usuário...</p>
-    </div>
 
     <!-- SUPABASE -->
     <script type="module">
@@ -34,52 +27,20 @@
 
         const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // ---------------------------
-        // 1. Verificar se está logado
-        // ---------------------------
+        // Verificar se o usuário está logado
         const {
             data: { session }
         } = await supabase.auth.getSession();
 
         if (!session) {
-            // não logado → volta para index
             window.location.href = "index.html";
         }
 
-        const user = session.user;
-        const userId = user.id;
-
-        // ---------------------------
-        // 2. Pegar username da URL
-        // ---------------------------
-        const params = new URLSearchParams(window.location.search);
-        let username = params.get("username");
-
-        // Se não veio username na URL, buscar no Supabase
-        if (!username) {
-            const { data } = await supabase
-                .from("usuarios")
-                .select("username")
-                .eq("user_id", userId)
-                .maybeSingle();
-
-            if (data) {
-                username = data.username;
-            }
-        }
-
-        // Exibir o username na tela
-        document.getElementById("nome-usuario").textContent =
-            username ? `Olá, ${username}!` : "Usuário carregado";
-
-        // ---------------------------
-        // 3. Logout
-        // ---------------------------
+        // Logout
         document.getElementById("logoutBtn").addEventListener("click", async () => {
             await supabase.auth.signOut();
             window.location.href = "index.html";
         });
-
     </script>
 
 </body>
