@@ -3,42 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Perfil</title>
+    <title>Bolão da Copa 2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- MENU SUPERIOR -->
-    <nav class="menu">
-        <a href="perfil.html" class="menu-btn">Acompanhamento</a>
-        <a href="simulacao.html" class="menu-btn">Simulação</a>
-        <a href="classificacao.html" class="menu-btn">Classificação</a>
-        <a href="artilharia.html" class="menu-btn">Artilharia</a>
-        <a href="regras.html" class="menu-btn">Regras</a>
-        <button id="logoutBtn" class="menu-btn logout-btn">Logout</button>
-    </nav>
-
     <div class="container">
-        <h1>Meu Perfil</h1>
-        <p id="userEmail">Carregando usuário...</p>
+
+        <div class="login-card">
+            <img src="logo.png" alt="Logo" class="logo">
+
+            <h1>Bem-vindo ao Bolão da Copa<br>2026!</h1>
+            <p>Faça seu cadastro ou login para continuar.</p>
+
+            <form id="login-form">
+                <input type="email" id="email" placeholder="Seu e-mail" required>
+                <input type="password" id="password" placeholder="Senha" required>
+
+                <!-- BOTÕES NO MESMO ESTILO DO PERFIL -->
+                <button type="submit" class="menu-btn" style="width:100%; margin-top:10px;">
+                    Login
+                </button>
+
+                <button type="button" class="menu-btn" style="width:100%; margin-top:10px;"
+                        onclick="window.location.href='cadastro.html'">
+                    Cadastrar
+                </button>
+            </form>
+
+        </div>
+
     </div>
 
-    <script type="module">
-        import { auth, onAuthStateChanged, signOut } from "./firebase.js";
-
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                document.getElementById("userEmail").textContent = user.email;
-            } else {
-                window.location.href = "index.html";
-            }
-        });
-
-        document.getElementById("logoutBtn").addEventListener("click", async () => {
-            await signOut(auth);
-            window.location.href = "index.html";
-        });
-    </script>
+    <script src="login.js"></script>
 
 </body>
 </html>
+
