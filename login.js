@@ -1,8 +1,7 @@
 // login.js
 import { createClient } from 'https://esm.sh/@supabase/supabase-js';
 
-// --- SUBSTITUA SE QUISER, SE JÁ NÃO FOR ESSA A URL/KEY ---
-// (já usei os valores que você usou antes)
+// --- SUBSTITUA SE NECESSÁRIO ---
 const SUPABASE_URL = 'https://mdaqzciffsgupzbfxzgf.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY';
 
@@ -40,12 +39,11 @@ btnLogin.addEventListener('click', async (e) => {
     });
 
     if (error) {
-      // Mensagem amigável ao usuário
       showMessage('Email ou senha incorretos.', 'red');
       return;
     }
 
-    // login ok -> redireciona ao perfil
+    // Login OK → vai para o perfil
     window.location.href = 'perfil.html';
   } catch (err) {
     console.error('Erro no login:', err);
@@ -73,32 +71,36 @@ btnCadastrar.addEventListener('click', async (e) => {
       password
     });
 
-    // Se houver erro, avalia se é "já cadastrado"
+    // Se houver erro → provavelmente usuário já existe
     if (error) {
       const m = (error.message || '').toLowerCase();
-      // checagens comuns
-      if (m.includes('already') || m.includes('registered') || m.includes('user already')) {
+      if (
+        m.includes('already') ||
+        m.includes('exist') ||
+        m.includes('registered') ||
+        m.includes('duplicate')
+      ) {
         showMessage('Usuário já cadastrado.', 'red');
         return;
       }
 
-      // outro erro qualquer
+      // erro inesperado
       showMessage('Erro ao cadastrar: ' + error.message, 'red');
       return;
     }
 
-    // signUp sem erro:
-    // data.user existe quando a sessão é criada automaticamente (sem confirmação de email)
+    // Cadastro OK — Supabase retorna data.user se login automático estiver habilitado
     if (data && data.user) {
-      // usuário logado após signUp -> leva direto para perfil
       window.location.href = 'perfil.html';
       return;
     }
 
-    // Caso o signUp exija confirmação por e-mail (data.user indefinido)
-    showMessage('Cadastro feito! Verifique seu e-mail para confirmar a conta.', 'lime');
+    // Caso precise verificar email
+    showMessage('Cadastro realizado! Verifique seu email.', 'lime');
+
   } catch (err) {
     console.error('Erro no signUp:', err);
     showMessage('Erro ao cadastrar.', 'red');
   }
 });
+
