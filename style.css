@@ -28,6 +28,15 @@ h1 {
   color: #333;
 }
 
+.main-title {
+  font-size: 20px;
+  color: #2575fc;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+
 input {
   width: 100%;
   padding: 10px;
