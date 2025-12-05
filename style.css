@@ -8,28 +8,46 @@
 body {
   font-family: 'Arial', sans-serif;
   background: linear-gradient(135deg, #1c1c1c, #000); /* Fundo preto com leve gradiente */
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Título no topo */
+/* Container para título, imagem e texto de boas-vindas */
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px; /* Espaço do topo da página */
+  margin-bottom: 50px; /* Espaço entre imagem/texto e formulário */
+}
+
+/* Título */
 .main-title {
   font-size: 26px;
   text-align: center;
-  margin: 20px 0;
   font-weight: bold;
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  margin-bottom: 30px; /* Espaço entre título e imagem */
 }
 
-/* Imagem centralizada abaixo do título */
+/* Imagem */
 .logo {
   display: block;
-  margin: 10px auto 30px auto;
   max-width: 200px;
   height: auto;
+  margin-bottom: 30px; /* Espaço entre imagem e texto de boas-vindas */
+}
+
+/* Texto de boas-vindas */
+.welcome-text {
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px; /* Espaço entre texto e formulário */
 }
 
 /* Container que centraliza o formulário */
@@ -46,14 +64,6 @@ body {
   display: flex;
   flex-direction: column;
   width: 300px;
-}
-
-.welcome-text {
-  font-size: 16px;
-  color: #fff;
-  text-align: center;
-  margin-bottom: 20px;
-  font-weight: bold;
 }
 
 input {
