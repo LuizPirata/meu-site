@@ -3,119 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
+    <title>Meu Perfil</title>
     <link rel="stylesheet" href="style.css">
-
-    <!-- Tailwind CDN (opcional, deixa muito fácil criar componentes) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
 </head>
-<body class="bg-gray-100">
+<body>
 
-    <!-- ===================== MENU EXISTENTE ===================== -->
-    <header class="bg-white shadow-md">
-        <nav class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-xl font-bold">LOGO</div>
-            <ul class="flex space-x-6">
-                <li><a href="#" class="text-gray-700 font-medium">Início</a></li>
-                <li><a href="#" class="text-gray-700 font-medium">Palpites</a></li>
-                <li><a href="#" class="text-gray-700 font-medium">Configurações</a></li>
-                <li><a href="#" class="text-gray-700 font-medium">Sair</a></li>
-            </ul>
-        </nav>
-    </header>
-    <!-- =========================================================== -->
+    <!-- MENU SUPERIOR -->
+    <nav class="menu">
+        <a href="perfil.html" class="menu-btn">Palpites</a>
+        <a href="simulacao.html" class="menu-btn">Simulação</a>
+        <a href="classificacao.html" class="menu-btn">Classificação</a>
+        <a href="artilharia.html" class="menu-btn">Artilharia</a>
+        <a href="regras.html" class="menu-btn">Regras</a>
+        <button id="logoutBtn" class="menu-btn logout-btn">Logout</button>
+    </nav>
 
 
-    <!-- ===========================================================
-            ÁREA NOVA — A partir daqui vamos montar o DESIGN
-         =========================================================== -->
+    <!-- =====================================================
+         RESUMO DO USUÁRIO (Linhas 2 a 6 da planilha)
+    ====================================================== -->
+    <section class="resumo-container">
+        <div class="resumo-grid">
 
-    <main class="max-w-4xl mx-auto px-4 py-6">
-
-        <!-- Cabeçalho do Usuário -->
-        <div class="bg-white rounded-xl shadow-md p-6 mb-6">
-            <h2 class="text-2xl font-bold mb-2">👤 Meu Perfil</h2>
-            <p id="usernameDisplay" class="text-gray-600 text-lg">
-                Carregando usuário...
-            </p>
-        </div>
-
-        <!-- BLOCO DE RESUMO (baseado na planilha) -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-
-            <div class="bg-white p-4 rounded-xl shadow-md">
-                <p class="text-gray-600 text-sm">Total de Palpites</p>
-                <h3 class="text-2xl font-bold">0</h3>
+            <div class="resumo-card">
+                <p>Total</p>
+                <h3 id="totalPalpites">0</h3>
             </div>
 
-            <div class="bg-white p-4 rounded-xl shadow-md">
-                <p class="text-gray-600 text-sm">Palpites Certos</p>
-                <h3 class="text-2xl font-bold">0</h3>
+            <div class="resumo-card">
+                <p>Acertos</p>
+                <h3 id="acertos">0</h3>
             </div>
 
-            <div class="bg-white p-4 rounded-xl shadow-md">
-                <p class="text-gray-600 text-sm">Porcentagem de Acertos</p>
-                <h3 class="text-2xl font-bold">0%</h3>
+            <div class="resumo-card">
+                <p>Erros</p>
+                <h3 id="erros">0</h3>
             </div>
+
+            <div class="resumo-card">
+                <p>% Acerto</p>
+                <h3 id="porcentagem">0%</h3>
+            </div>
+
+            <div class="resumo-card">
+                <p>Sequência</p>
+                <h3 id="sequencia">0</h3>
+            </div>
+
+            <div class="resumo-card">
+                <p>Consistência</p>
+                <h3 id="consistencia">0%</h3>
+            </div>
+
         </div>
-
-        <!-- Tabela de Palpites (baseada 100% na planilha que você enviou) -->
-        <div class="bg-white rounded-xl shadow-md p-6">
-            <h3 class="text-xl font-bold mb-4">📊 Histórico de Palpites</h3>
-
-            <table class="w-full border-collapse">
-                <thead>
-                    <tr class="border-b">
-                        <th class="text-left py-2">Data</th>
-                        <th class="text-left py-2">Jogo</th>
-                        <th class="text-left py-2">Palpite</th>
-                        <th class="text-left py-2">Resultado</th>
-                    </tr>
-                </thead>
-                <tbody id="historicoPalpites">
-                    <!-- Dados serão carregados futuramente -->
-                    <tr>
-                        <td class="py-2 text-gray-600">—</td>
-                        <td class="py-2 text-gray-600">—</td>
-                        <td class="py-2 text-gray-600">—</td>
-                        <td class="py-2 text-gray-600">—</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </main>
+    </section>
 
 
-    <!-- Script para carregar username do Supabase depois -->
+    <!-- SUPABASE -->
     <script type="module">
         import { createClient } from "https://esm.sh/@supabase/supabase-js";
 
-        const supabase = createClient(
-            "https://SEU-PROJETO.supabase.co",
-            "SUA-CHAVE-PUBLICA"
-        );
+        const SUPABASE_URL = "https://mdaqzciffsgupzbfxzgf.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY";
 
-        async function carregarUsuario() {
-            const { data: { user } } = await supabase.auth.getUser();
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-            const usernameDisplay = document.getElementById("usernameDisplay");
+        // Verificar se o usuário está logado
+        const {
+            data: { session }
+        } = await supabase.auth.getSession();
 
-            if (user) {
-                const email = user.email;
-                const username = email.split("@")[0];
-                usernameDisplay.innerText = username;
-            } else {
-                usernameDisplay.innerText = "Usuário não identificado.";
-            }
+        if (!session) {
+            window.location.href = "index.html";
         }
 
-        carregarUsuario();
+        // Logout
+        document.getElementById("logoutBtn").addEventListener("click", async () => {
+            await supabase.auth.signOut();
+            window.location.href = "index.html";
+        });
     </script>
 
 </body>
 </html>
-
 
 
