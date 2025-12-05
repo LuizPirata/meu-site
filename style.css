@@ -63,7 +63,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 300px;
-  gap: 15px; /* Espaçamento uniforme entre inputs e botões */
+  gap: 15px; /* Espaçamento uniforme entre inputs e container de botões */
 }
 
 input {
@@ -78,6 +78,13 @@ input {
 
 input::placeholder {
   color: #aaa;
+}
+
+/* Container dos botões */
+.buttons {
+  display: flex;
+  flex-direction: column; /* empilha os botões */
+  gap: 10px; /* espaço entre cada botão */
 }
 
 button {
