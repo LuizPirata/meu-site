@@ -1,28 +1,35 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js";
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js';
 
-// ⛔ ALTERE AQUI PARA O SEU PROJETO
-const supabaseUrl = "https://mdaqzciffsgupzbfxzgf.supabase.co";
-const supabaseAnonKey = "sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY";
+const supabase = createClient(
+  'https://mdaqzciffsgupzbfxzgf.supabase.co',
+  'sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY'
+);
 
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+document.getElementById("btnCadastrar").addEventListener("click", async () => {
+  const email = document.getElementById("email").value;
+  const senha = document.getElementById("senha").value;
 
-// LOGIN
-document.getElementById("login-form").addEventListener("submit", async (e) => {
-    e.preventDefault();
+  // 1️⃣ TENTA CRIAR O USUÁRIO
+  const { data, error } = await supabase.auth.signUp({
+    email: email,
+    password: senha
+  });
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+  // 2️⃣ SE O USUÁRIO JÁ EXISTE
+  if (error && error.message.includes("User already registered")) {
+    alert("Usuário já cadastrado!");
+    return;
+  }
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-    });
+  // 3️⃣ QUALQUER OUTRO ERRO
+  if (error) {
+    alert("Erro ao cadastrar: " + error.message);
+    return;
+  }
 
-    if (error) {
-        alert("Email ou senha incorretos!");
-        return;
-    }
-
-    // LOGIN OK → vai para perfil.html
-    window.location.href = "perfil.html";
+  // 4️⃣ TUDO CERTO → REDIRECIONA PARA cadastro.html
+  window.location.href = "cadastro.html";
 });
+</script>
+
