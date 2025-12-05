@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Usuário</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- MENU SUPERIOR -->
+    <nav class="menu">
+        <a href="index.html" class="menu-btn">Login</a>
+    </nav>
+
+    <div class="container">
+        <h1>Criar Conta</h1>
+
+        <form id="cadastro-form">
+            <input type="email" id="email" placeholder="Seu e-mail" required>
+            <input type="password" id="password" placeholder="Senha" required>
+            <button type="submit" class="menu-btn" style="margin-top: 20px;">Cadastrar</button>
+        </form>
+
+        <p id="mensagem" style="margin-top:20px; font-size:18px;"></p>
+    </div>
+
+    <script type="module">
+        import { supabase } from "./supabase.js";
+
+        document.getElementById("cadastro-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const msg = document.getElementById("mensagem");
+
+            // 🔎 Verifica se o usuário já existe
+            const { data: existingUsers, error: checkError } = await supabase
+                .from("users")
+                .select("*")
+                .eq("email", email);
+
+            if (existingUsers.length > 0) {
+                msg.textContent = "Usuário já cadastrado.";
+                msg.style.color = "red";
+                return;
+            }
+
+            // 🆕 Cria o usuário no Supabase Auth
+            const { data, error } = await supabase.auth.signUp({
+                email: email,
+                password: password
+            });
+
+            if (error) {
+                msg.textContent = "Erro ao cadastrar: " + error.message;
+                msg.style.color = "red";
+                return;
+            }
+
+            // ✔️ Cadastra no banco (opcional)
+            await supabase.from("users").insert([{ email }]);
+
+            msg.textContent = "Cadastro realizado com sucesso!";
+            msg.style.color = "lime";
+
+            // Redireciona para login
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 1500);
+        });
+    </script>
+
+</body>
+</html>
