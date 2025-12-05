@@ -7,35 +7,37 @@
 
 body {
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  background-color: #000; /* Fundo preto */
   height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
 }
 
-.container {
-  background: white;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  width: 300px;
-  text-align: center;
-}
-
-h1 {
-  margin-bottom: 20px;
-  color: #333;
-}
-
+/* Título fixado no topo */
 .main-title {
-  font-size: 20px;
-  color: #2575fc;
+  font-size: 22px;
+  color: #fff; /* branco */
   text-align: center;
-  margin-bottom: 30px;
+  margin: 20px 0;
   font-weight: bold;
 }
 
+/* Centraliza o formulário no restante da página */
+.container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Formulário sem fundo */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
 
 input {
   width: 100%;
@@ -43,6 +45,12 @@ input {
   margin: 10px 0;
   border-radius: 8px;
   border: 1px solid #ccc;
+  background-color: #222; /* fundo escuro dos inputs */
+  color: #fff; /* texto branco */
+}
+
+input::placeholder {
+  color: #aaa; /* placeholder mais claro */
 }
 
 button {
