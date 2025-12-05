@@ -25,13 +25,7 @@ async function cadastrar() {
     return;
   }
 
-  // Se a confirmação de email estiver DESATIVADA → redireciona
-  if (data.user) {
-    window.location.href = "perfil.html";
-  }
-
-  // Senão, pede verificação
-  alert("Cadastro realizado! Verifique seu e-mail para confirmar.");
+  window.location.href = "perfil.html";
 }
 
 // LOGIN
@@ -57,6 +51,7 @@ async function logar() {
   window.location.href = "perfil.html";
 }
 
+// EVENTOS
 document.getElementById('btn-cadastrar').addEventListener('click', cadastrar);
 document.getElementById('btn-login').addEventListener('click', logar);
 
