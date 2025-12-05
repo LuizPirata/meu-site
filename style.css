@@ -14,16 +14,16 @@ body {
   align-items: center;
 }
 
-/* Título fixado no topo */
+/* Título no topo */
 .main-title {
   font-size: 22px;
-  color: #fff; /* branco */
+  color: #fff;
   text-align: center;
   margin: 20px 0;
   font-weight: bold;
 }
 
-/* Centraliza o formulário no restante da página */
+/* Container que centraliza o formulário */
 .container {
   flex: 1;
   display: flex;
@@ -32,7 +32,7 @@ body {
   width: 100%;
 }
 
-/* Formulário sem fundo */
+/* Formulário */
 .form-container {
   display: flex;
   flex-direction: column;
@@ -45,12 +45,12 @@ input {
   margin: 10px 0;
   border-radius: 8px;
   border: 1px solid #ccc;
-  background-color: #222; /* fundo escuro dos inputs */
-  color: #fff; /* texto branco */
+  background-color: #222; /* Fundo escuro dos inputs */
+  color: #fff; /* Texto branco */
 }
 
 input::placeholder {
-  color: #aaa; /* placeholder mais claro */
+  color: #aaa;
 }
 
 button {
