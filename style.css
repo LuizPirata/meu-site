@@ -59,3 +59,62 @@ body {
     width: 120px;
     height: auto;
 }
+
+/* Container da tabela */
+.grupo-container {
+    width: 95%;
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+/* Cabeçalho estilo menu */
+.grupo-header {
+    background: linear-gradient(to right, #ff9900, #ff0000);
+    color: white;
+    font-weight: bold;
+    padding: 14px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+/* Tabela */
+.grupo-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+}
+
+/* Linha do header */
+.grupo-table thead th {
+    padding: 10px 5px;
+    font-weight: bold;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Coluna Time maior */
+.th-time {
+    width: 22%;
+    text-align: left !important;
+}
+
+/* Todas as demais colunas menores e iguais */
+.grupo-table th:not(.th-time),
+.grupo-table td:not(:first-child) {
+    width: 9%;
+    text-align: center;
+}
+
+/* Células */
+.grupo-table td {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Remove fundo branco (usa o fundo natural da página) */
+.grupo-table, .grupo-table td, .grupo-table th {
+    background: transparent !important;
+}
+
