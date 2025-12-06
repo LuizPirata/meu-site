@@ -118,11 +118,26 @@ body {
     background: transparent !important;
 }
 
+.time-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.posicao {
+    font-weight: bold;
+    width: 28px; /* mantém alinhado */
+    display: inline-block;
+}
+
 .flag {
     width: 22px;
     height: 16px;
-    margin-right: 8px;
     border-radius: 2px;
     object-fit: cover;
 }
 
+.time-nome {
+    font-size: 16px;
+}
