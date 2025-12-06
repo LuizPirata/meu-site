@@ -7,50 +7,58 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* ----- ESTILO DA TABELA (isolado do resto do site) ----- */
-        .table-container {
-            width: 95%;
-            max-width: 900px;
-            margin: 30px auto;
-            background: white;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 0 8px rgba(0,0,0,0.15);
-        }
+    /* ----- ESTILO DA TABELA (isolado do resto do site) ----- */
 
-        .group-title {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 12px;
-            text-align: left;
-        }
+    .table-container {
+        width: 95%;
+        max-width: 900px;
+        margin: 30px auto;
+        padding: 5px;
+    }
 
-        table.group-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 15px;
-        }
+    .group-title {
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 12px;
+        text-align: left;
+    }
 
-        table.group-table th {
-            background: #eaeaea;
-            padding: 8px;
-            border: 1px solid #ccc;
-            text-align: center;
-            font-weight: bold;
-        }
+    table.group-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 15px;
+        background: transparent; /* sem fundo */
+    }
 
-        table.group-table td {
-            padding: 8px;
-            border: 1px solid #ccc;
-            text-align: center;
-        }
+    table.group-table th {
+        background: #eaeaea;
+        padding: 8px;
+        border: 1px solid #ccc;
+        text-align: center;
+        font-weight: bold;
+    }
 
-        table.group-table td:first-child {
-            text-align: left;
-            padding-left: 10px;
-            font-weight: bold;
-        }
-    </style>
+    /* primeira coluna ("Classificação") maior */
+    table.group-table th:first-child,
+    table.group-table td:first-child {
+        width: 160px;
+        text-align: left;
+        padding-left: 10px;
+        font-weight: bold;
+    }
+
+    /* ➜ todas as outras colunas do mesmo tamanho */
+    table.group-table th:not(:first-child),
+    table.group-table td:not(:first-child) {
+        width: 55px;  /* tamanho fixo, igual para todas */
+        text-align: center;
+    }
+
+    table.group-table td {
+        padding: 8px;
+        border: 1px solid #ccc;
+    }
+</style>
 
 </head>
 <body>
