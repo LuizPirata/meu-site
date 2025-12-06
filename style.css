@@ -118,3 +118,11 @@ body {
     background: transparent !important;
 }
 
+.flag {
+    width: 22px;
+    height: 16px;
+    margin-right: 8px;
+    border-radius: 2px;
+    object-fit: cover;
+}
+
