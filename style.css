@@ -142,32 +142,29 @@ body {
     font-size: 16px;
 }
 
-/* Container das rodadas: espaçamento perfeito */
+/* Layout em colunas */
 .rodadas-container {
     display: flex;
-    justify-content: space-between; /* espaça igualmente */
-    align-items: flex-start;
-    width: 90%;                    /* ocupa 90% da tela */
-    max-width: 1200px;             /* limite para não ficar exagerado */
-    margin: 60px auto 0;           /* centralizado */
-    gap: 40px;                     /* espaço igual entre as rodadas */
-}}
+    justify-content: space-between;
+    margin-top: 50px;
+    gap: 30px;
+}
 
 /* Cada coluna de rodada */
 .rodada-coluna {
-    flex: 1;                       /* tamanhos iguais */
-    text-align: center;
+    width: 32%;
 }
 
-/* Título da rodada */
+/* Título com degradê igual ao topo da tabela */
 .rodada-titulo {
-    background: linear-gradient(90deg, #ff9500, #ff0000);
-    color: white;
-    padding: 12px 0;
-    border-radius: 12px;
+    text-align: center;
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 20px;
+    padding: 12px 0;
+    border-radius: 12px;
+
+    background: linear-gradient(90deg, #ff9500, #ff0000);
+    color: white;
 }
 
 /* Informações do jogo */
