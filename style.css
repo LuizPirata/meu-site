@@ -145,16 +145,12 @@ body {
 /* Layout em colunas */
 .rodadas-container {
     display: flex;
-    justify-content: center;
-    gap: 80px;        /* distância igual entre as rodadas */
-    margin-top: 50px;
-    width: 100%;
+    justify-content: space-between;   /* ocupa toda a largura */
+    align-items: flex-start;
+    width: 90%;
+    margin: 50px auto 0 auto;
 }
 
-/* Cada coluna de rodada */
-.rodada-coluna {
-    flex: 1;
-}
 
 /* Título com degradê igual ao topo da tabela */
 .rodada-titulo {
@@ -266,8 +262,8 @@ body {
 }
 
 .rodada-coluna {
-    width: 28%;             /* largura igual e proporcional */
-    text-align: center;     /* centraliza tudo dentro */
+    width: 30%;
+    text-align: center;
 }
 
 
