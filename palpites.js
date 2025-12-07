@@ -86,75 +86,14 @@ const grupoB = {
   ]
 };
 
-// GRUPO C
-const grupoC = {
-  tableBodyId: "grupoC-body",
-  teams: [
-    { id: "brasil",   name: "Brasil",   flag: "brasil.png" },
-    { id: "marrocos", name: "Marrocos", flag: "marrocos.png" },
-    { id: "haiti",    name: "Haiti",    flag: "haiti.png" },
-    { id: "escocia",  name: "Escócia",  flag: "escocia.png" }
-  ],
-
-  matches: [
-    // 1ª rodada
-    {
-      id: "C1",
-      home: "brasil",
-      away: "marrocos",
-      homeSelector: 'input[data-jogo="C1"][data-time="brasil"]',
-      awaySelector: 'input[data-jogo="C1"][data-time="marrocos"]'
-    },
-    {
-      id: "C2",
-      home: "haiti",
-      away: "escocia",
-      homeSelector: 'input[data-jogo="C2"][data-time="haiti"]',
-      awaySelector: 'input[data-jogo="C2"][data-time="escocia"]'
-    },
-
-    // 2ª rodada
-    {
-      id: "C3",
-      home: "escocia",
-      away: "marrocos",
-      homeSelector: 'input[data-jogo="C3"][data-time="escocia"]',
-      awaySelector: 'input[data-jogo="C3"][data-time="marrocos"]'
-    },
-    {
-      id: "C4",
-      home: "brasil",
-      away: "haiti",
-      homeSelector: 'input[data-jogo="C4"][data-time="brasil"]',
-      awaySelector: 'input[data-jogo="C4"][data-time="haiti"]'
-    },
-
-    // 3ª rodada
-    {
-      id: "C5",
-      home: "escocia",
-      away: "brasil",
-      homeSelector: 'input[data-jogo="C5"][data-time="escocia"]',
-      awaySelector: 'input[data-jogo="C5"][data-time="brasil"]'
-    },
-    {
-      id: "C6",
-      home: "marrocos",
-      away: "haiti",
-      homeSelector: 'input[data-jogo="C6"][data-time="marrocos"]',
-      awaySelector: 'input[data-jogo="C6"][data-time="haiti"]'
-    }
-  ]
-};
 
 
 // Aqui você pode ir adicionando futuramente:
-// const grupoD = { ... }, grupoE, etc.
+// const grupoC = { ... }, grupoD, etc.
 
 const grupos = {
   A: grupoA,
   B: grupoB
-  C: grupoC
 };
 
 // ==========================================================
