@@ -228,5 +228,42 @@ body {
     white-space: nowrap;
 }
 
+/* Container do placar */
+.placar-input {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Caixinhas de gols */
+.gols-input {
+    width: 34px;
+    height: 28px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 6px;
+
+    outline: none;
+}
+
+/* Efeito ao clicar */
+.gols-input:focus {
+    border-color: #ff9500;
+    box-shadow: 0 0 6px #ff9500;
+}
+
+/* O “x” entre os campos */
+.x-separador {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+
 
 
