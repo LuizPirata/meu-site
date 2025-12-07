@@ -288,13 +288,237 @@
 
   </div>
 
-  <!-- ====================================================== -->
-  <!-- PAINÉIS C–L (AINDA EM CONSTRUÇÃO) -->
-  <!-- ====================================================== -->
+  <!-- 
+<!-- ========================================= -->
+<!-- GRUPO C - TABELA DE CLASSIFICAÇÃO -->
+<!-- ========================================= -->
 
-  <div id="grupo-C" class="grupo-pane">
-    <h2 class="grupo-placeholder">Grupo C – em construção</h2>
-  </div>
+<div id="grupo-C" class="grupo-pane">
+
+    <div class="grupo-container">
+        <div class="grupo-header">Grupo C – Classificação</div>
+
+        <table class="grupo-table">
+            <thead>
+                <tr>
+                    <th class="th-time">Classificação</th>
+                    <th>P</th>
+                    <th>J</th>
+                    <th>V</th>
+                    <th>E</th>
+                    <th>D</th>
+                    <th>GF</th>
+                    <th>GC</th>
+                    <th>SG</th>
+                </tr>
+            </thead>
+
+            <tbody id="grupoC-body">
+
+                <!-- 1º Brasil -->
+                <tr>
+                    <td>
+                        <div class="time-cell">
+                            <span class="posicao">1º</span>
+                            <img src="brasil.png" class="flag">
+                            <span class="time-nome">Brasil</span>
+                        </div>
+                    </td>
+                    <td class="pontos">0</td>
+                    <td class="jogos">0</td>
+                    <td class="vitorias">0</td>
+                    <td class="empates">0</td>
+                    <td class="derrotas">0</td>
+                    <td class="gf">0</td>
+                    <td class="gc">0</td>
+                    <td class="sg">0</td>
+                </tr>
+
+                <!-- 2º Marrocos -->
+                <tr>
+                    <td>
+                        <div class="time-cell">
+                            <span class="posicao">2º</span>
+                            <img src="marrocos.png" class="flag">
+                            <span class="time-nome">Marrocos</span>
+                        </div>
+                    </td>
+                    <td class="pontos">0</td>
+                    <td class="jogos">0</td>
+                    <td class="vitorias">0</td>
+                    <td class="empates">0</td>
+                    <td class="derrotas">0</td>
+                    <td class="gf">0</td>
+                    <td class="gc">0</td>
+                    <td class="sg">0</td>
+                </tr>
+
+                <!-- 3º Haiti -->
+                <tr>
+                    <td>
+                        <div class="time-cell">
+                            <span class="posicao">3º</span>
+                            <img src="haiti.png" class="flag">
+                            <span class="time-nome">Haiti</span>
+                        </div>
+                    </td>
+                    <td class="pontos">0</td>
+                    <td class="jogos">0</td>
+                    <td class="vitorias">0</td>
+                    <td class="empates">0</td>
+                    <td class="derrotas">0</td>
+                    <td class="gf">0</td>
+                    <td class="gc">0</td>
+                    <td class="sg">0</td>
+                </tr>
+
+                <!-- 4º Escócia -->
+                <tr>
+                    <td>
+                        <div class="time-cell">
+                            <span class="posicao">4º</span>
+                            <img src="escocia.png" class="flag">
+                            <span class="time-nome">Escócia</span>
+                        </div>
+                    </td>
+                    <td class="pontos">0</td>
+                    <td class="jogos">0</td>
+                    <td class="vitorias">0</td>
+                    <td class="empates">0</td>
+                    <td class="derrotas">0</td>
+                    <td class="gf">0</td>
+                    <td class="gc">0</td>
+                    <td class="sg">0</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- GRUPO C - RODADAS / CONFRONTOS -->
+    <!-- ========================================= -->
+
+    <div class="rodadas-container">
+
+        <!-- 1ª Rodada -->
+        <div class="rodada-coluna">
+            <h3 class="rodada-titulo">1ª Rodada</h3>
+
+            <!-- Brasil x Marrocos -->
+            <div class="jogo-info">13/06/2026 – 19h – Nova Jersey</div>
+            <div class="jogo-linha">
+                <img src="brasil.png" class="flag-jogo">
+                <span class="jogo-time">Brasil</span>
+
+                <div class="placar-input">
+                    <input type="number" class="gols-input" data-jogo="C1" data-time="brasil">
+                    <span class="x-separador">x</span>
+                    <input type="number" class="gols-input" data-jogo="C1" data-time="marrocos">
+                </div>
+
+                <span class="jogo-time">Marrocos</span>
+                <img src="marrocos.png" class="flag-jogo">
+            </div>
+
+            <!-- Haiti x Escócia -->
+            <div class="jogo-info">13/06/2026 – 22h – Boston</div>
+            <div class="jogo-linha">
+                <img src="haiti.png" class="flag-jogo">
+                <span class="jogo-time">Haiti</span>
+
+                <div class="placar-input">
+                    <input type="number" class="gols-input" data-jogo="C2" data-time="haiti">
+                    <span class="x-separador">x</span>
+                    <input type="number" class="gols-input" data-jogo="C2" data-time="escocia">
+                </div>
+
+                <span class="jogo-time">Escócia</span>
+                <img src="escocia.png" class="flag-jogo">
+            </div>
+        </div>
+
+        <!-- 2ª Rodada -->
+        <div class="rodada-coluna">
+            <h3 class="rodada-titulo">2ª Rodada</h3>
+
+            <!-- Escócia x Marrocos -->
+            <div class="jogo-info">19/06/2026 – 19h – Boston</div>
+            <div class="jogo-linha">
+                <img src="escocia.png" class="flag-jogo">
+                <span class="jogo-time">Escócia</span>
+
+                <div class="placar-input">
+                    <input type="number" class="gols-input" data-jogo="C3" data-time="escocia">
+                    <span class="x-separador">x</span>
+                    <input type="number" class="gols-input" data-jogo="C3" data-time="marrocos">
+                </div>
+
+                <span class="jogo-time">Marrocos</span>
+                <img src="marrocos.png" class="flag-jogo">
+            </div>
+
+            <!-- Brasil x Haiti -->
+            <div class="jogo-info">19/06/2026 – 22h – Filadélfia</div>
+            <div class="jogo-linha">
+                <img src="brasil.png" class="flag-jogo">
+                <span class="jogo-time">Brasil</span>
+
+                <div class="placar-input">
+                    <input type="number" class="gols-input" data-jogo="C4" data-time="brasil">
+                    <span class="x-separador">x</span>
+                    <input type="number" class="gols-input" data-jogo="C4" data-time="haiti">
+                </div>
+
+                <span class="jogo-time">Haiti</span>
+                <img src="haiti.png" class="flag-jogo">
+            </div>
+        </div>
+
+        <!-- 3ª Rodada -->
+        <div class="rodada-coluna">
+            <h3 class="rodada-titulo">3ª Rodada</h3>
+
+            <!-- Escócia x Brasil -->
+            <div class="jogo-info">24/06/2026 – 19h – Miami</div>
+            <div class="jogo-linha">
+                <img src="escocia.png" class="flag-jogo">
+                <span class="jogo-time">Escócia</span>
+
+                <div class="placar-input">
+                    <input type="number" class="gols-input" data-jogo="C5" data-time="escocia">
+                    <span class="x-separador">x</span>
+                    <input type="number" class="gols-input" data-jogo="C5" data-time="brasil">
+                </div>
+
+                <span class="jogo-time">Brasil</span>
+                <img src="brasil.png" class="flag-jogo">
+            </div>
+
+            <!-- Marrocos x Haiti -->
+            <div class="jogo-info">24/06/2026 – 19h – Atlanta</div>
+            <div class="jogo-linha">
+                <img src="marrocos.png" class="flag-jogo">
+                <span class="jogo-time">Marrocos</span>
+
+                <div class="placar-input">
+                    <input type="number" class="gols-input" data-jogo="C6" data-time="marrocos">
+                    <span class="x-separador">x</span>
+                    <input type="number" class="gols-input" data-jogo="C6" data-time="haiti">
+                </div>
+
+                <span class="jogo-time">Haiti</span>
+                <img src="haiti.png" class="flag-jogo">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+====================================================== -->
+  <!-- PAINÉIS D–L (AINDA EM CONSTRUÇÃO) -->
+  <!-- ====================================================== -->
 
   <div id="grupo-D" class="grupo-pane">
     <h2 class="grupo-placeholder">Grupo D – em construção</h2>
