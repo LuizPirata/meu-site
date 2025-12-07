@@ -300,6 +300,50 @@ const grupoG = {
         }
     ]
 };
+// ===============================
+// GRUPO H
+// ===============================
+const grupoH = {
+    tableBodyId: "grupoH-body",
+    teams: [
+        { id: "espanha",   name: "Espanha", flag: "espanha.png" },
+        { id: "arabia",    name: "Arábia Saudita", flag: "arabia.png" },
+        { id: "caboverde", name: "Cabo Verde", flag: "caboverde.png" },
+        { id: "uruguai",   name: "Uruguai", flag: "uruguai.png" }
+    ],
+    matches: [
+
+        // 1ª rodada
+        { id: "H1", home: "espanha", away: "caboverde",
+          homeSelector:'input[data-jogo="H1"][data-time="espanha"]',
+          awaySelector:'input[data-jogo="H1"][data-time="caboverde"]'
+        },
+        { id: "H2", home: "arabia", away: "uruguai",
+          homeSelector:'input[data-jogo="H2"][data-time="arabia"]',
+          awaySelector:'input[data-jogo="H2"][data-time="uruguai"]'
+        },
+
+        // 2ª rodada
+        { id: "H3", home: "espanha", away: "arabia",
+          homeSelector:'input[data-jogo="H3"][data-time="espanha"]',
+          awaySelector:'input[data-jogo="H3"][data-time="arabia"]'
+        },
+        { id: "H4", home: "uruguai", away: "caboverde",
+          homeSelector:'input[data-jogo="H4"][data-time="uruguai"]',
+          awaySelector:'input[data-jogo="H4"][data-time="caboverde"]'
+        },
+
+        // 3ª rodada
+        { id: "H5", home: "uruguai", away: "espanha",
+          homeSelector:'input[data-jogo="H5"][data-time="uruguai"]',
+          awaySelector:'input[data-jogo="H5"][data-time="espanha"]'
+        },
+        { id: "H6", home: "caboverde", away: "arabia",
+          homeSelector:'input[data-jogo="H6"][data-time="caboverde"]',
+          awaySelector:'input[data-jogo="H6"][data-time="arabia"]'
+        }
+    ]
+};
 
 
 // ---------- REGISTRO GLOBAL DE GRUPOS ----------
@@ -310,7 +354,8 @@ const grupos = {
   D: grupoD,
   E: grupoE,
   F: grupoF,
-  G: grupoG
+  G: grupoG,
+  H: grupoH
 };
 
 // ==========================================================
