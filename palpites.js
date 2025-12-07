@@ -171,13 +171,57 @@ const grupoD = {
         { id: "D6", home: "paraguai",  away: "australia",homeSelector:'input[data-jogo="D6"][data-time="paraguai"]',  awaySelector:'input[data-jogo="D6"][data-time="australia"]' }
     ]
 };
+// ===============================
+// GRUPO E
+// ===============================
+const grupoE = {
+    tableBodyId: "grupoE-body",
+    teams: [
+        { id: "alemanha",     name: "Alemanha",        flag: "alemanha.png" },
+        { id: "costadomarfim",name: "Costa do Marfim", flag: "costadomarfim.png" },
+        { id: "curacao",      name: "Curaçao",         flag: "curacao.png" },
+        { id: "equador",      name: "Equador",         flag: "equador.png" }
+    ],
+    matches: [
+        // 1ª rodada
+        { id: "E1", home: "alemanha", away: "curacao",
+          homeSelector:'input[data-jogo="E1"][data-time="alemanha"]',
+          awaySelector:'input[data-jogo="E1"][data-time="curacao"]'
+        },
+        { id: "E2", home: "costadomarfim", away: "equador",
+          homeSelector:'input[data-jogo="E2"][data-time="costadomarfim"]',
+          awaySelector:'input[data-jogo="E2"][data-time="equador"]'
+        },
+
+        // 2ª rodada
+        { id: "E3", home: "alemanha", away: "costadomarfim",
+          homeSelector:'input[data-jogo="E3"][data-time="alemanha"]',
+          awaySelector:'input[data-jogo="E3"][data-time="costadomarfim"]'
+        },
+        { id: "E4", home: "equador", away: "curacao",
+          homeSelector:'input[data-jogo="E4"][data-time="equador"]',
+          awaySelector:'input[data-jogo="E4"][data-time="curacao"]'
+        },
+
+        // 3ª rodada
+        { id: "E5", home: "equador", away: "alemanha",
+          homeSelector:'input[data-jogo="E5"][data-time="equador"]',
+          awaySelector:'input[data-jogo="E5"][data-time="alemanha"]'
+        },
+        { id: "E6", home: "curacao", away: "costadomarfim",
+          homeSelector:'input[data-jogo="E6"][data-time="curacao"]',
+          awaySelector:'input[data-jogo="E6"][data-time="costadomarfim"]'
+        }
+    ]
+};
 
 // ---------- REGISTRO GLOBAL DE GRUPOS ----------
 const grupos = {
   A: grupoA,
   B: grupoB,
   C: grupoC,
-  D: grupoD
+  D: grupoD,
+  E: grupoE
 };
 
 // ==========================================================
