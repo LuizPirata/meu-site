@@ -97,7 +97,7 @@ body {
 /* Coluna Time maior */
 .th-time {
     width: 22%;
-    text-align: left !important;
+    text-align: center !important;
 }
 
 /* Todas as demais colunas menores e iguais */
