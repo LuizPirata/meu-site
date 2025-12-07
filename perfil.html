@@ -34,10 +34,13 @@
     <button class="grupo-tab" data-group="L">Grupo L</button>
   </div>
 
-  <!-- ===== GRUPO A (FUNCIONANDO COMPLETO) ===== -->
+  <!-- ====================================================== -->
+  <!-- ====================== GRUPO A ======================= -->
+  <!-- ====================================================== -->
+
   <div id="grupo-A" class="grupo-pane active">
 
-    <!-- TABELA GRUPO A -->
+    <!-- TABELA -->
     <div class="grupo-container">
       <div class="grupo-header">Grupo A – Classificação</div>
 
@@ -55,16 +58,14 @@
             <th>SG</th>
           </tr>
         </thead>
-        <tbody id="tabela-grupoA-body">
-          <!-- preenchido via JavaScript -->
-        </tbody>
+        <tbody id="tabela-grupoA-body"></tbody>
       </table>
     </div>
 
-    <!-- RODADAS GRUPO A -->
+    <!-- RODADAS -->
     <div class="rodadas-container">
 
-      <!-- 1ª Rodada -->
+      <!-- RODADA 1 -->
       <div class="rodada-coluna">
         <h3 class="rodada-titulo">1ª Rodada</h3>
 
@@ -72,13 +73,11 @@
         <div class="jogo-linha">
           <img src="Mexico.png" class="flag-jogo">
           <span class="jogo-time">México</span>
-
           <div class="placar-input">
-            <input type="number" min="0" class="gols-input" id="m1_home">
+            <input type="number" class="gols-input" id="m1_home">
             <span class="x-separador">x</span>
-            <input type="number" min="0" class="gols-input" id="m1_away">
+            <input type="number" class="gols-input" id="m1_away">
           </div>
-
           <span class="jogo-time">África do Sul</span>
           <img src="africa.png" class="flag-jogo">
         </div>
@@ -87,19 +86,17 @@
         <div class="jogo-linha">
           <img src="coreia.png" class="flag-jogo">
           <span class="jogo-time">Coreia do Sul</span>
-
           <div class="placar-input">
-            <input type="number" min="0" class="gols-input" id="m2_home">
+            <input type="number" class="gols-input" id="m2_home">
             <span class="x-separador">x</span>
-            <input type="number" min="0" class="gols-input" id="m2_away">
+            <input type="number" class="gols-input" id="m2_away">
           </div>
-
           <span class="jogo-time">Europa D</span>
           <img src="europad.png" class="flag-jogo">
         </div>
       </div>
 
-      <!-- 2ª Rodada -->
+      <!-- RODADA 2 -->
       <div class="rodada-coluna">
         <h3 class="rodada-titulo">2ª Rodada</h3>
 
@@ -107,13 +104,11 @@
         <div class="jogo-linha">
           <img src="europad.png" class="flag-jogo">
           <span class="jogo-time">Europa D</span>
-
           <div class="placar-input">
-            <input type="number" min="0" class="gols-input" id="m3_home">
+            <input type="number" class="gols-input" id="m3_home">
             <span class="x-separador">x</span>
-            <input type="number" min="0" class="gols-input" id="m3_away">
+            <input type="number" class="gols-input" id="m3_away">
           </div>
-
           <span class="jogo-time">África do Sul</span>
           <img src="africa.png" class="flag-jogo">
         </div>
@@ -122,19 +117,17 @@
         <div class="jogo-linha">
           <img src="Mexico.png" class="flag-jogo">
           <span class="jogo-time">México</span>
-
           <div class="placar-input">
-            <input type="number" min="0" class="gols-input" id="m4_home">
+            <input type="number" class="gols-input" id="m4_home">
             <span class="x-separador">x</span>
-            <input type="number" min="0" class="gols-input" id="m4_away">
+            <input type="number" class="gols-input" id="m4_away">
           </div>
-
           <span class="jogo-time">Coreia do Sul</span>
           <img src="coreia.png" class="flag-jogo">
         </div>
       </div>
 
-      <!-- 3ª Rodada -->
+      <!-- RODADA 3 -->
       <div class="rodada-coluna">
         <h3 class="rodada-titulo">3ª Rodada</h3>
 
@@ -142,13 +135,11 @@
         <div class="jogo-linha">
           <img src="europad.png" class="flag-jogo">
           <span class="jogo-time">Europa D</span>
-
           <div class="placar-input">
-            <input type="number" min="0" class="gols-input" id="m5_home">
+            <input type="number" class="gols-input" id="m5_home">
             <span class="x-separador">x</span>
-            <input type="number" min="0" class="gols-input" id="m5_away">
+            <input type="number" class="gols-input" id="m5_away">
           </div>
-
           <span class="jogo-time">México</span>
           <img src="Mexico.png" class="flag-jogo">
         </div>
@@ -157,256 +148,149 @@
         <div class="jogo-linha">
           <img src="africa.png" class="flag-jogo">
           <span class="jogo-time">África do Sul</span>
-
           <div class="placar-input">
-            <input type="number" min="0" class="gols-input" id="m6_home">
+            <input type="number" class="gols-input" id="m6_home">
             <span class="x-separador">x</span>
-            <input type="number" min="0" class="gols-input" id="m6_away">
+            <input type="number" class="gols-input" id="m6_away">
           </div>
-
           <span class="jogo-time">Coreia do Sul</span>
           <img src="coreia.png" class="flag-jogo">
         </div>
       </div>
 
-    </div> <!-- fim rodadas-container -->
-
-  </div> <!-- fim grupo-A -->
-
-<!-- ========================================= -->
-<!-- GRUPO B - TABELA DE CLASSIFICAÇÃO -->
-<!-- ========================================= -->
-
-<div class="grupo-container">
-
-    <div class="grupo-header">Grupo B - Tabela de Classificação</div>
-
-    <table class="grupo-table">
-        <thead>
-            <tr>
-                <th class="th-time">Time</th>
-                <th>P</th>
-                <th>J</th>
-                <th>V</th>
-                <th>E</th>
-                <th>D</th>
-                <th>GF</th>
-                <th>GC</th>
-                <th>SG</th>
-            </tr>
-        </thead>
-
-        <tbody id="grupoB-body">
-
-            <!-- 1º Canadá -->
-            <tr>
-                <td>
-                    <div class="time-cell">
-                        <span class="posicao">1º</span>
-                        <img src="canada.png" class="flag">
-                        <span class="time-nome">Canadá</span>
-                    </div>
-                </td>
-                <td class="pontos">0</td>
-                <td class="jogos">0</td>
-                <td class="vitorias">0</td>
-                <td class="empates">0</td>
-                <td class="derrotas">0</td>
-                <td class="gf">0</td>
-                <td class="gc">0</td>
-                <td class="sg">0</td>
-            </tr>
-
-            <!-- 2º Catar -->
-            <tr>
-                <td>
-                    <div class="time-cell">
-                        <span class="posicao">2º</span>
-                        <img src="catar.png" class="flag">
-                        <span class="time-nome">Catar</span>
-                    </div>
-                </td>
-                <td class="pontos">0</td>
-                <td class="jogos">0</td>
-                <td class="vitorias">0</td>
-                <td class="empates">0</td>
-                <td class="derrotas">0</td>
-                <td class="gf">0</td>
-                <td class="gc">0</td>
-                <td class="sg">0</td>
-            </tr>
-
-            <!-- 3º Europa A -->
-            <tr>
-                <td>
-                    <div class="time-cell">
-                        <span class="posicao">3º</span>
-                        <img src="europad.png" class="flag">
-                        <span class="time-nome">Europa A</span>
-                    </div>
-                </td>
-                <td class="pontos">0</td>
-                <td class="jogos">0</td>
-                <td class="vitorias">0</td>
-                <td class="empates">0</td>
-                <td class="derrotas">0</td>
-                <td class="gf">0</td>
-                <td class="gc">0</td>
-                <td class="sg">0</td>
-            </tr>
-
-            <!-- 4º Suíça -->
-            <tr>
-                <td>
-                    <div class="time-cell">
-                        <span class="posicao">4º</span>
-                        <img src="suica.png" class="flag">
-                        <span class="time-nome">Suíça</span>
-                    </div>
-                </td>
-                <td class="pontos">0</td>
-                <td class="jogos">0</td>
-                <td class="vitorias">0</td>
-                <td class="empates">0</td>
-                <td class="derrotas">0</td>
-                <td class="gf">0</td>
-                <td class="gc">0</td>
-                <td class="sg">0</td>
-            </tr>
-
-        </tbody>
-    </table>
-</div>
-
-<!-- ========================================= -->
-<!-- GRUPO B - RODADAS / CONFRONTOS -->
-<!-- ========================================= -->
-
-<div class="rodadas-container">
-
-    <!-- 1ª Rodada -->
-    <div class="rodada-coluna">
-        <h3 class="rodada-titulo">1ª Rodada</h3>
-
-        <!-- Canadá x Europa A -->
-        <div class="jogo-info">12/06/2026 – 16h – Toronto Field</div>
-        <div class="jogo-linha">
-            <img src="canada.png" class="flag-jogo">
-            <span class="jogo-time">Canadá</span>
-
-            <div class="placar-input">
-                <input type="number" class="gols-input" data-jogo="B1" data-time="canada">
-                <span class="x-separador">x</span>
-                <input type="number" class="gols-input" data-jogo="B1" data-time="europaa">
-            </div>
-
-            <span class="jogo-time">Europa A</span>
-            <img src="europad.png" class="flag-jogo">
-        </div>
-
-        <!-- Catar x Suíça -->
-        <div class="jogo-info">13/06/2026 – 16h – Santa Clara</div>
-        <div class="jogo-linha">
-            <img src="catar.png" class="flag-jogo">
-            <span class="jogo-time">Catar</span>
-
-            <div class="placar-input">
-                <input type="number" class="gols-input" data-jogo="B2" data-time="catar">
-                <span class="x-separador">x</span>
-                <input type="number" class="gols-input" data-jogo="B2" data-time="suica">
-            </div>
-
-            <span class="jogo-time">Suíça</span>
-            <img src="suica.png" class="flag-jogo">
-        </div>
     </div>
+  </div>
 
-    <!-- 2ª Rodada -->
-    <div class="rodada-coluna">
-        <h3 class="rodada-titulo">2ª Rodada</h3>
-
-        <!-- Suíça x Europa A -->
-        <div class="jogo-info">18/06/2026 – 16h – Los Angeles</div>
-        <div class="jogo-linha">
-            <img src="suica.png" class="flag-jogo">
-            <span class="jogo-time">Suíça</span>
-
-            <div class="placar-input">
-                <input type="number" class="gols-input" data-jogo="B3" data-time="suica">
-                <span class="x-separador">x</span>
-                <input type="number" class="gols-input" data-jogo="B3" data-time="europaa">
-            </div>
-
-            <span class="jogo-time">Europa A</span>
-            <img src="europad.png" class="flag-jogo">
-        </div>
-
-        <!-- Canadá x Catar -->
-        <div class="jogo-info">18/06/2026 – 19h – Vancouver Place</div>
-        <div class="jogo-linha">
-            <img src="canada.png" class="flag-jogo">
-            <span class="jogo-time">Canadá</span>
-
-            <div class="placar-input">
-                <input type="number" class="gols-input" data-jogo="B4" data-time="canada">
-                <span class="x-separador">x</span>
-                <input type="number" class="gols-input" data-jogo="B4" data-time="catar">
-            </div>
-
-            <span class="jogo-time">Catar</span>
-            <img src="catar.png" class="flag-jogo">
-        </div>
-    </div>
-
-    <!-- 3ª Rodada -->
-    <div class="rodada-coluna">
-        <h3 class="rodada-titulo">3ª Rodada</h3>
-
-        <!-- Suíça x Canadá -->
-        <div class="jogo-info">24/06/2026 – 16h – Vancouver Place</div>
-        <div class="jogo-linha">
-            <img src="suica.png" class="flag-jogo">
-            <span class="jogo-time">Suíça</span>
-
-            <div class="placar-input">
-                <input type="number" class="gols-input" data-jogo="B5" data-time="suica">
-                <span class="x-separador">x</span>
-                <input type="number" class="gols-input" data-jogo="B5" data-time="canada">
-            </div>
-
-            <span class="jogo-time">Canadá</span>
-            <img src="canada.png" class="flag-jogo">
-        </div>
-
-        <!-- Europa A x Catar -->
-        <div class="jogo-info">24/06/2026 – 16h – Seattle Field</div>
-        <div class="jogo-linha">
-            <img src="europad.png" class="flag-jogo">
-            <span class="jogo-time">Europa A</span>
-
-            <div class="placar-input">
-                <input type="number" class="gols-input" data-jogo="B6" data-time="europaa">
-                <span class="x-separador">x</span>
-                <input type="number" class="gols-input" data-jogo="B6" data-time="catar">
-            </div>
-
-            <span class="jogo-time">Catar</span>
-            <img src="catar.png" class="flag-jogo">
-        </div>
-    </div>
-
-</div>
-
- </div> <!-- fim rodadas-container -->
-
-  </div> <!-- fim grupo-B -->
-
-
-  <!-- ===== GRUPO B–L (POR ENQUANTO APENAS PLACEHOLDER VISUAL) ===== -->
+  <!-- ====================================================== -->
+  <!-- ====================== GRUPO B ======================= -->
+  <!-- ====================================================== -->
 
   <div id="grupo-B" class="grupo-pane">
-    <h2 class="grupo-placeholder">Grupo B – em construção</h2>
+
+    <div class="grupo-container">
+      <div class="grupo-header">Grupo B – Classificação</div>
+
+      <table class="grupo-table">
+        <thead>
+          <tr>
+            <th class="th-time">Time</th>
+            <th>P</th>
+            <th>J</th>
+            <th>V</th>
+            <th>E</th>
+            <th>D</th>
+            <th>GF</th>
+            <th>GC</th>
+            <th>SG</th>
+          </tr>
+        </thead>
+        <tbody id="grupoB-body"></tbody>
+      </table>
+    </div>
+
+    <!-- RODADAS B -->
+    <div class="rodadas-container">
+
+      <!-- 1ª RODADA -->
+      <div class="rodada-coluna">
+        <h3 class="rodada-titulo">1ª Rodada</h3>
+
+        <div class="jogo-info">12/06/2026 – 16h – Toronto Field</div>
+        <div class="jogo-linha">
+          <img src="canada.png" class="flag-jogo">
+          <span class="jogo-time">Canadá</span>
+          <div class="placar-input">
+            <input type="number" class="gols-input" data-jogo="B1" data-time="canada">
+            <span class="x-separador">x</span>
+            <input type="number" class="gols-input" data-jogo="B1" data-time="europaa">
+          </div>
+          <span class="jogo-time">Europa A</span>
+          <img src="europad.png" class="flag-jogo">
+        </div>
+
+        <div class="jogo-info">13/06/2026 – 16h – Santa Clara</div>
+        <div class="jogo-linha">
+          <img src="catar.png" class="flag-jogo">
+          <span class="jogo-time">Catar</span>
+          <div class="placar-input">
+            <input type="number" class="gols-input" data-jogo="B2" data-time="catar">
+            <span class="x-separador">x</span>
+            <input type="number" class="gols-input" data-jogo="B2" data-time="suica">
+          </div>
+          <span class="jogo-time">Suíça</span>
+          <img src="suica.png" class="flag-jogo">
+        </div>
+      </div>
+
+      <!-- 2ª RODADA -->
+      <div class="rodada-coluna">
+        <h3 class="rodada-titulo">2ª Rodada</h3>
+
+        <div class="jogo-info">18/06/2026 – 16h – Los Angeles</div>
+        <div class="jogo-linha">
+          <img src="suica.png" class="flag-jogo">
+          <span class="jogo-time">Suíça</span>
+          <div class="placar-input">
+            <input type="number" class="gols-input" data-jogo="B3" data-time="suica">
+            <span class="x-separador">x</span>
+            <input type="number" class="gols-input" data-jogo="B3" data-time="europaa">
+          </div>
+          <span class="jogo-time">Europa A</span>
+          <img src="europad.png" class="flag-jogo">
+        </div>
+
+        <div class="jogo-info">18/06/2026 – 19h – Vancouver Place</div>
+        <div class="jogo-linha">
+          <img src="canada.png" class="flag-jogo">
+          <span class="jogo-time">Canadá</span>
+          <div class="placar-input">
+            <input type="number" class="gols-input" data-jogo="B4" data-time="canada">
+            <span class="x-separador">x</span>
+            <input type="number" class="gols-input" data-jogo="B4" data-time="catar">
+          </div>
+          <span class="jogo-time">Catar</span>
+          <img src="catar.png" class="flag-jogo">
+        </div>
+      </div>
+
+      <!-- 3ª RODADA -->
+      <div class="rodada-coluna">
+        <h3 class="rodada-titulo">3ª Rodada</h3>
+
+        <div class="jogo-info">24/06/2026 – 16h – Vancouver Place</div>
+        <div class="jogo-linha">
+          <img src="suica.png" class="flag-jogo">
+          <span class="jogo-time">Suíça</span>
+          <div class="placar-input">
+            <input type="number" class="gols-input" data-jogo="B5" data-time="suica">
+            <span class="x-separador">x</span>
+            <input type="number" class="gols-input" data-jogo="B5" data-time="canada">
+          </div>
+          <span class="jogo-time">Canadá</span>
+          <img src="canada.png" class="flag-jogo">
+        </div>
+
+        <div class="jogo-info">24/06/2026 – 16h – Seattle Field</div>
+        <div class="jogo-linha">
+          <img src="europad.png" class="flag-jogo">
+          <span class="jogo-time">Europa A</span>
+          <div class="placar-input">
+            <input type="number" class="gols-input" data-jogo="B6" data-time="europaa">
+            <span class="x-separador">x</span>
+            <input type="number" class="gols-input" data-jogo="B6" data-time="catar">
+          </div>
+          <span class="jogo-time">Catar</span>
+          <img src="catar.png" class="flag-jogo">
+        </div>
+      </div>
+
+    </div>
+
   </div>
+
+  <!-- ====================================================== -->
+  <!-- PAINÉIS C–L (AINDA EM CONSTRUÇÃO) -->
+  <!-- ====================================================== -->
 
   <div id="grupo-C" class="grupo-pane">
     <h2 class="grupo-placeholder">Grupo C – em construção</h2>
@@ -448,32 +332,29 @@
     <h2 class="grupo-placeholder">Grupo L – em construção</h2>
   </div>
 
-   <!-- ========== SCRIPT: SUPABASE + TABS DE GRUPO ========== -->
+  <!-- ====================================================== -->
+  <!-- SCRIPTS -->
+  <!-- ====================================================== -->
+
+  <!-- Supabase + TABS -->
   <script type="module">
     import { createClient } from "https://esm.sh/@supabase/supabase-js";
 
-    // ---------- SUPABASE (login / logout) ----------
     const SUPABASE_URL = "https://mdaqzciffsgupzbfxzgf.supabase.co";
     const SUPABASE_ANON_KEY = "sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY";
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // Verificar se o usuário está logado
-    const {
-      data: { session }
-    } = await supabase.auth.getSession();
+    // Autenticação
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) window.location.href = "index.html";
 
-    if (!session) {
-      window.location.href = "index.html";
-    }
-
-    // Logout
     document.getElementById("logoutBtn").addEventListener("click", async () => {
       await supabase.auth.signOut();
       window.location.href = "index.html";
     });
 
-    // ---------- SELETOR DE GRUPOS (TABS) ----------
+    // Tabs dos grupos
     const tabs = document.querySelectorAll(".grupo-tab");
     const panes = document.querySelectorAll(".grupo-pane");
 
@@ -481,26 +362,19 @@
       tab.addEventListener("click", () => {
         const group = tab.getAttribute("data-group");
 
-        // botão ativo
         tabs.forEach(t => t.classList.remove("active"));
         tab.classList.add("active");
 
-        // mostrar/esconder painéis
         panes.forEach(p => {
-          if (p.id === "grupo-" + group) {
-            p.classList.add("active");
-          } else {
-            p.classList.remove("active");
-          }
+          if (p.id === "grupo-" + group) p.classList.add("active");
+          else p.classList.remove("active");
         });
       });
     });
   </script>
 
-  <!-- Motor de palpites (Grupo A + Grupo B) -->
+  <!-- MOTOR DE PALPITES -->
   <script src="palpites.js"></script>
 
 </body>
 </html>
-
-
