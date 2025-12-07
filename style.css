@@ -378,3 +378,7 @@ body {
     margin: 0 12px;
 }
 
+#grupo-MATA.grupo-pane.active {
+    display: block !important;
+}
+
