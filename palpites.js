@@ -214,6 +214,50 @@ const grupoE = {
         }
     ]
 };
+// ===============================
+// GRUPO F
+// ===============================
+const grupoF = {
+    tableBodyId: "grupoF-body",
+    teams: [
+        { id: "europab", name: "Europa B", flag: "europad.png" },
+        { id: "holanda", name: "Holanda",  flag: "holanda.png" },
+        { id: "japao",   name: "Japão",    flag: "japao.png" },
+        { id: "tunisia", name: "Tunísia",  flag: "tunisia.png" }
+    ],
+    matches: [
+        // 1ª rodada
+        { id: "F1", home: "holanda", away: "japao",
+          homeSelector:'input[data-jogo="F1"][data-time="holanda"]',
+          awaySelector:'input[data-jogo="F1"][data-time="japao"]'
+        },
+        { id: "F2", home: "europab", away: "tunisia",
+          homeSelector:'input[data-jogo="F2"][data-time="europab"]',
+          awaySelector:'input[data-jogo="F2"][data-time="tunisia"]'
+        },
+
+        // 2ª rodada
+        { id: "F3", home: "holanda", away: "europab",
+          homeSelector:'input[data-jogo="F3"][data-time="holanda"]',
+          awaySelector:'input[data-jogo="F3"][data-time="europab"]'
+        },
+        { id: "F4", home: "tunisia", away: "japao",
+          homeSelector:'input[data-jogo="F4"][data-time="tunisia"]',
+          awaySelector:'input[data-jogo="F4"][data-time="japao"]'
+        },
+
+        // 3ª rodada
+        { id: "F5", home: "tunisia", away: "holanda",
+          homeSelector:'input[data-jogo="F5"][data-time="tunisia"]',
+          awaySelector:'input[data-jogo="F5"][data-time="holanda"]'
+        },
+        { id: "F6", home: "japao", away: "europab",
+          homeSelector:'input[data-jogo="F6"][data-time="japao"]',
+          awaySelector:'input[data-jogo="F6"][data-time="europab"]'
+        }
+    ]
+};
+
 
 // ---------- REGISTRO GLOBAL DE GRUPOS ----------
 const grupos = {
@@ -221,7 +265,8 @@ const grupos = {
   B: grupoB,
   C: grupoC,
   D: grupoD,
-  E: grupoE
+  E: grupoE,
+  F: grupoF
 };
 
 // ==========================================================
