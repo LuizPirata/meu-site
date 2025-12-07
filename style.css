@@ -197,11 +197,12 @@ body {
 }
 
 .jogo-linha {
-    display: flex;
+    display: grid;
+    grid-template-columns: 24px 1fr auto 1fr 24px;  /* bandeira, time, placar, time, bandeira */
     align-items: center;
-    justify-content: center;
-    gap: 12px;              /* mais espaçado e centrado */
+    justify-items: center;
     margin-bottom: 20px;
+    gap: 8px;
 }
 
 .jogo-time {
