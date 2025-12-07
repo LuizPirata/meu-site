@@ -198,11 +198,17 @@ body {
 
 .jogo-linha {
     display: grid;
-    grid-template-columns: 24px 1fr auto 1fr 24px;  /* bandeira, time, placar, time, bandeira */
+    grid-template-columns: 
+        24px         /* bandeira esquerda */
+        130px        /* nome do time esquerdo */
+        80px         /* placar (2 inputs + x) */
+        130px        /* nome do time direito */
+        24px;        /* bandeira direita */
+
     align-items: center;
     justify-items: center;
     margin-bottom: 20px;
-    gap: 8px;
+    gap: 10px;
 }
 
 .jogo-time {
