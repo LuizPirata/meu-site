@@ -285,93 +285,98 @@ body {
 }
 
 
-/* =============================== */
-/*   MATA-MATA — LAYOUT ESPELHADO  */
-/* =============================== */
+/* ===== FASE MATA-MATA ===== */
 
-#grupo-MATA .mata-titulo-central {
-    text-align: center;
-    font-size: 32px;
-    font-weight: bold;
-    margin-top: 25px;
-    background: linear-gradient(to right, #ff9900, #ff0000);
-    padding: 12px;
-    border-radius: 12px;
+.mata-bloco {
+  width: 95%;
+  max-width: 1100px;
+  margin: 30px auto;
 }
 
-#grupo-MATA .mata-wrapper {
-    display: flex !important;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 98%;
-    margin: 30px auto 60px auto;
+.mata-titulo {
+  background: linear-gradient(to right, #ff9900, #ff0000);
+  color: white;
+  font-weight: bold;
+  padding: 10px 16px;
+  font-size: 20px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 16px;
 }
 
-#grupo-MATA .mata-col {
-    width: 32%;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+/* Grades para cada fase */
+.mata-grid {
+  display: grid;
+  gap: 12px;
 }
 
-#grupo-MATA .mata-centro {
-    width: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.mata32 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
-#grupo-MATA .fase-titulo,
-#grupo-MATA .fase-titulo-final {
-    text-align: center;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #ffcf87;
-    font-size: 20px;
+.mata16 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
-#grupo-MATA .fase-titulo-final {
-    font-size: 26px;
+.mata8 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
-#grupo-MATA .jogo {
-    background: rgba(255,255,255,0.12);
-    padding: 14px;
-    border-radius: 12px;
-    margin-bottom: 16px;
-    text-align: center;
-    font-size: 15px;
+.mata4 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
-#grupo-MATA .jogo input {
-    width: 110px;
-    padding: 6px;
-    margin: 5px;
-    border-radius: 6px;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(0,0,0,0.35);
-    color: #fff;
-    font-weight: bold;
-    text-align: center;
+.mata-final {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
-#grupo-MATA .jogo input:focus {
-    outline: none;
-    border-color: #ff9500;
-    box-shadow: 0 0 4px #ff9500;
+/* Cartão de cada jogo */
+.mata-jogo {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 10px 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
-#grupo-MATA .grande-final {
-    background: rgba(255,255,255,0.20);
-    padding: 22px;
-    border-radius: 14px;
-    font-size: 18px;
+.mata-jogo-header {
+  font-weight: bold;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #ffcc66;
 }
 
-#grupo-MATA .x-final {
-    font-size: 26px;
-    font-weight: bold;
-    margin: 0 12px;
+/* Linha com times */
+.mata-jogo-linha {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
+.mata-time {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+  font-size: 13px;
+}
+
+.mata-time::placeholder {
+  color: #bbb;
+}
+
+.mata-time:focus {
+  outline: none;
+  border-color: #ff9900;
+  box-shadow: 0 0 4px #ff9900;
+}
+
+.mata-x {
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+}
 
