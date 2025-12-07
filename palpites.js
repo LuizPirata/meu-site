@@ -222,7 +222,7 @@ const grupoF = {
     teams: [
         { id: "holanda", name: "Holanda", flag: "holanda.png" },
         { id: "japao", name: "Japão",  flag: "japao.png" },
-        { id: "europad",   name: "Europa B",    flag: "europad.png" },
+        { id: "europab",   name: "Europa B",    flag: "europad.png" },
         { id: "tunisia", name: "Tunísia",  flag: "tunisia.png" }
     ],
     matches: [
