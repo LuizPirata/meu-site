@@ -437,6 +437,53 @@ const grupoJ = {
         }
     ]
 };
+// ===============================
+// GRUPO K
+// ===============================
+const grupoK = {
+    tableBodyId: "grupoK-body",
+    teams: [
+        { id: "portugal",     name: "Portugal",          flag: "portugal.png" },
+        { id: "colombia",     name: "Colômbia",          flag: "colombia.png" },
+        { id: "inter1",       name: "Intercontinental 1", flag: "europad.png" },
+        { id: "uzbequistao",  name: "Uzbequistão",       flag: "uzbequistao.png" }
+    ],
+    matches: [
+
+        // 1ª Rodada
+        { id: "K1", home: "portugal", away: "inter1",
+          homeSelector:'input[data-jogo="K1"][data-time="portugal"]',
+          awaySelector:'input[data-jogo="K1"][data-time="inter1"]'
+        },
+
+        { id: "K2", home: "uzbequistao", away: "colombia",
+          homeSelector:'input[data-jogo="K2"][data-time="uzbequistao"]',
+          awaySelector:'input[data-jogo="K2"][data-time="colombia"]'
+        },
+
+        // 2ª Rodada
+        { id: "K3", home: "portugal", away: "uzbequistao",
+          homeSelector:'input[data-jogo="K3"][data-time="portugal"]',
+          awaySelector:'input[data-jogo="K3"][data-time="uzbequistao"]'
+        },
+
+        { id: "K4", home: "colombia", away: "inter1",
+          homeSelector:'input[data-jogo="K4"][data-time="colombia"]',
+          awaySelector:'input[data-jogo="K4"][data-time="inter1"]'
+        },
+
+        // 3ª Rodada
+        { id: "K5", home: "colombia", away: "portugal",
+          homeSelector:'input[data-jogo="K5"][data-time="colombia"]',
+          awaySelector:'input[data-jogo="K5"][data-time="portugal"]'
+        },
+
+        { id: "K6", home: "inter1", away: "uzbequistao",
+          homeSelector:'input[data-jogo="K6"][data-time="inter1"]',
+          awaySelector:'input[data-jogo="K6"][data-time="uzbequistao"]'
+        }
+    ]
+};
 
 
 // ---------- REGISTRO GLOBAL DE GRUPOS ----------
@@ -450,7 +497,8 @@ const grupos = {
   G: grupoG,
   H: grupoH,
   I: grupoI,
-  J: grupoJ
+  J: grupoJ,
+  K: grupoK
 };
 
 // ==========================================================
