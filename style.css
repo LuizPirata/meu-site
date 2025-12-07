@@ -145,12 +145,12 @@ body {
 /* Layout em colunas */
 .rodadas-container {
     display: flex;
-    justify-content: space-between;   /* ocupa toda a largura */
-    align-items: flex-start;
-    width: 90%;
+    justify-content: center;         /* centraliza tudo */
+    gap: 60px;                       /* espaço entre as 3 colunas */
     margin: 50px auto 0 auto;
+    width: 100%;
+    max-width: 1200px;               /* limite pra não estourar na horizontal */
 }
-
 
 /* Título com degradê igual ao topo da tabela */
 .rodada-titulo {
@@ -189,12 +189,6 @@ body {
     border-radius: 2px;
 }
 
-/* Nome das seleções */
-.jogo-time {
-    font-size: 16px;
-    color: white;
-}
-
 /* Placar */
 .jogo-placar {
     font-size: 18px;
@@ -210,16 +204,19 @@ body {
     margin-bottom: 20px;
 }
 
-
 .jogo-time {
-    white-space: nowrap;
+    font-size: 16px;
+    color: white;
+    white-space: nowrap;         /* times continuam numa linha só */
 }
 
 .jogo-info {
-    white-space: nowrap;
-    font-size: clamp(12px, 1.2vw, 14px);
+    text-align: center;
+    color: #ccc;
+    font-size: 13px;
+    margin: 14px 0 6px;
+    white-space: normal;         /* deixa a linha do estádio quebrar se PRECISAR */
 }
-
 .jogo-placar {
     white-space: nowrap;
 }
@@ -262,7 +259,7 @@ body {
 }
 
 .rodada-coluna {
-    width: 30%;
+    flex: 0 0 340px;        /* cada rodada ~340px, não estica nem encolhe demais */
     text-align: center;
 }
 
