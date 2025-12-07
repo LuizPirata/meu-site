@@ -270,5 +270,15 @@ body {
     text-align: center;
 }
 
+/* Espaçamento padronizado entre a linha de informações e os placares */
+.jogo-info {
+    margin-top: 22px;    /* distância superior */
+    margin-bottom: 14px; /* distância inferior */
+}
+
+/* Espaçamento padronizado abaixo da linha de placar */
+.jogo-linha {
+    margin-bottom: 26px; /* controla o espaço até o próximo confronto */
+}
 
 
