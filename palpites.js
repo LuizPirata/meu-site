@@ -391,6 +391,52 @@ const grupoI = {
         }
     ]
 };
+// ===============================
+// GRUPO J
+// ===============================
+const grupoJ = {
+    tableBodyId: "grupoJ-body",
+    teams: [
+        { id: "argentina", name: "Argentina", flag: "argentina.png" },
+        { id: "argelia",   name: "Argélia",   flag: "argelia.png" },
+        { id: "jordania",  name: "Jordânia",  flag: "jordania.png" },
+        { id: "austria",   name: "Áustria",   flag: "austria.png" }
+    ],
+    matches: [
+        // 1ª Rodada
+        { id: "J1", home: "argentina", away: "argelia",
+          homeSelector:'input[data-jogo="J1"][data-time="argentina"]',
+          awaySelector:'input[data-jogo="J1"][data-time="argelia"]'
+        },
+
+        { id: "J2", home: "austria", away: "jordania",
+          homeSelector:'input[data-jogo="J2"][data-time="austria"]',
+          awaySelector:'input[data-jogo="J2"][data-time="jordania"]'
+        },
+
+        // 2ª Rodada
+        { id: "J3", home: "argentina", away: "austria",
+          homeSelector:'input[data-jogo="J3"][data-time="argentina"]',
+          awaySelector:'input[data-jogo="J3"][data-time="austria"]'
+        },
+
+        { id: "J4", home: "jordania", away: "argelia",
+          homeSelector:'input[data-jogo="J4"][data-time="jordania"]',
+          awaySelector:'input[data-jogo="J4"][data-time="argelia"]'
+        },
+
+        // 3ª Rodada
+        { id: "J5", home: "jordania", away: "argentina",
+          homeSelector:'input[data-jogo="J5"][data-time="jordania"]',
+          awaySelector:'input[data-jogo="J5"][data-time="argentina"]'
+        },
+
+        { id: "J6", home: "argelia", away: "austria",
+          homeSelector:'input[data-jogo="J6"][data-time="argelia"]',
+          awaySelector:'input[data-jogo="J6"][data-time="austria"]'
+        }
+    ]
+};
 
 
 // ---------- REGISTRO GLOBAL DE GRUPOS ----------
@@ -403,7 +449,8 @@ const grupos = {
   F: grupoF,
   G: grupoG,
   H: grupoH,
-  I: grupoI
+  I: grupoI,
+  J: grupoJ
 };
 
 // ==========================================================
