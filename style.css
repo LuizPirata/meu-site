@@ -284,6 +284,11 @@ body {
     color: #ccc;
 }
 
+#grupo-MATA.grupo-pane {
+    display: block !important;
+}
+
+
 /* =============================== */
 /*   MATA-MATA — LAYOUT ESPELHADO  */
 /* =============================== */
