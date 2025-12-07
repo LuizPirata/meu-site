@@ -1,520 +1,531 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Perfil</title>
-    <link rel="stylesheet" href="style.css">
-
-    <style>
-    /* ----- ESTILO DA TABELA (isolado do resto do site) ----- */
-
-    .table-container {
-        width: 95%;
-        max-width: 900px;
-        margin: 30px auto;
-        padding: 5px;
-    }
-
-    .group-title {
-        font-size: 22px;
-        font-weight: bold;
-        margin-bottom: 12px;
-        text-align: left;
-    }
-
-    table.group-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 15px;
-        background: transparent; /* sem fundo */
-    }
-
-    table.group-table th {
-        background: #eaeaea;
-        padding: 8px;
-        border: 1px solid #ccc;
-        text-align: center;
-        font-weight: bold;
-    }
-
-    /* primeira coluna ("Classificação") maior */
-    table.group-table th:first-child,
-    table.group-table td:first-child {
-        width: 160px;
-        text-align: left;
-        padding-left: 10px;
-        font-weight: bold;
-    }
-
-    /* ➜ todas as outras colunas do mesmo tamanho */
-    table.group-table th:not(:first-child),
-    table.group-table td:not(:first-child) {
-        width: 55px;  /* tamanho fixo, igual para todas */
-        text-align: center;
-    }
-
-    table.group-table td {
-        padding: 8px;
-        border: 1px solid #ccc;
-    }
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Perfil - Palpites</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- MENU SUPERIOR -->
-    <nav class="menu">
-        <a href="perfil.html" class="menu-btn">Palpites</a>
-        <a href="simulacao.html" class="menu-btn">Simulação</a>
-        <a href="classificacao.html" class="menu-btn">Classificação</a>
-        <a href="artilharia.html" class="menu-btn">Artilharia</a>
-        <a href="regras.html" class="menu-btn">Regras</a>
-        <button id="logoutBtn" class="menu-btn logout-btn">Logout</button>
-    </nav>
+  <!-- MENU SUPERIOR PRINCIPAL -->
+  <nav class="menu">
+    <a href="perfil.html" class="menu-btn">Palpites</a>
+    <a href="simulacao.html" class="menu-btn">Simulação</a>
+    <a href="classificacao.html" class="menu-btn">Classificação</a>
+    <a href="artilharia.html" class="menu-btn">Artilharia</a>
+    <a href="regras.html" class="menu-btn">Regras</a>
+    <button id="logoutBtn" class="menu-btn logout-btn">Logout</button>
+  </nav>
 
-    <!-- ======================================================= -->
-    <!--                 TABELA GRUPO A (VISUAL)                -->
-    <!-- ======================================================= -->
+  <!-- SUB-MENU DE GRUPOS (A–L) -->
+  <div class="grupo-tabs">
+    <button class="grupo-tab active" data-group="A">Grupo A</button>
+    <button class="grupo-tab" data-group="B">Grupo B</button>
+    <button class="grupo-tab" data-group="C">Grupo C</button>
+    <button class="grupo-tab" data-group="D">Grupo D</button>
+    <button class="grupo-tab" data-group="E">Grupo E</button>
+    <button class="grupo-tab" data-group="F">Grupo F</button>
+    <button class="grupo-tab" data-group="G">Grupo G</button>
+    <button class="grupo-tab" data-group="H">Grupo H</button>
+    <button class="grupo-tab" data-group="I">Grupo I</button>
+    <button class="grupo-tab" data-group="J">Grupo J</button>
+    <button class="grupo-tab" data-group="K">Grupo K</button>
+    <button class="grupo-tab" data-group="L">Grupo L</button>
+  </div>
 
+  <!-- ===== GRUPO A (FUNCIONANDO COMPLETO) ===== -->
+  <div id="grupo-A" class="grupo-pane active">
+
+    <!-- TABELA GRUPO A -->
     <div class="grupo-container">
-  <div class="grupo-header">Grupo A – Classificação</div>
+      <div class="grupo-header">Grupo A – Classificação</div>
 
-  <table class="grupo-table">
-    <thead>
-      <tr>
-        <th>Classificação</th>
-        <th>P</th>
-        <th>J</th>
-        <th>V</th>
-        <th>E</th>
-        <th>D</th>
-        <th>GF</th>
-        <th>GC</th>
-        <th>SG</th>
-      </tr>
-    </thead>
-    <tbody id="tabela-grupoA-body">
-      <!-- linhas serão geradas via JavaScript -->
-    </tbody>
-  </table>
-</div>
+      <table class="grupo-table">
+        <thead>
+          <tr>
+            <th>Classificação</th>
+            <th>P</th>
+            <th>J</th>
+            <th>V</th>
+            <th>E</th>
+            <th>D</th>
+            <th>GF</th>
+            <th>GC</th>
+            <th>SG</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-grupoA-body">
+          <!-- preenchido via JavaScript -->
+        </tbody>
+      </table>
+    </div>
 
-
-    </table>
+    <!-- RODADAS GRUPO A -->
     <div class="rodadas-container">
 
-  <!-- 1ª Rodada -->
-  <div class="rodada-coluna">
-    <h3 class="rodada-titulo">1ª Rodada</h3>
+      <!-- 1ª Rodada -->
+      <div class="rodada-coluna">
+        <h3 class="rodada-titulo">1ª Rodada</h3>
 
-    <div class="jogo-info">11/06/2026 – 16h – Estádio Azteca</div>
-    <div class="jogo-linha">
-      <img src="Mexico.png" class="flag-jogo">
-      <span class="jogo-time">México</span>
+        <div class="jogo-info">11/06/2026 – 16h – Estádio Azteca</div>
+        <div class="jogo-linha">
+          <img src="Mexico.png" class="flag-jogo">
+          <span class="jogo-time">México</span>
 
-      <div class="placar-input">
-        <input type="number" min="0" class="gols-input" id="m1_home">
-        <span class="x-separador">x</span>
-        <input type="number" min="0" class="gols-input" id="m1_away">
+          <div class="placar-input">
+            <input type="number" min="0" class="gols-input" id="m1_home">
+            <span class="x-separador">x</span>
+            <input type="number" min="0" class="gols-input" id="m1_away">
+          </div>
+
+          <span class="jogo-time">África do Sul</span>
+          <img src="africa.png" class="flag-jogo">
+        </div>
+
+        <div class="jogo-info">11/06/2026 – 23h – Estádio Akron</div>
+        <div class="jogo-linha">
+          <img src="coreia.png" class="flag-jogo">
+          <span class="jogo-time">Coreia do Sul</span>
+
+          <div class="placar-input">
+            <input type="number" min="0" class="gols-input" id="m2_home">
+            <span class="x-separador">x</span>
+            <input type="number" min="0" class="gols-input" id="m2_away">
+          </div>
+
+          <span class="jogo-time">Europa D</span>
+          <img src="europad.png" class="flag-jogo">
+        </div>
       </div>
 
-      <span class="jogo-time">África do Sul</span>
-      <img src="africa.png" class="flag-jogo">
-    </div>
+      <!-- 2ª Rodada -->
+      <div class="rodada-coluna">
+        <h3 class="rodada-titulo">2ª Rodada</h3>
 
-    <div class="jogo-info">11/06/2026 – 23h – Estádio Akron</div>
-    <div class="jogo-linha">
-      <img src="coreia.png" class="flag-jogo">
-      <span class="jogo-time">Coreia do Sul</span>
+        <div class="jogo-info">18/06/2026 – 13h – Estádio Atlanta</div>
+        <div class="jogo-linha">
+          <img src="europad.png" class="flag-jogo">
+          <span class="jogo-time">Europa D</span>
 
-      <div class="placar-input">
-        <input type="number" min="0" class="gols-input" id="m2_home">
-        <span class="x-separador">x</span>
-        <input type="number" min="0" class="gols-input" id="m2_away">
+          <div class="placar-input">
+            <input type="number" min="0" class="gols-input" id="m3_home">
+            <span class="x-separador">x</span>
+            <input type="number" min="0" class="gols-input" id="m3_away">
+          </div>
+
+          <span class="jogo-time">África do Sul</span>
+          <img src="africa.png" class="flag-jogo">
+        </div>
+
+        <div class="jogo-info">22/06/2026 – 22h – Estádio Akron</div>
+        <div class="jogo-linha">
+          <img src="Mexico.png" class="flag-jogo">
+          <span class="jogo-time">México</span>
+
+          <div class="placar-input">
+            <input type="number" min="0" class="gols-input" id="m4_home">
+            <span class="x-separador">x</span>
+            <input type="number" min="0" class="gols-input" id="m4_away">
+          </div>
+
+          <span class="jogo-time">Coreia do Sul</span>
+          <img src="coreia.png" class="flag-jogo">
+        </div>
       </div>
 
-      <span class="jogo-time">Europa D</span>
-      <img src="europad.png" class="flag-jogo">
-    </div>
+      <!-- 3ª Rodada -->
+      <div class="rodada-coluna">
+        <h3 class="rodada-titulo">3ª Rodada</h3>
+
+        <div class="jogo-info">24/06/2026 – 22h – Estádio Atlanta</div>
+        <div class="jogo-linha">
+          <img src="europad.png" class="flag-jogo">
+          <span class="jogo-time">Europa D</span>
+
+          <div class="placar-input">
+            <input type="number" min="0" class="gols-input" id="m5_home">
+            <span class="x-separador">x</span>
+            <input type="number" min="0" class="gols-input" id="m5_away">
+          </div>
+
+          <span class="jogo-time">México</span>
+          <img src="Mexico.png" class="flag-jogo">
+        </div>
+
+        <div class="jogo-info">24/06/2026 – 22h – Estádio El Gigante de Acero</div>
+        <div class="jogo-linha">
+          <img src="africa.png" class="flag-jogo">
+          <span class="jogo-time">África do Sul</span>
+
+          <div class="placar-input">
+            <input type="number" min="0" class="gols-input" id="m6_home">
+            <span class="x-separador">x</span>
+            <input type="number" min="0" class="gols-input" id="m6_away">
+          </div>
+
+          <span class="jogo-time">Coreia do Sul</span>
+          <img src="coreia.png" class="flag-jogo">
+        </div>
+      </div>
+
+    </div> <!-- fim rodadas-container -->
+
+  </div> <!-- fim grupo-A -->
+
+  <!-- ===== GRUPO B–L (POR ENQUANTO APENAS PLACEHOLDER VISUAL) ===== -->
+
+  <div id="grupo-B" class="grupo-pane">
+    <h2 class="grupo-placeholder">Grupo B – em construção</h2>
   </div>
 
-  <!-- 2ª Rodada -->
-  <div class="rodada-coluna">
-    <h3 class="rodada-titulo">2ª Rodada</h3>
-
-    <div class="jogo-info">18/06/2026 – 13h – Estádio Atlanta</div>
-    <div class="jogo-linha">
-      <img src="europad.png" class="flag-jogo">
-      <span class="jogo-time">Europa D</span>
-
-      <div class="placar-input">
-        <input type="number" min="0" class="gols-input" id="m3_home">
-        <span class="x-separador">x</span>
-        <input type="number" min="0" class="gols-input" id="m3_away">
-      </div>
-
-      <span class="jogo-time">África do Sul</span>
-      <img src="africa.png" class="flag-jogo">
-    </div>
-
-    <div class="jogo-info">22/06/2026 – 22h – Estádio Akron</div>
-    <div class="jogo-linha">
-      <img src="Mexico.png" class="flag-jogo">
-      <span class="jogo-time">México</span>
-
-      <div class="placar-input">
-        <input type="number" min="0" class="gols-input" id="m4_home">
-        <span class="x-separador">x</span>
-        <input type="number" min="0" class="gols-input" id="m4_away">
-      </div>
-
-      <span class="jogo-time">Coreia do Sul</span>
-      <img src="coreia.png" class="flag-jogo">
-    </div>
+  <div id="grupo-C" class="grupo-pane">
+    <h2 class="grupo-placeholder">Grupo C – em construção</h2>
   </div>
 
-  <!-- 3ª Rodada -->
-  <div class="rodada-coluna">
-    <h3 class="rodada-titulo">3ª Rodada</h3>
-
-    <div class="jogo-info">24/06/2026 – 22h – Estádio Atlanta</div>
-    <div class="jogo-linha">
-      <img src="europad.png" class="flag-jogo">
-      <span class="jogo-time">Europa D</span>
-
-      <div class="placar-input">
-        <input type="number" min="0" class="gols-input" id="m5_home">
-        <span class="x-separador">x</span>
-        <input type="number" min="0" class="gols-input" id="m5_away">
-      </div>
-
-      <span class="jogo-time">México</span>
-      <img src="Mexico.png" class="flag-jogo">
-    </div>
-
-    <div class="jogo-info">24/06/2026 – 22h – Estádio El Gigante de Acero</div>
-    <div class="jogo-linha">
-      <img src="africa.png" class="flag-jogo">
-      <span class="jogo-time">África do Sul</span>
-
-      <div class="placar-input">
-        <input type="number" min="0" class="gols-input" id="m6_home">
-        <span class="x-separador">x</span>
-        <input type="number" min="0" class="gols-input" id="m6_away">
-      </div>
-
-      <span class="jogo-time">Coreia do Sul</span>
-      <img src="coreia.png" class="flag-jogo">
-    </div>
+  <div id="grupo-D" class="grupo-pane">
+    <h2 class="grupo-placeholder">Grupo D – em construção</h2>
   </div>
 
-</div>
+  <div id="grupo-E" class="grupo-pane">
+    <h2 class="grupo-placeholder">Grupo E – em construção</h2>
+  </div>
 
+  <div id="grupo-F" class="grupo-pane">
+    <h2 class="grupo-placeholder">Grupo F – em construção</h2>
+  </div>
 
+  <div id="grupo-G" class="grupo-pane">
+    <h2 class="grupo-placeholder">Grupo G – em construção</h2>
+  </div>
 
-</div>
->
+  <div id="grupo-H" class="grupo-pane">
+    <h2 class="grupo-placeholder">Grupo H – em construção</h2>
+  </div>
 
-    <!-- SUPABASE -->
-    <script type="module">
-  import { createClient } from "https://esm.sh/@supabase/supabase-js";
+  <div id="grupo-I" class="grupo-pane">
+    <h2 class="grupo-placeholder">Grupo I – em construção</h2>
+  </div>
 
-  // ---------- SUPABASE (login / logout) ----------
-  const SUPABASE_URL = "https://mdaqzciffsgupzbfxzgf.supabase.co";
-  const SUPABASE_ANON_KEY = "sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY";
+  <div id="grupo-J" class="grupo-pane">
+    <h2 class="grupo-placeholder">Grupo J – em construção</h2>
+  </div>
 
-  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  <div id="grupo-K" class="grupo-pane">
+    <h2 class="grupo-placeholder">Grupo K – em construção</h2>
+  </div>
 
-  // Verificar se o usuário está logado
-  const {
-    data: { session }
-  } = await supabase.auth.getSession();
+  <div id="grupo-L" class="grupo-pane">
+    <h2 class="grupo-placeholder">Grupo L – em construção</h2>
+  </div>
 
-  if (!session) {
-    window.location.href = "index.html";
-  }
+  <!-- ========== SCRIPT: SUPABASE + TABELA GRUPO A + TABS DE GRUPO ========== -->
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js";
 
-  // Logout
-  document.getElementById("logoutBtn").addEventListener("click", async () => {
-    await supabase.auth.signOut();
-    window.location.href = "index.html";
-  });
+    // ---------- SUPABASE (login / logout) ----------
+    const SUPABASE_URL = "https://mdaqzciffsgupzbfxzgf.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY";
 
-  // ---------- TABELA DO GRUPO A (AUTOMÁTICA) ----------
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // Times do grupo
-  const teams = [
-    { id: "mex", name: "México", flag: "Mexico.png" },
-    { id: "afs", name: "África do Sul", flag: "africa.png" },
-    { id: "cor", name: "Coreia do Sul", flag: "coreia.png" },
-    { id: "eur", name: "Europa D", flag: "europad.png" }
-  ];
+    // Verificar se o usuário está logado
+    const {
+      data: { session }
+    } = await supabase.auth.getSession();
 
-  // Partidas do grupo (linkadas aos IDs dos inputs)
-  const matches = [
-    { id: "m1", home: "mex", away: "afs", homeInputId: "m1_home", awayInputId: "m1_away" },
-    { id: "m2", home: "cor", away: "eur", homeInputId: "m2_home", awayInputId: "m2_away" },
-    { id: "m3", home: "eur", away: "afs", homeInputId: "m3_home", awayInputId: "m3_away" },
-    { id: "m4", home: "mex", away: "cor", homeInputId: "m4_home", awayInputId: "m4_away" },
-    { id: "m5", home: "eur", away: "mex", homeInputId: "m5_home", awayInputId: "m5_away" },
-    { id: "m6", home: "afs", away: "cor", homeInputId: "m6_home", awayInputId: "m6_away" }
-  ];
-
-  const tabelaBody = document.getElementById("tabela-grupoA-body");
-
-  // Cria estrutura base de estatísticas
-  function createEmptyStats() {
-    const stats = {};
-    teams.forEach(t => {
-      stats[t.id] = {
-        id: t.id,
-        name: t.name,
-        flag: t.flag,
-        pts: 0,
-        j: 0,
-        v: 0,
-        e: 0,
-        d: 0,
-        gf: 0,
-        gc: 0,
-        sg: 0,
-        h2h: {} // head-to-head: { [opponentId]: { gf, ga, pts } }
-      };
-    });
-    return stats;
-  }
-
-  // Lê os inputs, calcula tudo e atualiza tabela
-  function recalcularTabela() {
-    const stats = createEmptyStats();
-
-    // Processar cada jogo
-    for (const match of matches) {
-      const homeInput = document.getElementById(match.homeInputId);
-      const awayInput = document.getElementById(match.awayInputId);
-      if (!homeInput || !awayInput) continue;
-
-      const homeVal = homeInput.value.trim();
-      const awayVal = awayInput.value.trim();
-
-      // Se um dos lados estiver vazio, ignoramos o jogo
-      if (homeVal === "" || awayVal === "") continue;
-
-      const gh = parseInt(homeVal, 10);
-      const ga = parseInt(awayVal, 10);
-      if (Number.isNaN(gh) || Number.isNaN(ga)) continue;
-
-      const home = stats[match.home];
-      const away = stats[match.away];
-
-      // Jogos
-      home.j++;
-      away.j++;
-
-      // Gols
-      home.gf += gh;
-      home.gc += ga;
-      away.gf += ga;
-      away.gc += gh;
-
-      // Resultado / Pontos
-      let homePts = 0;
-      let awayPts = 0;
-      if (gh > ga) {
-        // vitória do mandante
-        home.v++;
-        away.d++;
-        homePts = 3;
-      } else if (gh < ga) {
-        // vitória do visitante
-        away.v++;
-        home.d++;
-        awayPts = 3;
-      } else {
-        // empate
-        home.e++;
-        away.e++;
-        homePts = 1;
-        awayPts = 1;
-      }
-
-      home.pts += homePts;
-      away.pts += awayPts;
-
-      // Atualizar head-to-head (mini-tabela entre empatados)
-      if (!home.h2h[match.away]) {
-        home.h2h[match.away] = { gf: 0, ga: 0, pts: 0 };
-      }
-      if (!away.h2h[match.home]) {
-        away.h2h[match.home] = { gf: 0, ga: 0, pts: 0 };
-      }
-
-      home.h2h[match.away].gf += gh;
-      home.h2h[match.away].ga += ga;
-      home.h2h[match.away].pts += homePts;
-
-      away.h2h[match.home].gf += ga;
-      away.h2h[match.home].ga += gh;
-      away.h2h[match.home].pts += awayPts;
+    if (!session) {
+      window.location.href = "index.html";
     }
 
-    // Saldo de gols
-    for (const t of Object.values(stats)) {
-      t.sg = t.gf - t.gc;
-    }
-
-    // Ordenação geral inicial (pontos, saldo, gols pró)
-    let order = teams.map(t => t.id);
-    order.sort((aId, bId) => {
-      const a = stats[aId];
-      const b = stats[bId];
-      if (b.pts !== a.pts) return b.pts - a.pts;
-      if (b.sg !== a.sg) return b.sg - a.sg;
-      if (b.gf !== a.gf) return b.gf - a.gf;
-      // se tudo igual, mantém ordem original
-      return 0;
+    // Logout
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      await supabase.auth.signOut();
+      window.location.href = "index.html";
     });
 
-    // Aplica confronto direto (mini-tabela) entre times empatados
-    order = aplicarConfrontoDireto(order, stats);
+    // ---------- SELETOR DE GRUPOS (TABS) ----------
+    const tabs = document.querySelectorAll(".grupo-tab");
+    const panes = document.querySelectorAll(".grupo-pane");
 
-    // Renderizar tabela no DOM
-    renderTabela(order, stats);
-  }
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        const group = tab.getAttribute("data-group");
 
-  // Aplica regra de confronto direto estilo FIFA (mini-tabela entre empatados)
-  function aplicarConfrontoDireto(order, stats) {
-    const finalOrder = [];
-    let i = 0;
+        // botão ativo
+        tabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
 
-    while (i < order.length) {
-      let j = i + 1;
-
-      // Identificar bloco de times com mesmos pontos, saldo e gols pró
-      while (j < order.length) {
-        const a = stats[order[i]];
-        const b = stats[order[j]];
-        if (a.pts === b.pts && a.sg === b.sg && a.gf === b.gf) {
-          j++;
-        } else {
-          break;
-        }
-      }
-
-      const grupoEmpatado = order.slice(i, j);
-
-      if (grupoEmpatado.length === 1) {
-        finalOrder.push(grupoEmpatado[0]);
-      } else {
-        // Mini-tabela só com confrontos entre os empatados
-        const mini = grupoEmpatado.map(id => {
-          const st = stats[id];
-          let pts = 0;
-          let sg = 0;
-          let gf = 0;
-
-          for (const outroId of grupoEmpatado) {
-            if (outroId === id) continue;
-            const h = st.h2h[outroId];
-            if (!h) continue;
-            pts += h.pts;
-            sg += h.gf - h.ga;
-            gf += h.gf;
+        // mostrar/esconder painéis
+        panes.forEach(p => {
+          if (p.id === "grupo-" + group) {
+            p.classList.add("active");
+          } else {
+            p.classList.remove("active");
           }
-
-          return { id, pts, sg, gf };
         });
+      });
+    });
 
-        // Ordena pela mini-tabela (confronto direto)
-        mini.sort((a, b) => {
-          if (b.pts !== a.pts) return b.pts - a.pts;
-          if (b.sg !== a.sg) return b.sg - a.sg;
-          if (b.gf !== a.gf) return b.gf - a.gf;
-          // se mesmo assim empatar, mantém ordem do bloco original
-          return grupoEmpatado.indexOf(a.id) - grupoEmpatado.indexOf(b.id);
-        });
+    // ---------- TABELA DO GRUPO A (AUTOMÁTICA) ----------
 
-        finalOrder.push(...mini.map(m => m.id));
-      }
+    // Times do grupo A
+    const teamsA = [
+      { id: "mex", name: "México",       flag: "Mexico.png" },
+      { id: "afs", name: "África do Sul", flag: "africa.png" },
+      { id: "cor", name: "Coreia do Sul", flag: "coreia.png" },
+      { id: "eur", name: "Europa D",      flag: "europad.png" }
+    ];
 
-      i = j;
+    // Partidas do grupo A (linkadas aos IDs dos inputs)
+    const matchesA = [
+      { id: "m1", home: "mex", away: "afs", homeInputId: "m1_home", awayInputId: "m1_away" },
+      { id: "m2", home: "cor", away: "eur", homeInputId: "m2_home", awayInputId: "m2_away" },
+      { id: "m3", home: "eur", away: "afs", homeInputId: "m3_home", awayInputId: "m3_away" },
+      { id: "m4", home: "mex", away: "cor", homeInputId: "m4_home", awayInputId: "m4_away" },
+      { id: "m5", home: "eur", away: "mex", homeInputId: "m5_home", awayInputId: "m5_away" },
+      { id: "m6", home: "afs", away: "cor", homeInputId: "m6_home", awayInputId: "m6_away" }
+    ];
+
+    const tabelaBodyA = document.getElementById("tabela-grupoA-body");
+
+    // Cria estrutura base de estatísticas
+    function createEmptyStatsA() {
+      const stats = {};
+      teamsA.forEach(t => {
+        stats[t.id] = {
+          id: t.id,
+          name: t.name,
+          flag: t.flag,
+          pts: 0,
+          j: 0,
+          v: 0,
+          e: 0,
+          d: 0,
+          gf: 0,
+          gc: 0,
+          sg: 0,
+          h2h: {} // head-to-head
+        };
+      });
+      return stats;
     }
 
-    return finalOrder;
-  }
+    // Recalcula tudo para o Grupo A
+    function recalcularTabelaA() {
+      const stats = createEmptyStatsA();
 
-  // Desenha a tabela no HTML
-  function renderTabela(order, stats) {
-    tabelaBody.innerHTML = "";
+      // Processar cada jogo
+      for (const match of matchesA) {
+        const homeInput = document.getElementById(match.homeInputId);
+        const awayInput = document.getElementById(match.awayInputId);
+        if (!homeInput || !awayInput) continue;
 
-    order.forEach((teamId, index) => {
-      const st = stats[teamId];
-      const meta = teams.find(t => t.id === teamId);
-      const pos = index + 1;
+        const homeVal = homeInput.value.trim();
+        const awayVal = awayInput.value.trim();
 
-      const tr = document.createElement("tr");
+        if (homeVal === "" || awayVal === "") continue;
 
-      // Coluna "Classificação" (posição + bandeira + nome)
-      const tdTeam = document.createElement("td");
-      tdTeam.className = "time-cell";
-      tdTeam.innerHTML = `
-        <span class="posicao">${pos}º</span>
-        <img src="${meta.flag}" class="flag" alt="${meta.name}">
-        <span class="time-nome">${meta.name}</span>
-      `;
+        const gh = parseInt(homeVal, 10);
+        const ga = parseInt(awayVal, 10);
+        if (Number.isNaN(gh) || Number.isNaN(ga)) continue;
 
-      const tdP  = document.createElement("td");
-      const tdJ  = document.createElement("td");
-      const tdV  = document.createElement("td");
-      const tdE  = document.createElement("td");
-      const tdD  = document.createElement("td");
-      const tdGF = document.createElement("td");
-      const tdGC = document.createElement("td");
-      const tdSG = document.createElement("td");
+        const home = stats[match.home];
+        const away = stats[match.away];
 
-      tdP.textContent  = st.pts;
-      tdJ.textContent  = st.j;
-      tdV.textContent  = st.v;
-      tdE.textContent  = st.e;
-      tdD.textContent  = st.d;
-      tdGF.textContent = st.gf;
-      tdGC.textContent = st.gc;
-      tdSG.textContent = st.sg;
+        home.j++;
+        away.j++;
 
-      tr.appendChild(tdTeam);
-      tr.appendChild(tdP);
-      tr.appendChild(tdJ);
-      tr.appendChild(tdV);
-      tr.appendChild(tdE);
-      tr.appendChild(tdD);
-      tr.appendChild(tdGF);
-      tr.appendChild(tdGC);
-      tr.appendChild(tdSG);
+        home.gf += gh;
+        home.gc += ga;
+        away.gf += ga;
+        away.gc += gh;
 
-      tabelaBody.appendChild(tr);
-    });
-  }
+        let homePts = 0;
+        let awayPts = 0;
 
-  // Ligar eventos nos inputs de gols
-  function initListeners() {
-    matches.forEach(match => {
-      const homeInput = document.getElementById(match.homeInputId);
-      const awayInput = document.getElementById(match.awayInputId);
+        if (gh > ga) {
+          home.v++;
+          away.d++;
+          homePts = 3;
+        } else if (gh < ga) {
+          away.v++;
+          home.d++;
+          awayPts = 3;
+        } else {
+          home.e++;
+          away.e++;
+          homePts = 1;
+          awayPts = 1;
+        }
 
-      if (!homeInput || !awayInput) return;
+        home.pts += homePts;
+        away.pts += awayPts;
 
-      homeInput.addEventListener("input", recalcularTabela);
-      awayInput.addEventListener("input", recalcularTabela);
-    });
+        // head-to-head
+        if (!home.h2h[match.away]) {
+          home.h2h[match.away] = { gf: 0, ga: 0, pts: 0 };
+        }
+        if (!away.h2h[match.home]) {
+          away.h2h[match.home] = { gf: 0, ga: 0, pts: 0 };
+        }
 
-    // Calcula uma vez ao carregar (tudo zerado)
-    recalcularTabela();
-  }
+        home.h2h[match.away].gf += gh;
+        home.h2h[match.away].ga += ga;
+        home.h2h[match.away].pts += homePts;
 
-  initListeners();
-</script>
+        away.h2h[match.home].gf += ga;
+        away.h2h[match.home].ga += gh;
+        away.h2h[match.home].pts += awayPts;
+      }
 
+      // saldo de gols
+      for (const t of Object.values(stats)) {
+        t.sg = t.gf - t.gc;
+      }
+
+      // ordenação geral inicial
+      let order = teamsA.map(t => t.id);
+      order.sort((aId, bId) => {
+        const a = stats[aId];
+        const b = stats[bId];
+        if (b.pts !== a.pts) return b.pts - a.pts;
+        if (b.sg !== a.sg) return b.sg - a.sg;
+        if (b.gf !== a.gf) return b.gf - a.gf;
+        return 0;
+      });
+
+      // aplica confronto direto
+      order = aplicarConfrontoDiretoA(order, stats);
+
+      // renderizar
+      renderTabelaA(order, stats);
+    }
+
+    // Confronto direto (mini-tabela) Grupo A
+    function aplicarConfrontoDiretoA(order, stats) {
+      const finalOrder = [];
+      let i = 0;
+
+      while (i < order.length) {
+        let j = i + 1;
+
+        while (j < order.length) {
+          const a = stats[order[i]];
+          const b = stats[order[j]];
+          if (a.pts === b.pts && a.sg === b.sg && a.gf === b.gf) {
+            j++;
+          } else {
+            break;
+          }
+        }
+
+        const grupoEmpatado = order.slice(i, j);
+
+        if (grupoEmpatado.length === 1) {
+          finalOrder.push(grupoEmpatado[0]);
+        } else {
+          const mini = grupoEmpatado.map(id => {
+            const st = stats[id];
+            let pts = 0;
+            let sg = 0;
+            let gf = 0;
+
+            for (const outroId of grupoEmpatado) {
+              if (outroId === id) continue;
+              const h = st.h2h[outroId];
+              if (!h) continue;
+              pts += h.pts;
+              sg += h.gf - h.ga;
+              gf += h.gf;
+            }
+
+            return { id, pts, sg, gf };
+          });
+
+          mini.sort((a, b) => {
+            if (b.pts !== a.pts) return b.pts - a.pts;
+            if (b.sg !== a.sg) return b.sg - a.sg;
+            if (b.gf !== a.gf) return b.gf - a.gf;
+            return grupoEmpatado.indexOf(a.id) - grupoEmpatado.indexOf(b.id);
+          });
+
+          finalOrder.push(...mini.map(m => m.id));
+        }
+
+        i = j;
+      }
+
+      return finalOrder;
+    }
+
+    // Desenha tabela no HTML (Grupo A)
+    function renderTabelaA(order, stats) {
+      tabelaBodyA.innerHTML = "";
+
+      order.forEach((teamId, index) => {
+        const st = stats[teamId];
+        const meta = teamsA.find(t => t.id === teamId);
+        const pos = index + 1;
+
+        const tr = document.createElement("tr");
+
+        const tdTeam = document.createElement("td");
+        tdTeam.className = "time-cell";
+        tdTeam.innerHTML = `
+          <span class="posicao">${pos}º</span>
+          <img src="${meta.flag}" class="flag" alt="${meta.name}">
+          <span class="time-nome">${meta.name}</span>
+        `;
+
+        const tdP  = document.createElement("td");
+        const tdJ  = document.createElement("td");
+        const tdV  = document.createElement("td");
+        const tdE  = document.createElement("td");
+        const tdD  = document.createElement("td");
+        const tdGF = document.createElement("td");
+        const tdGC = document.createElement("td");
+        const tdSG = document.createElement("td");
+
+        tdP.textContent  = st.pts;
+        tdJ.textContent  = st.j;
+        tdV.textContent  = st.v;
+        tdE.textContent  = st.e;
+        tdD.textContent  = st.d;
+        tdGF.textContent = st.gf;
+        tdGC.textContent = st.gc;
+        tdSG.textContent = st.sg;
+
+        tr.appendChild(tdTeam);
+        tr.appendChild(tdP);
+        tr.appendChild(tdJ);
+        tr.appendChild(tdV);
+        tr.appendChild(tdE);
+        tr.appendChild(tdD);
+        tr.appendChild(tdGF);
+        tr.appendChild(tdGC);
+        tr.appendChild(tdSG);
+
+        tabelaBodyA.appendChild(tr);
+      });
+    }
+
+    // Ligar eventos nos inputs do Grupo A
+    function initListenersA() {
+      matchesA.forEach(match => {
+        const homeInput = document.getElementById(match.homeInputId);
+        const awayInput = document.getElementById(match.awayInputId);
+        if (!homeInput || !awayInput) return;
+
+        homeInput.addEventListener("input", recalcularTabelaA);
+        awayInput.addEventListener("input", recalcularTabelaA);
+      });
+
+      recalcularTabelaA();
+    }
+
+    initListenersA();
+  </script>
 
 </body>
 </html>
