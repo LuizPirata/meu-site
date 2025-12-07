@@ -145,11 +145,10 @@ body {
 /* Layout em colunas */
 .rodadas-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 80px;        /* distância igual entre as rodadas */
+    margin-top: 50px;
     width: 100%;
-    max-width: 1400px; /* opcional — deixa mais bonito em telas grandes */
-    margin: 50px auto 0 auto;
-    gap: 30px;
 }
 
 /* Cada coluna de rodada */
@@ -211,9 +210,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    flex-wrap: nowrap;
+    gap: 12px;              /* mais espaçado e centrado */
+    margin-bottom: 20px;
 }
+
 
 .jogo-time {
     white-space: nowrap;
@@ -232,6 +232,7 @@ body {
 .placar-input {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
 }
 
@@ -264,6 +265,10 @@ body {
     color: white;
 }
 
+.rodada-coluna {
+    width: 28%;             /* largura igual e proporcional */
+    text-align: center;     /* centraliza tudo dentro */
+}
 
 
 
