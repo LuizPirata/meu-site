@@ -146,13 +146,15 @@ body {
 .rodadas-container {
     display: flex;
     justify-content: space-between;
-    margin-top: 50px;
+    width: 100%;
+    max-width: 1400px; /* opcional — deixa mais bonito em telas grandes */
+    margin: 50px auto 0 auto;
     gap: 30px;
 }
 
 /* Cada coluna de rodada */
 .rodada-coluna {
-    width: 32%;
+    flex: 1;
 }
 
 /* Título com degradê igual ao topo da tabela */
@@ -219,6 +221,7 @@ body {
 
 .jogo-info {
     white-space: nowrap;
+    font-size: clamp(12px, 1.2vw, 14px);
 }
 
 .jogo-placar {
