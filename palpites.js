@@ -146,11 +146,38 @@ const grupoC = {
   ]
 };
 
+// ===============================
+// GRUPO D
+// ===============================
+const grupoD = {
+    tableBodyId: "grupoD-body",
+    teams: [
+        { id: "australia", name: "Austrália", flag: "australia.png" },
+        { id: "eua",       name: "Estados Unidos", flag: "eua.png" },
+        { id: "europac",   name: "Europa C", flag: "europad.png" },
+        { id: "paraguai",  name: "Paraguai", flag: "paraguai.png" }
+    ],
+    matches: [
+        // 1ª rodada
+        { id: "D1", home: "eua",       away: "paraguai", homeSelector:'input[data-jogo="D1"][data-time="eua"]',       awaySelector:'input[data-jogo="D1"][data-time="paraguai"]' },
+        { id: "D2", home: "australia", away: "europac",  homeSelector:'input[data-jogo="D2"][data-time="australia"]', awaySelector:'input[data-jogo="D2"][data-time="europac"]' },
+
+        // 2ª rodada
+        { id: "D3", home: "europac",   away: "paraguai", homeSelector:'input[data-jogo="D3"][data-time="europac"]',   awaySelector:'input[data-jogo="D3"][data-time="paraguai"]' },
+        { id: "D4", home: "eua",       away: "australia",homeSelector:'input[data-jogo="D4"][data-time="eua"]',       awaySelector:'input[data-jogo="D4"][data-time="australia"]' },
+
+        // 3ª rodada
+        { id: "D5", home: "europac",   away: "eua",      homeSelector:'input[data-jogo="D5"][data-time="europac"]',   awaySelector:'input[data-jogo="D5"][data-time="eua"]' },
+        { id: "D6", home: "paraguai",  away: "australia",homeSelector:'input[data-jogo="D6"][data-time="paraguai"]',  awaySelector:'input[data-jogo="D6"][data-time="australia"]' }
+    ]
+};
+
 // ---------- REGISTRO GLOBAL DE GRUPOS ----------
 const grupos = {
   A: grupoA,
   B: grupoB,
-  C: grupoC
+  C: grupoC,
+  D: grupoD
 };
 
 // ==========================================================
