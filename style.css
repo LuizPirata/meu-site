@@ -98,7 +98,7 @@ body {
 
 /* Coluna de classificação (ex-Time) */
 .th-time {
-    width: 25%;
+    width: 24%;
     text-align: center !important;
     font-weight: bold;
 }
