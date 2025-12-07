@@ -344,6 +344,53 @@ const grupoH = {
         }
     ]
 };
+// ===============================
+// GRUPO I
+// ===============================
+const grupoI = {
+    tableBodyId: "grupoI-body",
+    teams: [
+        { id: "franca",  name: "França", flag: "franca.png" },
+        { id: "inter2",  name: "Intercontinental 2", flag: "europad.png" },
+        { id: "noruega", name: "Noruega", flag: "noruega.png" },
+        { id: "senegal", name: "Senegal", flag: "senegal.png" }
+    ],
+    matches: [
+
+        // 1ª Rodada
+        { id: "I1", home: "franca", away: "senegal",
+          homeSelector:'input[data-jogo="I1"][data-time="franca"]',
+          awaySelector:'input[data-jogo="I1"][data-time="senegal"]'
+        },
+
+        { id: "I2", home: "inter2", away: "noruega",
+          homeSelector:'input[data-jogo="I2"][data-time="inter2"]',
+          awaySelector:'input[data-jogo="I2"][data-time="noruega"]'
+        },
+
+        // 2ª Rodada
+        { id: "I3", home: "franca", away: "inter2",
+          homeSelector:'input[data-jogo="I3"][data-time="franca"]',
+          awaySelector:'input[data-jogo="I3"][data-time="inter2"]'
+        },
+
+        { id: "I4", home: "noruega", away: "senegal",
+          homeSelector:'input[data-jogo="I4"][data-time="noruega"]',
+          awaySelector:'input[data-jogo="I4"][data-time="senegal"]'
+        },
+
+        // 3ª Rodada
+        { id: "I5", home: "noruega", away: "franca",
+          homeSelector:'input[data-jogo="I5"][data-time="noruega"]',
+          awaySelector:'input[data-jogo="I5"][data-time="franca"]'
+        },
+
+        { id: "I6", home: "senegal", away: "inter2",
+          homeSelector:'input[data-jogo="I6"][data-time="senegal"]',
+          awaySelector:'input[data-jogo="I6"][data-time="inter2"]'
+        }
+    ]
+};
 
 
 // ---------- REGISTRO GLOBAL DE GRUPOS ----------
@@ -355,7 +402,8 @@ const grupos = {
   E: grupoE,
   F: grupoF,
   G: grupoG,
-  H: grupoH
+  H: grupoH,
+  I: grupoI
 };
 
 // ==========================================================
