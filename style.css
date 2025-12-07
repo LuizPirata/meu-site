@@ -204,3 +204,16 @@ body {
     font-weight: bold;
     color: white;
 }
+
+.jogo-linha {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+}
+
+.jogo-time {
+    white-space: nowrap;
+}
+
