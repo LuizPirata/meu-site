@@ -152,8 +152,8 @@ const grupoC = {
 const grupoD = {
     tableBodyId: "grupoD-body",
     teams: [
-        { id: "australia", name: "Austrália", flag: "australia.png" },
-        { id: "eua",       name: "Estados Unidos", flag: "eua.png" },
+        { id: "eua", name: "Estados Unidos", flag: "eua.png" },
+        { id: "australia",       name: "Austrália", flag: "australia.png" },
         { id: "europac",   name: "Europa C", flag: "europad.png" },
         { id: "paraguai",  name: "Paraguai", flag: "paraguai.png" }
     ],
@@ -220,9 +220,9 @@ const grupoE = {
 const grupoF = {
     tableBodyId: "grupoF-body",
     teams: [
-        { id: "europab", name: "Europa B", flag: "europad.png" },
-        { id: "holanda", name: "Holanda",  flag: "holanda.png" },
-        { id: "japao",   name: "Japão",    flag: "japao.png" },
+        { id: "holanda", name: "Holanda", flag: "holanda.png" },
+        { id: "japao", name: "Japão",  flag: "japao.png" },
+        { id: "europad",   name: "Europa B",    flag: "europad.png" },
         { id: "tunisia", name: "Tunísia",  flag: "tunisia.png" }
     ],
     matches: [
