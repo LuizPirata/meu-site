@@ -257,6 +257,49 @@ const grupoF = {
         }
     ]
 };
+// ===============================
+// GRUPO G
+// ===============================
+const grupoG = {
+    tableBodyId: "grupoG-body",
+    teams: [
+        { id: "belgica", name: "Bélgica", flag: "belgica.png" },
+        { id: "egito",   name: "Egito",   flag: "egito.png" },
+        { id: "ira",     name: "Irã",     flag: "ira.png" },
+        { id: "nz",      name: "Nova Zelândia", flag: "novazelandia.png" }
+    ],
+    matches: [
+        // 1ª rodada
+        { id: "G1", home: "belgica", away: "egito",
+          homeSelector:'input[data-jogo="G1"][data-time="belgica"]',
+          awaySelector:'input[data-jogo="G1"][data-time="egito"]'
+        },
+        { id: "G2", home: "ira", away: "nz",
+          homeSelector:'input[data-jogo="G2"][data-time="ira"]',
+          awaySelector:'input[data-jogo="G2"][data-time="nz"]'
+        },
+
+        // 2ª rodada
+        { id: "G3", home: "belgica", away: "ira",
+          homeSelector:'input[data-jogo="G3"][data-time="belgica"]',
+          awaySelector:'input[data-jogo="G3"][data-time="ira"]'
+        },
+        { id: "G4", home: "nz", away: "egito",
+          homeSelector:'input[data-jogo="G4"][data-time="nz"]',
+          awaySelector:'input[data-jogo="G4"][data-time="egito"]'
+        },
+
+        // 3ª rodada
+        { id: "G5", home: "nz", away: "belgica",
+          homeSelector:'input[data-jogo="G5"][data-time="nz"]',
+          awaySelector:'input[data-jogo="G5"][data-time="belgica"]'
+        },
+        { id: "G6", home: "egito", away: "ira",
+          homeSelector:'input[data-jogo="G6"][data-time="egito"]',
+          awaySelector:'input[data-jogo="G6"][data-time="ira"]'
+        }
+    ]
+};
 
 
 // ---------- REGISTRO GLOBAL DE GRUPOS ----------
@@ -266,7 +309,8 @@ const grupos = {
   C: grupoC,
   D: grupoD,
   E: grupoE,
-  F: grupoF
+  F: grupoF,
+  G: grupoG
 };
 
 // ==========================================================
