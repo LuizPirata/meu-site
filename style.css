@@ -4,7 +4,7 @@ body {
     font-family: Arial, sans-serif;
     color: white;
     background: radial-gradient(circle at top, #222 0%, #000 100%);
-    min-height: 100vh;
+    height: 100vh;
 }
 
 /* Container principal */
@@ -60,14 +60,12 @@ body {
     height: auto;
 }
 
-/* ====== AJUSTE IMPORTANTE ====== */
-/* AQUI padronizamos largura entre Grupo A e Grupo B */
+/* Container da tabela */
 .grupo-container {
     width: 95%;
-    max-width: 950px;   /* antes 900px */
+    max-width: 900px;
     margin: 30px auto;
 }
-/* ================================= */
 
 /* Cabeçalho estilo menu */
 .grupo-header {
@@ -88,7 +86,7 @@ body {
     color: white;
 }
 
-/* Cabeçalho da tabela */
+/* Linha do header */
 .grupo-table thead th {
     padding: 10px 5px;
     font-weight: bold;
@@ -96,14 +94,12 @@ body {
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* Coluna de classificação (ex-Time) */
 .th-time {
-    width: 24%;
+    width: 22%;
     text-align: center !important;
-    font-weight: bold;
 }
 
-/* Todas as demais colunas */
+/* Colunas menores */
 .grupo-table th:not(.th-time),
 .grupo-table td:not(:first-child) {
     width: 9%;
@@ -114,6 +110,10 @@ body {
 .grupo-table td {
     padding: 8px 0;
     border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.grupo-table, .grupo-table td, .grupo-table th {
+    background: transparent !important;
 }
 
 .time-cell {
@@ -140,7 +140,7 @@ body {
     font-size: 16px;
 }
 
-/* Layout das rodadas */
+/* Rodadas */
 .rodadas-container {
     display: flex;
     justify-content: center;
@@ -148,11 +148,6 @@ body {
     margin: 50px auto 0 auto;
     width: 100%;
     max-width: 1200px;
-}
-
-.rodada-coluna {
-    flex: 0 0 340px;
-    text-align: center;
 }
 
 .rodada-titulo {
@@ -168,14 +163,14 @@ body {
 .jogo-info {
     text-align: center;
     color: #ccc;
-    font-size: 13px;
-    margin: 14px 0 6px;
-    white-space: normal;
+    font-size: 14px;
+    margin: 18px 0 6px;
 }
 
+/* Linha dos jogos */
 .jogo-linha {
     display: grid;
-    grid-template-columns:
+    grid-template-columns: 
         24px
         130px
         80px
@@ -196,15 +191,7 @@ body {
 
 .jogo-time {
     font-size: 16px;
-    color: white;
     white-space: nowrap;
-}
-
-.placar-input {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
 }
 
 .gols-input {
@@ -217,22 +204,11 @@ body {
     color: white;
     border: 1px solid rgba(255,255,255,0.25);
     border-radius: 6px;
-    outline: none;
 }
 
 .gols-input:focus {
     border-color: #ff9500;
     box-shadow: 0 0 6px #ff9500;
-}
-
-.gols-input::-webkit-inner-spin-button,
-.gols-input::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.gols-input {
-    -moz-appearance: textfield;
 }
 
 .x-separador {
@@ -241,7 +217,12 @@ body {
     color: white;
 }
 
-/* SUB-MENU DE GRUPOS */
+.rodada-coluna {
+    flex: 0 0 340px;
+    text-align: center;
+}
+
+/* Tabs dos grupos */
 .grupo-tabs {
     display: flex;
     justify-content: center;
@@ -268,7 +249,7 @@ body {
     transform: scale(1.05);
 }
 
-/* Painéis */
+/* Conteúdo dos grupos */
 .grupo-pane {
     display: none;
 }
@@ -277,21 +258,9 @@ body {
     display: block;
 }
 
-.grupo-placeholder {
-    margin-top: 60px;
-    text-align: center;
-    font-size: 22px;
-    color: #ccc;
-}
-
-#grupo-MATA.grupo-pane {
-    display: block !important;
-}
-
-
-/* =============================== */
-/*   MATA-MATA — LAYOUT ESPELHADO  */
-/* =============================== */
+/* ========================================================= */
+/* ===============  SEÇÃO MATA-MATA CORRIGIDA  ============= */
+/* ========================================================= */
 
 #grupo-MATA .mata-titulo-central {
     text-align: center;
@@ -304,7 +273,7 @@ body {
 }
 
 #grupo-MATA .mata-wrapper {
-    display: flex !important;
+    display: flex;
     justify-content: space-between;
     align-items: flex-start;
     width: 98%;
@@ -378,7 +347,6 @@ body {
     margin: 0 12px;
 }
 
-#grupo-MATA.grupo-pane.active {
-    display: block !important;
-}
+/* REMOVIDO O PROBLEMA: NÃO DEIXAR VISÍVEL SEMPRE */
+/* (Essas linhas eram o que quebrava tudo!) */
 
