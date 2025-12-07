@@ -283,3 +283,99 @@ body {
     font-size: 22px;
     color: #ccc;
 }
+
+/* ===== FASE MATA-MATA ===== */
+
+.mata-bloco {
+  width: 95%;
+  max-width: 1100px;
+  margin: 30px auto;
+}
+
+.mata-titulo {
+  background: linear-gradient(to right, #ff9900, #ff0000);
+  color: white;
+  font-weight: bold;
+  padding: 10px 16px;
+  font-size: 20px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* Grades para cada fase */
+.mata-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.mata32 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.mata16 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.mata8 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.mata4 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.mata-final {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Cartão de cada jogo */
+.mata-jogo {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 10px 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.mata-jogo-header {
+  font-weight: bold;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #ffcc66;
+}
+
+/* Linha com times */
+.mata-jogo-linha {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.mata-time {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+  font-size: 13px;
+}
+
+.mata-time::placeholder {
+  color: #bbb;
+}
+
+.mata-time:focus {
+  outline: none;
+  border-color: #ff9900;
+  box-shadow: 0 0 4px #ff9900;
+}
+
+.mata-x {
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+}
+
