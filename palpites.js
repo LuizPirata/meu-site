@@ -484,6 +484,49 @@ const grupoK = {
         }
     ]
 };
+// ===============================
+// GRUPO L
+// ===============================
+const grupoL = {
+    tableBodyId: "grupoL-body",
+    teams: [
+        { id: "inglaterra", name: "Inglaterra", flag: "inglaterra.png" },
+        { id: "croacia",    name: "Croácia",    flag: "croacia.png" },
+        { id: "gana",       name: "Gana",       flag: "gana.png" },
+        { id: "panama",     name: "Panamá",     flag: "panama.png" }
+    ],
+    matches: [
+        // 1ª Rodada
+        { id: "L1", home: "inglaterra", away: "croacia",
+          homeSelector:'input[data-jogo="L1"][data-time="inglaterra"]',
+          awaySelector:'input[data-jogo="L1"][data-time="croacia"]'
+        },
+        { id: "L2", home: "gana", away: "panama",
+          homeSelector:'input[data-jogo="L2"][data-time="gana"]',
+          awaySelector:'input[data-jogo="L2"][data-time="panama"]'
+        },
+
+        // 2ª Rodada
+        { id: "L3", home: "inglaterra", away: "gana",
+          homeSelector:'input[data-jogo="L3"][data-time="inglaterra"]',
+          awaySelector:'input[data-jogo="L3"][data-time="gana"]'
+        },
+        { id: "L4", home: "panama", away: "croacia",
+          homeSelector:'input[data-jogo="L4"][data-time="panama"]',
+          awaySelector:'input[data-jogo="L4"][data-time="croacia"]'
+        },
+
+        // 3ª Rodada
+        { id: "L5", home: "panama", away: "inglaterra",
+          homeSelector:'input[data-jogo="L5"][data-time="panama"]',
+          awaySelector:'input[data-jogo="L5"][data-time="inglaterra"]'
+        },
+        { id: "L6", home: "croacia", away: "gana",
+          homeSelector:'input[data-jogo="L6"][data-time="croacia"]',
+          awaySelector:'input[data-jogo="L6"][data-time="gana"]'
+        }
+    ]
+};
 
 
 // ---------- REGISTRO GLOBAL DE GRUPOS ----------
@@ -498,7 +541,8 @@ const grupos = {
   H: grupoH,
   I: grupoI,
   J: grupoJ,
-  K: grupoK
+  K: grupoK,
+  L: grupoL
 };
 
 // ==========================================================
