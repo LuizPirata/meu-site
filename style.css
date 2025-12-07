@@ -4,7 +4,7 @@ body {
     font-family: Arial, sans-serif;
     color: white;
     background: radial-gradient(circle at top, #222 0%, #000 100%);
-    height: 100vh;
+    min-height: 100vh;
 }
 
 /* Container principal */
@@ -60,12 +60,14 @@ body {
     height: auto;
 }
 
-/* Container da tabela */
+/* ====== AJUSTE IMPORTANTE ====== */
+/* AQUI padronizamos largura entre Grupo A e Grupo B */
 .grupo-container {
     width: 95%;
-    max-width: 900px;
+    max-width: 950px;   /* antes 900px */
     margin: 30px auto;
 }
+/* ================================= */
 
 /* Cabeçalho estilo menu */
 .grupo-header {
@@ -86,7 +88,7 @@ body {
     color: white;
 }
 
-/* Linha do header */
+/* Cabeçalho da tabela */
 .grupo-table thead th {
     padding: 10px 5px;
     font-weight: bold;
@@ -94,13 +96,14 @@ body {
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* Coluna Time maior */
+/* Coluna de classificação (ex-Time) */
 .th-time {
-    width: 22%;
+    width: 25%;
     text-align: center !important;
+    font-weight: bold;
 }
 
-/* Todas as demais colunas menores e iguais */
+/* Todas as demais colunas */
 .grupo-table th:not(.th-time),
 .grupo-table td:not(:first-child) {
     width: 9%;
@@ -113,11 +116,6 @@ body {
     border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 
-/* Remove fundo branco (usa o fundo natural da página) */
-.grupo-table, .grupo-table td, .grupo-table th {
-    background: transparent !important;
-}
-
 .time-cell {
     display: flex;
     align-items: center;
@@ -127,7 +125,7 @@ body {
 
 .posicao {
     font-weight: bold;
-    width: 28px; /* mantém alinhado */
+    width: 28px;
     display: inline-block;
 }
 
@@ -142,79 +140,29 @@ body {
     font-size: 16px;
 }
 
-/* Layout em colunas */
+/* Layout das rodadas */
 .rodadas-container {
     display: flex;
-    justify-content: center;         /* centraliza tudo */
-    gap: 60px;                       /* espaço entre as 3 colunas */
+    justify-content: center;
+    gap: 60px;
     margin: 50px auto 0 auto;
     width: 100%;
-    max-width: 1200px;               /* limite pra não estourar na horizontal */
+    max-width: 1200px;
 }
 
-/* Título com degradê igual ao topo da tabela */
+.rodada-coluna {
+    flex: 0 0 340px;
+    text-align: center;
+}
+
 .rodada-titulo {
     text-align: center;
     font-size: 24px;
     font-weight: bold;
     padding: 12px 0;
     border-radius: 12px;
-
     background: linear-gradient(90deg, #ff9500, #ff0000);
     color: white;
-}
-
-/* Informações do jogo */
-.jogo-info {
-    text-align: center;
-    color: #ccc;
-    font-size: 14px;
-    margin: 18px 0 6px;
-}
-
-/* Linha com bandeiras, nomes e placar */
-.jogo-linha {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-/* Bandeiras dos jogos */
-.flag-jogo {
-    width: 22px;
-    height: 16px;
-    object-fit: cover;
-    border-radius: 2px;
-}
-
-/* Placar */
-.jogo-placar {
-    font-size: 18px;
-    font-weight: bold;
-    color: white;
-}
-
-.jogo-linha {
-    display: grid;
-    grid-template-columns: 
-        24px         /* bandeira esquerda */
-        130px        /* nome do time esquerdo */
-        80px         /* placar (2 inputs + x) */
-        130px        /* nome do time direito */
-        24px;        /* bandeira direita */
-
-    align-items: center;
-    justify-items: center;
-    margin-bottom: 20px;
-    gap: 10px;
-}
-
-.jogo-time {
-    font-size: 16px;
-    color: white;
-    white-space: nowrap;         /* times continuam numa linha só */
 }
 
 .jogo-info {
@@ -222,13 +170,36 @@ body {
     color: #ccc;
     font-size: 13px;
     margin: 14px 0 6px;
-    white-space: normal;         /* deixa a linha do estádio quebrar se PRECISAR */
+    white-space: normal;
 }
-.jogo-placar {
+
+.jogo-linha {
+    display: grid;
+    grid-template-columns:
+        24px
+        130px
+        80px
+        130px
+        24px;
+    align-items: center;
+    justify-items: center;
+    margin-bottom: 26px;
+    gap: 10px;
+}
+
+.flag-jogo {
+    width: 22px;
+    height: 16px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.jogo-time {
+    font-size: 16px;
+    color: white;
     white-space: nowrap;
 }
 
-/* Container do placar */
 .placar-input {
     display: flex;
     align-items: center;
@@ -236,64 +207,41 @@ body {
     gap: 6px;
 }
 
-/* Caixinhas de gols */
 .gols-input {
     width: 34px;
     height: 28px;
     text-align: center;
     font-size: 16px;
     font-weight: bold;
-
     background: rgba(255,255,255,0.15);
     color: white;
     border: 1px solid rgba(255,255,255,0.25);
     border-radius: 6px;
-
     outline: none;
 }
 
-/* Efeito ao clicar */
 .gols-input:focus {
     border-color: #ff9500;
     box-shadow: 0 0 6px #ff9500;
 }
 
-/* O “x” entre os campos */
-.x-separador {
-    font-size: 18px;
-    font-weight: bold;
-    color: white;
-}
-
-.rodada-coluna {
-    flex: 0 0 340px;        /* cada rodada ~340px, não estica nem encolhe demais */
-    text-align: center;
-}
-
-/* Espaçamento padronizado entre a linha de informações e os placares */
-.jogo-info {
-    margin-top: 22px;    /* distância superior */
-    margin-bottom: 14px; /* distância inferior */
-}
-
-/* Espaçamento padronizado abaixo da linha de placar */
-.jogo-linha {
-    margin-bottom: 26px; /* controla o espaço até o próximo confronto */
-}
-
-/* Remove os spinners (setinhas) dos inputs type="number" — Chrome, Edge, Opera */
 .gols-input::-webkit-inner-spin-button,
 .gols-input::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-/* Remove spinners no Firefox */
 .gols-input {
     -moz-appearance: textfield;
 }
 
-/* SUB-MENU DE GRUPOS (A–L) */
+.x-separador {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+/* SUB-MENU DE GRUPOS */
 .grupo-tabs {
     display: flex;
     justify-content: center;
@@ -320,7 +268,7 @@ body {
     transform: scale(1.05);
 }
 
-/* CONTEÚDO DE CADA GRUPO */
+/* Painéis */
 .grupo-pane {
     display: none;
 }
@@ -329,11 +277,9 @@ body {
     display: block;
 }
 
-/* Placeholder dos grupos que ainda não estão prontos */
 .grupo-placeholder {
     margin-top: 60px;
     text-align: center;
     font-size: 22px;
     color: #ccc;
 }
-
