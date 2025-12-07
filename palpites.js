@@ -86,8 +86,6 @@ const grupoB = {
   ]
 };
 
-
-
 // Aqui você pode ir adicionando futuramente:
 // const grupoC = { ... }, grupoD, etc.
 
