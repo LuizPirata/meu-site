@@ -281,4 +281,15 @@ body {
     margin-bottom: 26px; /* controla o espaço até o próximo confronto */
 }
 
+/* Remove os spinners (setinhas) dos inputs type="number" — Chrome, Edge, Opera */
+.gols-input::-webkit-inner-spin-button,
+.gols-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Remove spinners no Firefox */
+.gols-input {
+    -moz-appearance: textfield;
+}
 
