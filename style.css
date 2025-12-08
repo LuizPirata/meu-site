@@ -389,3 +389,11 @@ body {
         margin-right: 24px;
     }
 }
+
+/* CENTRALIZAR VERTICALMENTE AS COLUNAS DO BRACKET */
+.bracket-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Alinha os jogos verticalmente */
+    gap: 40px; /* Mantém a distância atual entre jogos */
+}
