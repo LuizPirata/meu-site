@@ -397,3 +397,15 @@ body {
     justify-content: center; /* Alinha os jogos verticalmente */
     gap: 40px; /* Mantém a distância atual entre jogos */
 }
+
+/* FAZER TODAS AS COLUNAS TEREM ALTURA IGUAL */
+.mata-grid {
+    align-items: stretch; /* força todas as colunas a terem a mesma altura */
+}
+
+/* CENTRALIZAR VERTICALMENTE O CONTEÚDO DE CADA COLUNA */
+.round-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centraliza os jogos no meio vertical */
+}
