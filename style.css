@@ -390,22 +390,29 @@ body {
     }
 }
 
-/* CENTRALIZAR VERTICALMENTE AS COLUNAS DO BRACKET */
-.bracket-col {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Alinha os jogos verticalmente */
-    gap: 40px; /* Mantém a distância atual entre jogos */
-}
-
-/* FAZER TODAS AS COLUNAS TEREM ALTURA IGUAL */
+/* COLUNAS DO BRACKET (A2) */
 .mata-grid {
-    align-items: stretch; /* força todas as colunas a terem a mesma altura */
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 40px;
+
+    /* força altura igual entre as colunas */
+    grid-auto-rows: 1fr;
 }
 
-/* CENTRALIZAR VERTICALMENTE O CONTEÚDO DE CADA COLUNA */
+/* garante que cada coluna tenha altura total */
+.mata-grid > .round-col {
+    height: 100%;
+}
+
+/* centralizar verticalmente o conteúdo */
 .round-col {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* centraliza os jogos no meio vertical */
+    justify-content: center;
+}
+
+/* opcional – mantém espaçamento interno */
+.round-col .match {
+    margin: 12px 0;
 }
