@@ -285,106 +285,62 @@ body {
 }
 
 
-/* ============================== */
-/*   MATA-MATA — LAYOUT ESPELHADO */
-/* ============================== */
+/* ======================================= */
+/*   BRACKET — 9 COLUNAS (MODELO A LIMPO)  */
+/* ======================================= */
 
-#grupo-MATA .mata-titulo-central {
-    text-align: center;
-    font-size: 32px;
-    font-weight: bold;
-    margin-top: 25px;
-    background: linear-gradient(to right, #ff9900, #ff0000);
-    padding: 12px;
-    border-radius: 12px;
-}
-
-/* Wrapper das 3 colunas (esq - centro - dir) */
-.bracket-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 95%;
+#grupo-MATA .bracket-9col {
+    width: 98%;
     margin: 40px auto;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    column-gap: 25px;
 }
 
-/* Colunas laterais iguais */
-.bracket-column {
-    width: 32%;
-    display: flex;
-    flex-direction: column;
-    gap: 45px;
+/* Títulos de cada fase */
+#grupo-MATA .bracket-phase-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffcf87;
+    margin-bottom: 14px;
 }
 
-/* Chave direita inverte o alinhamento visual */
-.bracket-column.right {
-    direction: rtl;
-}
-.bracket-column.right .round {
-    direction: ltr;
-}
-
-/* Centro (Final) */
-.bracket-center {
-    width: 20%;
+/* Coluna da fase (cada bloco vertical) */
+#grupo-MATA .phase-col {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 28px;
 }
 
-.final-title {
-    font-size: 26px;
-    margin-bottom: 15px;
-    color: #ffcf87;
-    font-weight: bold;
-}
-
-.final-match {
-    background: rgba(255,255,255,0.18);
-    padding: 22px;
-    border-radius: 14px;
-    text-align: center;
-    font-size: 18px;
-}
-
-.final-x {
-    margin: 0 14px;
-    font-weight: bold;
-    font-size: 26px;
-}
-
-/* Estilo das fases */
-.round h3 {
-    text-align: center;
-    color: #ffcf87;
-    margin-bottom: 10px;
-    font-size: 20px;
-}
-
-.match {
-    background: rgba(255,255,255,0.10);
-    padding: 14px;
-    border-radius: 12px;
-    margin-bottom: 16px;
+/* Caixas de jogos — AGORA LIMPA, SEM FUNDO */
+#grupo-MATA .match-box {
+    padding: 6px 0;
     text-align: center;
 }
 
-/* Inputs */
-.match input,
-.final-match input {
-    width: 120px;
+/* Inputs dos times */
+#grupo-MATA .match-input {
+    width: 115px;
     padding: 6px;
-    border-radius: 6px;
-    border: 1px solid rgba(255,255,255,0.25);
-    background: rgba(0,0,0,0.30);
-    color: white;
-    font-weight: bold;
+    border: none;
+    border-bottom: 2px solid rgba(255,255,255,0.25);
+    background: transparent;
     text-align: center;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
 }
 
-.match input:focus,
-.final-match input:focus {
+#grupo-MATA .match-input:focus {
     outline: none;
-    border-color: #ff9900;
-    box-shadow: 0 0 5px #ff9900;
+    border-bottom: 2px solid #ff9900;
+}
+
+/* Separador “X“ */
+#grupo-MATA .x-mid {
+    margin: 0 10px;
+    font-weight: bold;
+    font-size: 18px;
 }
