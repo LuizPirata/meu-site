@@ -285,198 +285,106 @@ body {
 }
 
 
-/* =============================== */
-/*     GRADE PRINCIPAL DO BRACKET */
-/* =============================== */
+/* ============================== */
+/*   MATA-MATA — LAYOUT ESPELHADO */
+/* ============================== */
 
-#grupo-MATA .bracket-grid {
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    gap: 30px;
-    width: 95%;
-    margin: 30px auto;
+#grupo-MATA .mata-titulo-central {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 25px;
+    background: linear-gradient(to right, #ff9900, #ff0000);
+    padding: 12px;
+    border-radius: 12px;
 }
 
+/* Wrapper das 3 colunas (esq - centro - dir) */
+.bracket-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 95%;
+    margin: 40px auto;
+}
 
-/* =============================== */
-/*       COLUNAS DO BRACKET       */
-/* =============================== */
+/* Colunas laterais iguais */
+.bracket-column {
+    width: 32%;
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+}
 
-#grupo-MATA .col {
+/* Chave direita inverte o alinhamento visual */
+.bracket-column.right {
+    direction: rtl;
+}
+.bracket-column.right .round {
+    direction: ltr;
+}
+
+/* Centro (Final) */
+.bracket-center {
+    width: 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
 }
 
-#grupo-MATA .fase-titulo,
-#grupo-MATA .fase-titulo-final {
-    text-align: center;
-    color: #ffcf87;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-#grupo-MATA .fase-titulo-final {
+.final-title {
     font-size: 26px;
-}
-
-/* =============================== */
-/*         BLOCOS DE JOGO         */
-/* =============================== */
-
-#grupo-MATA .jogo {
-    background: rgba(255,255,255,0.12);
-    padding: 14px 18px;
-    border-radius: 12px;
-    font-size: 15px;
-    min-width: 140px;
-    text-align: center;
-    position: relative;
-}
-
-#grupo-MATA .jogo span {
-    display: inline-block;
-    min-width: 48px;
-}
-
-#grupo-MATA .x {
-    margin: 0 6px;
+    margin-bottom: 15px;
+    color: #ffcf87;
     font-weight: bold;
 }
 
-/* Final maior */
-#grupo-MATA .grande-final {
-    background: rgba(255,255,255,0.22);
-    padding: 22px 30px;
-    border-radius: 16px;
+.final-match {
+    background: rgba(255,255,255,0.18);
+    padding: 22px;
+    border-radius: 14px;
+    text-align: center;
     font-size: 18px;
 }
 
-/* =============================== */
-/*    LINHAS CONECTANDO JOGOS     */
-/* =============================== */
-
-/* Cada fase tem um tipo de linha */
-
-#grupo-MATA .lig32::after,
-#grupo-MATA .lig16::after,
-#grupo-MATA .lig8::after,
-#grupo-MATA .lig4::after {
-    content: "";
-    position: absolute;
-    right: -30px;
-    top: 50%;
-    width: 30px;
-    height: 2px;
-    background: #666;
+.final-x {
+    margin: 0 14px;
+    font-weight: bold;
+    font-size: 26px;
 }
 
-/* Linha entrando pela esquerda */
-#grupo-MATA .lig32::before,
-#grupo-MATA .lig16::before,
-#grupo-MATA .lig8::before,
-#grupo-MATA .lig4::before {
-    content: "";
-    position: absolute;
-    left: -30px;
-    top: 50%;
-    width: 30px;
-    height: 2px;
-    background: #666;
+/* Estilo das fases */
+.round h3 {
+    text-align: center;
+    color: #ffcf87;
+    margin-bottom: 10px;
+    font-size: 20px;
 }
 
-/* =============================== */
-/*      ALTURA DAS CONEXÕES       */
-/* =============================== */
-
-/* SEGUNDA FASE → OITAVAS */
-
-#grupo-MATA .fase32 .jogo:nth-child(1)::after {
-    top: 25%;
-}
-#grupo-MATA .fase32 .jogo:nth-child(2)::after {
-    top: 75%;
+.match {
+    background: rgba(255,255,255,0.10);
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    text-align: center;
 }
 
-#grupo-MATA .fase16 .jogo:nth-child(1)::before {
-    top: 25%;
-}
-#grupo-MATA .fase16 .jogo:nth-child(2)::before {
-    top: 75%;
-}
-
-/* OITAVAS → QUARTAS */
-
-#grupo-MATA .fase16 .jogo::after {
-    top: 50%;
-}
-#grupo-MATA .fase8 .jogo::before {
-    top: 50%;
+/* Inputs */
+.match input,
+.final-match input {
+    width: 120px;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(0,0,0,0.30);
+    color: white;
+    font-weight: bold;
+    text-align: center;
 }
 
-/* QUARTAS → SEMI */
-
-#grupo-MATA .fase8 .jogo::after {
-    top: 50%;
-}
-#grupo-MATA .fase4 .jogo::before {
-    top: 50%;
-}
-
-/* SEMI → FINAL */
-
-#grupo-MATA .fase4.coluna-esq .jogo::after {
-    width: 50px;
-    right: -50px;
-}
-#grupo-MATA .fase4.coluna-dir .jogo::before {
-    width: 50px;
-    left: -50px;
-}
-
-/* FINAL sem linhas laterais */
-#grupo-MATA .grande-final::before,
-#grupo-MATA .grande-final::after {
-    display: none !important;
-}
-
-
-/* =============================== */
-/*         LINHAS CURVAS          */
-/* =============================== */
-
-/* Curva direita */
-#grupo-MATA .lig32::after,
-#grupo-MATA .lig16::after,
-#grupo-MATA .lig8::after,
-#grupo-MATA .lig4::after {
-    border-top-right-radius: 12px;
-}
-
-/* Curva esquerda */
-#grupo-MATA .lig32::before,
-#grupo-MATA .lig16::before,
-#grupo-MATA .lig8::before,
-#grupo-MATA .lig4::before {
-    border-top-left-radius: 12px;
-}
-
-
-/* =============================== */
-/*     RESPONSIVIDADE BÁSICA      */
-/* =============================== */
-
-@media (max-width: 1200px) {
-    #grupo-MATA .bracket-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-    }
-}
-
-@media (max-width: 800px) {
-    #grupo-MATA .bracket-grid {
-        grid-template-columns: 1fr;
-    }
+.match input:focus,
+.final-match input:focus {
+    outline: none;
+    border-color: #ff9900;
+    box-shadow: 0 0 5px #ff9900;
 }
