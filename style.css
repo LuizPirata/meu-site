@@ -285,9 +285,9 @@ body {
 }
 
 
-/* ============================== */
-/*   MATA-MATA — LAYOUT ESPELHADO */
-/* ============================== */
+/* =============================================== */
+/*       FASE MATA-MATA — MODELO A (ESPELHADO)     */
+/* =============================================== */
 
 #grupo-MATA .mata-titulo-central {
     text-align: center;
@@ -299,79 +299,53 @@ body {
     border-radius: 12px;
 }
 
-/* Wrapper das 3 colunas (esq - centro - dir) */
-.bracket-wrapper {
-    display: flex;
+/* GRID PRINCIPAL */
+#grupo-MATA .bracket-grid {
+    display: grid;
+    grid-template-columns: 32% 20% 32%;
     justify-content: space-between;
-    align-items: flex-start;
-    width: 95%;
+    width: 96%;
     margin: 40px auto;
+    gap: 20px;
 }
 
-/* Colunas laterais iguais */
-.bracket-column {
-    width: 32%;
+/* COLUNAS */
+#grupo-MATA .col {
     display: flex;
     flex-direction: column;
-    gap: 45px;
+    gap: 60px;
 }
 
-/* Chave direita inverte o alinhamento visual */
-.bracket-column.right {
+/* Ajuste da direita para espelhamento */
+#grupo-MATA .direita {
     direction: rtl;
 }
-.bracket-column.right .round {
+#grupo-MATA .direita .round {
     direction: ltr;
 }
 
-/* Centro (Final) */
-.bracket-center {
-    width: 20%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.final-title {
-    font-size: 26px;
-    margin-bottom: 15px;
-    color: #ffcf87;
-    font-weight: bold;
-}
-
-.final-match {
-    background: rgba(255,255,255,0.18);
-    padding: 22px;
-    border-radius: 14px;
-    text-align: center;
-    font-size: 18px;
-}
-
-.final-x {
-    margin: 0 14px;
-    font-weight: bold;
-    font-size: 26px;
-}
-
-/* Estilo das fases */
-.round h3 {
+/* TITULOS DAS FASES */
+#grupo-MATA .round h3 {
     text-align: center;
     color: #ffcf87;
-    margin-bottom: 10px;
     font-size: 20px;
+    margin-bottom: 12px;
+    font-weight: bold;
 }
 
-.match {
+/* CAIXAS DOS JOGOS */
+#grupo-MATA .match {
     background: rgba(255,255,255,0.10);
     padding: 14px;
     border-radius: 12px;
-    margin-bottom: 16px;
+    margin: 12px 0;
     text-align: center;
+    font-size: 15px;
 }
 
-/* Inputs */
-.match input,
-.final-match input {
+/* INPUTS */
+#grupo-MATA .match input,
+#grupo-MATA .final input {
     width: 120px;
     padding: 6px;
     border-radius: 6px;
@@ -381,10 +355,88 @@ body {
     font-weight: bold;
     text-align: center;
 }
-
-.match input:focus,
-.final-match input:focus {
+#grupo-MATA .match input:focus,
+#grupo-MATA .final input:focus {
     outline: none;
-    border-color: #ff9900;
-    box-shadow: 0 0 5px #ff9900;
+    border-color: #ff9500;
+    box-shadow: 0 0 5px #ff9500;
+}
+
+/* FINAL AO CENTRO */
+#grupo-MATA .titulo-final {
+    font-size: 26px;
+    color: #ffcf87;
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+#grupo-MATA .final {
+    background: rgba(255,255,255,0.20);
+    padding: 20px;
+    border-radius: 14px;
+    text-align: center;
+    font-size: 18px;
+}
+
+#grupo-MATA .x-final {
+    margin: 0 14px;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+/* ============================================ */
+/*   LINHAS DO BRACKET                           */
+/* ============================================ */
+
+#grupo-MATA .link {
+    width: 100%;
+    height: 40px;
+    position: relative;
+}
+
+/* 32 → 16 */
+#grupo-MATA .lig32::before,
+#grupo-MATA .lig32::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    background: rgba(255,255,255,0.4);
+    width: 60%;
+}
+#grupo-MATA .lig32::before { top: 0; left: 0; }
+#grupo-MATA .lig32::after  { bottom: 0; left: 0; }
+
+/* 16 → 8 */
+#grupo-MATA .lig16::before,
+#grupo-MATA .lig16::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    background: rgba(255,255,255,0.4);
+    width: 50%;
+}
+#grupo-MATA .lig16::before { top: 0; left: 0; }
+#grupo-MATA .lig16::after  { bottom: 0; left: 0; }
+
+/* 8 → 4 */
+#grupo-MATA .lig8::before,
+#grupo-MATA .lig8::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    background: rgba(255,255,255,0.4);
+    width: 40%;
+}
+#grupo-MATA .lig8::before { top: 0; left: 0; }
+#grupo-MATA .lig8::after  { bottom: 0; left: 0; }
+
+/* 4 → Final */
+#grupo-MATA .lig4::before {
+    content: "";
+    position: absolute;
+    height: 2px;
+    background: rgba(255,255,255,0.4);
+    width: 30%;
+    top: 50%;
+    left: 0;
 }

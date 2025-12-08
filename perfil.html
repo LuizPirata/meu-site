@@ -1775,87 +1775,130 @@
 <!-- ABA: FASE MATA-MATA                               -->
 <!-- ================================================== -->
 
+<!-- ================================================== -->
+<!-- ABA: FASE MATA-MATA – MODELO A (ESPALHADO C/ FINAL) -->
+<!-- ================================================== -->
+
 <div id="grupo-MATA" class="grupo-pane">
 
-  <h2 class="mata-titulo-central">Fase Mata-Mata</h2>
+    <h2 class="mata-titulo-central">Fase Mata-Mata</h2>
 
-<div class="bracket-wrapper">
+    <div class="bracket-grid">
 
-    <!-- ===================== -->
-    <!-- 🔵 CHAVE ESQUERDA -->
-    <!-- ===================== -->
-    <div class="bracket-column left">
+        <!-- ========================= -->
+        <!--   COLUNA ESQUERDA         -->
+        <!-- ========================= -->
+        <div class="col esquerda">
 
-        <div class="round round-32">
-            <h3>Segunda Fase</h3>
-            <div class="match"><input placeholder="A1"> x <input placeholder="B2"></div>
-            <div class="match"><input placeholder="C1"> x <input placeholder="D2"></div>
-            <div class="match"><input placeholder="E1"> x <input placeholder="F2"></div>
-            <div class="match"><input placeholder="G1"> x <input placeholder="H2"></div>
+            <!-- 2ª Fase -->
+            <div class="round fase32">
+                <h3>Segunda Fase</h3>
+
+                <div class="match">Jogo 1<br><input placeholder="Time A"> x <input placeholder="Time B"></div>
+                <div class="match">Jogo 2<br><input placeholder="Time A"> x <input placeholder="Time B"></div>
+                <div class="match">Jogo 3<br><input placeholder="Time A"> x <input placeholder="Time B"></div>
+                <div class="match">Jogo 4<br><input placeholder="Time A"> x <input placeholder="Time B"></div>
+
+                <!-- Linhas entre fases -->
+                <div class="link lig32"></div>
+            </div>
+
+            <!-- Oitavas -->
+            <div class="round fase16">
+                <h3>Oitavas</h3>
+
+                <div class="match">Oitavas 1<br><input placeholder="V1"> x <input placeholder="V2"></div>
+                <div class="match">Oitavas 2<br><input placeholder="V3"> x <input placeholder="V4"></div>
+
+                <div class="link lig16"></div>
+            </div>
+
+            <!-- Quartas -->
+            <div class="round fase8">
+                <h3>Quartas</h3>
+
+                <div class="match">Quartas E<br><input placeholder="Venc 1"> x <input placeholder="Venc 2"></div>
+
+                <div class="link lig8"></div>
+            </div>
+
+            <!-- Semifinal -->
+            <div class="round fase4">
+                <h3>Semifinal</h3>
+
+                <div class="match">Semifinal E<br><input placeholder="Vencedor"> x ???</div>
+
+                <div class="link lig4"></div>
+            </div>
+
         </div>
 
-        <div class="round round-16">
-            <h3>Oitavas</h3>
-            <div class="match"><input placeholder="Vencedor 1"> x <input placeholder="Vencedor 2"></div>
-            <div class="match"><input placeholder="Vencedor 3"> x <input placeholder="Vencedor 4"></div>
+        <!-- ========================= -->
+        <!--   COLUNA CENTRAL (FINAL)  -->
+        <!-- ========================= -->
+        <div class="col centro">
+
+            <div class="round final-round">
+                <h3 class="titulo-final">Final</h3>
+
+                <div class="final">
+                    Final<br>
+                    <input placeholder="Semi E">
+                    <span class="x-final">x</span>
+                    <input placeholder="Semi D">
+                </div>
+            </div>
+
         </div>
 
-        <div class="round round-8">
-            <h3>Quartas</h3>
-            <div class="match"><input placeholder="Venc. O1"> x <input placeholder="Venc. O2"></div>
-        </div>
+        <!-- ========================= -->
+        <!--   COLUNA DIREITA          -->
+        <!-- ========================= -->
+        <div class="col direita">
 
-        <div class="round round-4">
-            <h3>Semifinal</h3>
-            <div class="match"><input placeholder="Venc. Q1"> x <input placeholder="Venc. Q2"></div>
+            <!-- 2ª Fase -->
+            <div class="round fase32">
+                <h3>Segunda Fase</h3>
+
+                <div class="match">Jogo 5<br><input placeholder="Time A"> x <input placeholder="Time B"></div>
+                <div class="match">Jogo 6<br><input placeholder="Time A"> x <input placeholder="Time B"></div>
+                <div class="match">Jogo 7<br><input placeholder="Time A"> x <input placeholder="Time B"></div>
+                <div class="match">Jogo 8<br><input placeholder="Time A"> x <input placeholder="Time B"></div>
+
+                <div class="link lig32"></div>
+            </div>
+
+            <!-- Oitavas -->
+            <div class="round fase16">
+                <h3>Oitavas</h3>
+
+                <div class="match">Oitavas 3<br><input placeholder="V5"> x <input placeholder="V6"></div>
+                <div class="match">Oitavas 4<br><input placeholder="V7"> x <input placeholder="V8"></div>
+
+                <div class="link lig16"></div>
+            </div>
+
+            <!-- Quartas -->
+            <div class="round fase8">
+                <h3>Quartas</h3>
+
+                <div class="match">Quartas D<br><input placeholder="Venc 3"> x <input placeholder="Venc 4"></div>
+
+                <div class="link lig8"></div>
+            </div>
+
+            <!-- Semifinal -->
+            <div class="round fase4">
+                <h3>Semifinal</h3>
+
+                <div class="match">Semifinal D<br><input placeholder="Vencedor"> x ???</div>
+
+                <div class="link lig4"></div>
+            </div>
+
         </div>
 
     </div>
-
-    <!-- ===================== -->
-    <!-- 🟡 FINAL NO CENTRO -->
-    <!-- ===================== -->
-    <div class="bracket-center">
-        <h3 class="final-title">FINAL</h3>
-
-        <div class="final-match">
-            <input placeholder="Semi Esquerda">
-            <span class="final-x">x</span>
-            <input placeholder="Semi Direita">
-        </div>
-    </div>
-
-    <!-- ===================== -->
-    <!-- 🔴 CHAVE DIREITA -->
-    <!-- ===================== -->
-    <div class="bracket-column right">
-
-        <div class="round round-32">
-            <h3>Segunda Fase</h3>
-            <div class="match"><input placeholder="A3"> x <input placeholder="B1"></div>
-            <div class="match"><input placeholder="C3"> x <input placeholder="D1"></div>
-            <div class="match"><input placeholder="E3"> x <input placeholder="F1"></div>
-            <div class="match"><input placeholder="G3"> x <input placeholder="H1"></div>
-        </div>
-
-        <div class="round round-16">
-            <h3>Oitavas</h3>
-            <div class="match"><input placeholder="Venc. 5"> x <input placeholder="Venc. 6"></div>
-            <div class="match"><input placeholder="Venc. 7"> x <input placeholder="Venc. 8"></div>
-        </div>
-
-        <div class="round round-8">
-            <h3>Quartas</h3>
-            <div class="match"><input placeholder="Venc. O3"> x <input placeholder="Venc. O4"></div>
-        </div>
-
-        <div class="round round-4">
-            <h3>Semifinal</h3>
-            <div class="match"><input placeholder="Venc. Q3"> x <input placeholder="Venc. Q4"></div>
-        </div>
-
-    </div>
-
 </div>
 
   </section>
