@@ -285,62 +285,107 @@ body {
 }
 
 
-/* ======================================= */
-/*   BRACKET — 9 COLUNAS (MODELO A LIMPO)  */
-/* ======================================= */
+/* ===================================== */
+/*  FASE MATA-MATA — BRACKET 9 COLUNAS   */
+/*  (modelo A2, sem caixas cinzas)       */
+/* ===================================== */
 
-#grupo-MATA .bracket-9col {
-    width: 98%;
-    margin: 40px auto;
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    column-gap: 25px;
-}
-
-/* Títulos de cada fase */
-#grupo-MATA .bracket-phase-title {
+#grupo-MATA .mata-titulo-central {
     text-align: center;
-    font-size: 20px;
+    font-size: 32px;
     font-weight: bold;
-    color: #ffcf87;
-    margin-bottom: 14px;
+    margin: 25px auto 10px auto;
+    background: linear-gradient(to right, #ff9900, #ff0000);
+    padding: 12px;
+    border-radius: 12px;
+    width: 96%;
 }
 
-/* Coluna da fase (cada bloco vertical) */
-#grupo-MATA .phase-col {
+/* grade com 9 colunas */
+#grupo-MATA .mata-grid {
+    width: 96%;
+    margin: 30px auto 80px auto;
+    display: grid;
+    grid-template-columns: repeat(9, minmax(90px, 1fr));
+    column-gap: 28px;
+    align-items: flex-start;
+}
+
+/* cada coluna (Segunda fase, Oitavas, Quartas, etc) */
+#grupo-MATA .round-col {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 28px;
+    gap: 22px;
 }
 
-/* Caixas de jogos — AGORA LIMPA, SEM FUNDO */
-#grupo-MATA .match-box {
-    padding: 6px 0;
-    text-align: center;
-}
-
-/* Inputs dos times */
-#grupo-MATA .match-input {
-    width: 115px;
-    padding: 6px;
-    border: none;
-    border-bottom: 2px solid rgba(255,255,255,0.25);
-    background: transparent;
-    text-align: center;
-    color: white;
-    font-size: 15px;
+/* título de cada coluna */
+#grupo-MATA .round-title {
+    color: #ffcf87;
     font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 4px;
 }
 
-#grupo-MATA .match-input:focus {
-    outline: none;
-    border-bottom: 2px solid #ff9900;
+#grupo-MATA .round-title-final {
+    font-size: 22px;
 }
 
-/* Separador “X“ */
-#grupo-MATA .x-mid {
-    margin: 0 10px;
+/* central (FINAL) dá só um respiro extra */
+#grupo-MATA .round-center {
+    justify-content: flex-start;
+}
+
+/* cada confronto (time de cima, X, time de baixo) */
+#grupo-MATA .match {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* linha de cada time com um risquinho embaixo */
+#grupo-MATA .team-line {
+    position: relative;
+    padding: 2px 0 6px 0;
+    min-width: 110px;
+    text-align: center;
+    font-size: 15px;
+}
+
+#grupo-MATA .team-line::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+/* X entre os times */
+#grupo-MATA .x {
+    margin: 2px 0;
     font-weight: bold;
     font-size: 18px;
+}
+
+/* X da final um pouco maior */
+#grupo-MATA .x-final {
+    font-size: 22px;
+}
+
+/* pequena responsividade: se a tela ficar estreita demais,
+   deixa rolar horizontalmente em vez de quebrar tudo */
+@media (max-width: 1100px) {
+    #grupo-MATA .mata-grid {
+        overflow-x: auto;
+        display: block;
+        white-space: nowrap;
+    }
+
+    #grupo-MATA .round-col {
+        display: inline-flex;
+        vertical-align: top;
+        margin-right: 24px;
+    }
 }
