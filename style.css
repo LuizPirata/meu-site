@@ -285,107 +285,155 @@ body {
 }
 
 
-/* ===================================== */
-/*  FASE MATA-MATA — BRACKET 9 COLUNAS   */
-/*  (modelo A2, sem caixas cinzas)       */
-/* ===================================== */
+/* =============================== */
+/*      FASE MATA-MATA — A2        */
+/*        (Modelo das imagens)     */
+/* =============================== */
 
-#grupo-MATA .mata-titulo-central {
+#grupo-MATA {
+    padding: 30px;
+    color: #fff;
+}
+
+.mata-titulo-central {
     text-align: center;
-    font-size: 32px;
+    font-size: 38px;
     font-weight: bold;
-    margin: 25px auto 10px auto;
+    margin: 25px auto 40px auto;
     background: linear-gradient(to right, #ff9900, #ff0000);
-    padding: 12px;
+    padding: 14px;
     border-radius: 12px;
-    width: 96%;
+    width: 80%;
 }
 
-/* grade com 9 colunas */
-#grupo-MATA .mata-grid {
-    width: 96%;
-    margin: 30px auto 80px auto;
-    display: grid;
-    grid-template-columns: repeat(9, minmax(90px, 1fr));
-    column-gap: 28px;
-    align-items: flex-start;
+
+/* CONTAINER PRINCIPAL DE TODAS AS COLUNAS */
+.bracket-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 55px;
+    width: 100%;
+    margin-top: 40px;
 }
 
-/* cada coluna (Segunda fase, Oitavas, Quartas, etc) */
-#grupo-MATA .round-col {
+
+/* =============================== */
+/*        COLUNAS DAS FASES        */
+/* =============================== */
+
+.round-column {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 22px;
+    min-width: 150px;
 }
 
-/* título de cada coluna */
-#grupo-MATA .round-title {
+
+/* Título de cada fase (Segunda Fase, Oitavas, Quartas...) */
+.round-title {
     color: #ffcf87;
-    font-weight: bold;
-    font-size: 20px;
-    text-align: center;
-    margin-bottom: 4px;
-}
-
-#grupo-MATA .round-title-final {
     font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-/* central (FINAL) dá só um respiro extra */
-#grupo-MATA .round-center {
-    justify-content: flex-start;
-}
 
-/* cada confronto (time de cima, X, time de baixo) */
-#grupo-MATA .match {
+/* Bloco contendo os jogos de cada fase */
+.round-block {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    gap: 45px;
+    width: 100%;
+}
+
+
+/* CENTRALIZAÇÃO VERTICAL AUTOMÁTICA */
+.mid-align {
+    justify-content: center !important;
+}
+
+
+/* =============================== */
+/*             JOGOS               */
+/* =============================== */
+
+.match {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-}
-
-/* linha de cada time com um risquinho embaixo */
-#grupo-MATA .team-line {
+    width: 150px;
     position: relative;
-    padding: 2px 0 6px 0;
-    min-width: 110px;
-    text-align: center;
-    font-size: 15px;
 }
 
-#grupo-MATA .team-line::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-bottom: 1px solid rgba(255,255,255,0.3);
+.match span {
+    font-size: 17px;
+    white-space: nowrap;
 }
 
-/* X entre os times */
-#grupo-MATA .x {
-    margin: 2px 0;
+.x {
+    font-size: 20px;
     font-weight: bold;
-    font-size: 18px;
+    margin: 0 10px;
 }
 
-/* X da final um pouco maior */
-#grupo-MATA .x-final {
-    font-size: 22px;
+
+/* FINAL — fica levemente maior */
+.match-final {
+    font-size: 20px;
+    margin-top: 20px;
 }
 
-/* pequena responsividade: se a tela ficar estreita demais,
-   deixa rolar horizontalmente em vez de quebrar tudo */
-@media (max-width: 1100px) {
-    #grupo-MATA .mata-grid {
-        overflow-x: auto;
-        display: block;
-        white-space: nowrap;
+.x-final {
+    font-size: 30px;
+}
+
+
+/* =============================== */
+/*    RESPONSIVIDADE - TABLET      */
+/* =============================== */
+
+@media (max-width: 1200px) {
+    .bracket-container {
+        gap: 35px;
+    }
+    .match {
+        width: 130px;
+    }
+}
+
+
+/* =============================== */
+/*    RESPONSIVIDADE — MOBILE      */
+/* =============================== */
+
+@media (max-width: 900px) {
+    .bracket-container {
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
-    #grupo-MATA .round-col {
-        display: inline-flex;
-        vertical-align: top;
-        margin-right: 24px;
+    .round-column {
+        width: 45%;
+        margin-bottom: 40px;
+    }
+
+    .center-column {
+        order: 20;
+        width: 100%;
+    }
+
+    .match {
+        width: 200px;
+        justify-content: center;
+    }
+
+    .match span:nth-child(1) {
+        margin-right: 8px;
+    }
+    .match span:nth-child(3) {
+        margin-left: 8px;
     }
 }
