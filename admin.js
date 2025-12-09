@@ -840,6 +840,34 @@ async function atualizarTerceiroLugar() {
   terceiro.time2 = p2;
 }
 
+async function carregarExtrasExistentes() {
+  const { data } = await sb
+    .from("extras_oficiais")
+    .select("*")
+    .eq("id", EXTRAS_ID)
+    .maybeSingle();
+
+  if (!data) return;
+
+  // Carrega classificados
+  GRUPOS.forEach(g => {
+    const base = g.toLowerCase();
+    document.getElementById(`class-${g}-1`).value = data[`real_grupo_${base}_1`] || "";
+    document.getElementById(`class-${g}-2`).value = data[`real_grupo_${base}_2`] || "";
+    document.getElementById(`melhor3-${g}`).value = data[`melhor_3${base}`] ? "S" : "N";
+  });
+
+  // Carrega top 4
+  if (data.campeao) document.getElementById("top-campeao").value = data.campeao;
+  if (data.vice) document.getElementById("top-vice").value = data.vice;
+  if (data.terceiro) document.getElementById("top-terceiro").value = data.terceiro;
+  if (data.quarto) document.getElementById("top-quarto").value = data.quarto;
+
+  if (typeof data.total_gols === "number")
+    document.getElementById("top-total-gols").value = data.total_gols;
+}
+
+
 // ===============================================
 // 14. INICIALIZAÇÃO GERAL DO ADMIN
 // ===============================================
