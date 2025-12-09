@@ -102,80 +102,54 @@
   
   <section id="sec-matamata" class="admin-section">
   <h2>Fase Mata-Mata</h2>
-
-  <p class="mm-info">
-    Segunda Fase preenchida manualmente. A partir daí, o sistema avança automaticamente
-    os vencedores para Oitavas → Quartas → Semi → Final e monta a Disputa de 3º / 4º com os
-    perdedores das semifinais.
+  <p>
+    Segunda Fase preenchida manualmente. A partir daí, o sistema avança
+    automaticamente os vencedores para Oitavas → Quartas → Semi → Final
+    e monta a Disputa de 3º / 4º com os perdedores das semifinais.
   </p>
 
-  <div class="mm-bracket">
+  <div class="mm-wrapper">
+    <!-- COLUNA ESQUERDA -->
+    <div class="mm-column mm-col-left">
+      <h3>Segunda Fase</h3>
+      <div id="mm-segunda-left" class="mm-phase"></div>
 
-    <!-- LADO ESQUERDO -->
-    <div class="mm-side">
+      <h3>Oitavas</h3>
+      <div id="mm-oitavas-left" class="mm-phase"></div>
 
-      <div class="mm-fase-col">
-        <h3>Segunda Fase</h3>
-        <div id="mm-segunda-left" class="mm-col"></div>
-      </div>
+      <h3>Quartas</h3>
+      <div id="mm-quartas-left" class="mm-phase"></div>
 
-      <div class="mm-fase-col">
-        <h3>Oitavas</h3>
-        <div id="mm-oitavas-left" class="mm-col"></div>
-      </div>
-
-      <div class="mm-fase-col">
-        <h3>Quartas</h3>
-        <div id="mm-quartas-left" class="mm-col"></div>
-      </div>
-
-      <div class="mm-fase-col">
-        <h3>Semi</h3>
-        <div id="mm-semi-left" class="mm-col"></div>
-      </div>
-
+      <h3>Semi</h3>
+      <div id="mm-semi-left" class="mm-phase"></div>
     </div>
 
-    <!-- CENTRO (FINAL + 3º) -->
-    <div class="mm-center">
-      <div class="mm-fase-col">
-        <h3>Final</h3>
-        <div id="mm-final" class="mm-col"></div>
-      </div>
+    <!-- COLUNA CENTRAL (FINAL + 3º LUGAR) -->
+    <div class="mm-column mm-col-center">
+      <h3>Final</h3>
+      <div id="mm-final" class="mm-phase mm-phase-center"></div>
 
-      <div class="mm-fase-col">
-        <h3>Disputa 3º / 4º</h3>
-        <div id="mm-terceiro" class="mm-col"></div>
-      </div>
+      <h3>Disputa 3º / 4º</h3>
+      <div id="mm-terceiro" class="mm-phase mm-phase-center"></div>
     </div>
 
-    <!-- LADO DIREITO -->
-    <div class="mm-side">
+    <!-- COLUNA DIREITA -->
+    <div class="mm-column mm-col-right">
+      <h3>Segunda Fase</h3>
+      <div id="mm-segunda-right" class="mm-phase"></div>
 
-      <div class="mm-fase-col">
-        <h3>Segunda Fase</h3>
-        <div id="mm-segunda-right" class="mm-col"></div>
-      </div>
+      <h3>Oitavas</h3>
+      <div id="mm-oitavas-right" class="mm-phase"></div>
 
-      <div class="mm-fase-col">
-        <h3>Oitavas</h3>
-        <div id="mm-oitavas-right" class="mm-col"></div>
-      </div>
+      <h3>Quartas</h3>
+      <div id="mm-quartas-right" class="mm-phase"></div>
 
-      <div class="mm-fase-col">
-        <h3>Quartas</h3>
-        <div id="mm-quartas-right" class="mm-col"></div>
-      </div>
-
-      <div class="mm-fase-col">
-        <h3>Semi</h3>
-        <div id="mm-semi-right" class="mm-col"></div>
-      </div>
-
+      <h3>Semi</h3>
+      <div id="mm-semi-right" class="mm-phase"></div>
     </div>
-
   </div>
 </section>
+
 
 
 </main>

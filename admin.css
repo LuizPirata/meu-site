@@ -276,58 +276,38 @@ input[type=number] {
   display: inline-block;
 }
 
-/* ========================= */
-/*      MATA-MATA ADMIN      */
-/* ========================= */
+/* ===========================
+   MATA-MATA (ADMIN)
+   =========================== */
 
-.mm-info {
-  margin-bottom: 20px;
-  color: #ccc;
-}
-
-.mm-bracket {
-  display: flex;
-  justify-content: space-between;
-  gap: 40px;
-  margin-top: 10px;
-}
-
-.mm-side {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  flex: 1;
-}
-
-.mm-center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.mm-wrapper {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: 1fr 0.7fr 1fr;
   gap: 30px;
-  min-width: 230px;
-  align-items: center;
 }
 
-.mm-fase-col h3 {
+.mm-column h3 {
   text-align: center;
-  color: #ffae40;
+  color: #ff7b00;
   margin-bottom: 8px;
 }
 
-.mm-col {
+.mm-phase {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
+/* Cartão de cada confronto */
 .mm-match {
-  background: #171717;
+  background: #151515;
   border-radius: 10px;
-  border: 1px solid #333;
   padding: 8px 10px;
-  min-width: 210px;
+  border: 1px solid #333;
 }
 
+/* Linha de time + input de gols */
 .mm-team-row {
   display: flex;
   align-items: center;
@@ -340,70 +320,59 @@ input[type=number] {
   display: flex;
   align-items: center;
   gap: 6px;
-  flex: 1;
   min-width: 0;
 }
 
 .mm-flag {
-  width: 22px;
-  height: 16px;
-  object-fit: cover;
+  width: 26px;
+  height: 18px;
   border-radius: 3px;
+  object-fit: cover;
 }
 
 .mm-team-name {
-  font-size: 13px;
-  color: #f1f1f1;
+  font-size: 14px;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
+  overflow: hidden;
 }
 
+/* Select de times (Segunda Fase) */
 .mm-time-select {
   flex: 1;
-  font-size: 13px;
+  background: #202020;
+  color: #fff;
+  border-radius: 6px;
+  border: 1px solid #444;
   padding: 4px 6px;
+  font-size: 13px;
 }
 
+/* Input pequenininho de gols */
 .mm-gol-input {
-  width: 34px;
-  height: 28px;
+  width: 45px;
+  height: 32px;
   font-size: 16px;
   text-align: center;
   border-radius: 8px;
-  border: 1px solid #444;
-  background: #222;
+  background: #242424;
   color: #fff;
+  border: 1px solid #555;
 }
 
+/* Botão salvar do mata-mata */
 .mm-save-btn {
   width: 100%;
-  margin-top: 4px;
-  padding: 6px 10px;
+  margin-top: 6px;
   font-size: 13px;
-}
-
-/* diminui um pouco o botão padrão dentro da caixa do jogo */
-.mm-match .btn-save,
-.mm-match .mm-save-btn {
   padding: 6px 10px;
-  font-size: 13px;
 }
 
-/* em telas menores, empilha um pouco melhor */
-@media (max-width: 1100px) {
-  .mm-bracket {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .mm-side {
-    flex-direction: row;
-    justify-content: center;
-  }
-
-  .mm-center {
-    order: -1;
-  }
+/* Coluna central um pouco mais estreita */
+.mm-col-center .mm-phase {
+  align-items: center;
 }
 
+.mm-phase-center .mm-match {
+  width: 220px;
+}
