@@ -288,13 +288,23 @@ async function carregarListaArtilheiros() {
   const div = document.getElementById("lista-artilheiros");
   div.innerHTML = "";
 
-  data.forEach(item => {
+  data.forEach((item, index) => {
     const bloco = document.createElement("div");
     bloco.classList.add("artilheiro-item");
 
+    // Medalhas e posição
+    let posicaoHTML = "";
+    if (index === 0) posicaoHTML = `<span class="medal medal-ouro">🥇</span>`;
+    else if (index === 1) posicaoHTML = `<span class="medal medal-prata">🥈</span>`;
+    else if (index === 2) posicaoHTML = `<span class="medal medal-bronze">🥉</span>`;
+    else posicaoHTML = `<span class="posicao-num">${index + 1}º</span>`;
+
     bloco.innerHTML = `
+      ${posicaoHTML}
       <img class="artilheiro-flag" src="${item.flag}" alt="flag">
+
       <div class="artilheiro-nome">${item.jogador}</div>
+
       <div class="artilheiro-gols">${item.gols} gols</div>
 
       <button class="btn-gol mais" onclick="alterarGols('${item.id}', 1)">+1</button>
@@ -302,7 +312,8 @@ async function carregarListaArtilheiros() {
     `;
 
     div.appendChild(bloco);
-  });
+});
+
 }
 
 
