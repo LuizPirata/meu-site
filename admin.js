@@ -12,9 +12,10 @@ const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // Admins permitidos
 const ADMIN_EMAILS = ["luizpiratafla@hotmail.com"];
 
-// Sua tabela usa PK = boolean true
+// extras_oficiais usa PK booleana
 const EXTRAS_ID = true;
 
+// Lista de grupos
 const GRUPOS = ["A","B","C","D","E","F","G","H","I","J","K","L"];
 
 
@@ -24,7 +25,6 @@ const GRUPOS = ["A","B","C","D","E","F","G","H","I","J","K","L"];
 
 document.querySelectorAll(".admin-menu button").forEach(btn => {
   btn.addEventListener("click", () => {
-
     document.querySelectorAll(".admin-section")
       .forEach(sec => sec.classList.remove("visible"));
 
@@ -61,25 +61,19 @@ async function verificarAdmin() {
 
 
 // ===============================================
-// 3. CARREGAR JOGOS DA FASE DE GRUPOS
+// 3. CARREGAR JOGOS
 // ===============================================
 
 async function carregarJogos() {
   const select = document.getElementById("select-jogo");
   select.innerHTML = "<option>Carregando...</option>";
 
-  const { data: jogos, error } = await sb
+  const { data: jogos } = await sb
     .from("jogos_grupo")
     .select("id, grupo_id, rodada, time_casa, time_fora")
-    .order("grupo_id", { ascending: true })
-    .order("rodada", { ascending: true })
-    .order("id", { ascending: true });
-
-  if (error) {
-    console.error("Erro ao carregar jogos:", error);
-    select.innerHTML = "<option>Erro</option>";
-    return;
-  }
+    .order("grupo_id")
+    .order("rodada")
+    .order("id");
 
   const { data: times } = await sb
     .from("times")
@@ -93,10 +87,8 @@ async function carregarJogos() {
   jogos.forEach(j => {
     const opt = document.createElement("option");
     opt.value = j.id;
-
     const casa = mapaTimes[j.time_casa] || j.time_casa;
     const fora = mapaTimes[j.time_fora] || j.time_fora;
-
     opt.textContent = `Grupo ${j.grupo_id} • Rodada ${j.rodada} — ${casa} x ${fora}`;
     select.appendChild(opt);
   });
@@ -104,7 +96,7 @@ async function carregarJogos() {
 
 
 // ===============================================
-// 4. SALVAR RESULTADO OFICIAL DO JOGO
+// 4. SALVAR RESULTADO DO GRUPO
 // ===============================================
 
 async function salvarResultadoGrupo() {
@@ -113,20 +105,18 @@ async function salvarResultadoGrupo() {
   const golsFora = document.getElementById("gols-fora").value;
 
   if (Number.isNaN(jogoId) || golsCasa === "" || golsFora === "") {
-    alert("Preencha todos os campos do resultado.");
+    alert("Preencha todos os campos!");
     return;
   }
 
-  const payload = {
-    jogo_id: jogoId,
-    gols_casa: Number(golsCasa),
-    gols_fora: Number(golsFora),
-    atualizado_em: new Date().toISOString()
-  };
-
   const { error } = await sb
     .from("resultados_oficiais")
-    .upsert(payload, { onConflict: "jogo_id" });
+    .upsert({
+      jogo_id: jogoId,
+      gols_casa: Number(golsCasa),
+      gols_fora: Number(golsFora),
+      atualizado_em: new Date().toISOString()
+    }, { onConflict: "jogo_id" });
 
   if (error) {
     console.error(error);
@@ -142,7 +132,7 @@ document.getElementById("btn-salvar-grupo")
 
 
 // ===============================================
-// 5. GERAR INPUTS DE CLASSIFICADOS
+// 5. INPUTS CLASSIFICADOS
 // ===============================================
 
 function gerarInputsClassificados() {
@@ -150,6 +140,8 @@ function gerarInputsClassificados() {
   div.innerHTML = "";
 
   GRUPOS.forEach(g => {
+    const base = g.toLowerCase();
+
     const bloco = document.createElement("div");
     bloco.style.marginBottom = "20px";
 
@@ -174,7 +166,7 @@ gerarInputsClassificados();
 
 
 // ===============================================
-// 6. SALVAR CLASSIFICADOS + MELHORES TERCEIROS
+// 6. SALVAR CLASSIFICADOS
 // ===============================================
 
 async function salvarClassificados() {
@@ -183,14 +175,11 @@ async function salvarClassificados() {
   GRUPOS.forEach(g => {
     const base = g.toLowerCase();
 
-    updateObj[`real_grupo_${base}_1`] =
-      document.getElementById(`class-${g}-1`).value.trim() || null;
-
-    updateObj[`real_grupo_${base}_2`] =
-      document.getElementById(`class-${g}-2`).value.trim() || null;
+    updateObj[`real_grupo_${base}_1`] = document.getElementById(`class-${g}-1`).value.trim() || null;
+    updateObj[`real_grupo_${base}_2`] = document.getElementById(`class-${g}-2`).value.trim() || null;
 
     const melhor3 = document.getElementById(`melhor3-${g}`).value.trim().toUpperCase();
-    updateObj[`melhor_3${base}`] = melhor3 === "S" ? true : false;
+    updateObj[`melhor_3${base}`] = melhor3 === "S";
   });
 
   const { error } = await sb
@@ -199,7 +188,7 @@ async function salvarClassificados() {
 
   if (error) {
     console.error(error);
-    alert("Erro ao salvar classificados.");
+    alert("Erro ao salvar.");
     return;
   }
 
@@ -211,19 +200,13 @@ document.getElementById("btn-salvar-classificados")
 
 
 // ===============================================
-// 7. ARTILHARIA — TIMES, ADICIONAR JOGADOR, ALTERAR GOLS
+// 7. ARTILHARIA — TIMES
 // ===============================================
 
-// Carregar seleções no dropdown
 async function carregarTimesArtilharia() {
-  const { data, error } = await sb
+  const { data } = await sb
     .from("times")
     .select("id, nome, flag");
-
-  if (error) {
-    console.error("Erro ao carregar times:", error);
-    return;
-  }
 
   const sel = document.getElementById("select-time-art");
   sel.innerHTML = "";
@@ -237,7 +220,10 @@ async function carregarTimesArtilharia() {
 }
 
 
-// Adicionar jogador novo
+// ===============================================
+// 8. ADICIONAR JOGADOR
+// ===============================================
+
 async function adicionarJogador() {
   const selectData = JSON.parse(document.getElementById("select-time-art").value);
   const jogador = document.getElementById("input-jogador").value.trim();
@@ -273,110 +259,92 @@ document.getElementById("btn-add-jogador")
   .addEventListener("click", adicionarJogador);
 
 
-// Atualizar lista de artilheiros na tela
-async function carregarListaArtilheiros() {
-  const { data, error } = await sb
-    .from("artilharia_oficial")
-    .select("*")
-    .order("gols", { ascending: false });
+// ===============================================
+// 9. ALTERAR GOLS (+1 / -1)
+// ===============================================
 
-  if (error) {
-    console.error("Erro lista artilheiros:", error);
-    return;
-  }
-
-  const div = document.getElementById("lista-artilheiros");
-  div.innerHTML = "";
-
-  data.forEach((item, index) => {
-    const bloco = document.createElement("div");
-    bloco.classList.add("artilheiro-item");
-
-    // Medalhas e posição
-    let posicaoHTML = "";
-    if (index === 0) posicaoHTML = `<span class="medal medal-ouro">🥇</span>`;
-    else if (index === 1) posicaoHTML = `<span class="medal medal-prata">🥈</span>`;
-    else if (index === 2) posicaoHTML = `<span class="medal medal-bronze">🥉</span>`;
-    else posicaoHTML = `<span class="posicao-num">${index + 1}º</span>`;
-
-    bloco.innerHTML = `
-  <img class="artilheiro-flag" src="${item.flag}" alt="flag">
-
-  <div class="artilheiro-nome">${item.jogador}</div>
-
-  <div class="artilheiro-gols">${item.gols} gols</div>
-
-  <button class="btn-gol mais" onclick="alterarGols('${item.id}', 1)">+1</button>
-  <button class="btn-gol menos" onclick="alterarGols('${item.id}', -1)">-1</button>
-
-  <button class="btn-remove" onclick="removerJogador('${item.id}')">Remover</button>
-`;
-
-
-    div.appendChild(bloco);
-});
-
-}
-
-
-// Função que soma ou subtrai gols
 async function alterarGols(id, valor) {
-  const { data, error: erroBusca } = await sb
+  // pega gols atuais
+  const { data } = await sb
     .from("artilharia_oficial")
     .select("gols")
     .eq("id", id)
-    .single();
+    .maybeSingle();
 
-  if (erroBusca) {
-    console.error(erroBusca);
-    alert("Erro ao buscar gols.");
-    return;
-  }
+  if (!data) return;
 
-  let golsAtuais = Number(data.gols);
-  let novoTotal = golsAtuais + valor;
+  let novoValor = data.gols + valor;
+  if (novoValor < 0) novoValor = 0;
 
-  if (novoTotal < 0) novoTotal = 0;
-
-  const { error } = await sb
+  await sb
     .from("artilharia_oficial")
-    .update({ gols: novoTotal })
+    .update({ gols: novoValor })
     .eq("id", id);
-
-  if (error) {
-    console.error(error);
-    alert("Erro ao atualizar gols.");
-    return;
-  }
-
- async function removerJogador(id) {
-  if (!confirm("Tem certeza que deseja remover este jogador?")) return;
-
-  const { error } = await sb
-    .from("artilharia_oficial")
-    .delete()
-    .eq("id", id);
-
-  if (error) {
-    console.error(error);
-    alert("Erro ao remover jogador.");
-    return;
-  }
 
   carregarListaArtilheiros();
 }
 
 
+// ===============================================
+// 10. REMOVER JOGADOR
+// ===============================================
 
-// Inicialização da artilharia
-(async function initArtilharia() {
-  await carregarTimesArtilharia();
-  await carregarListaArtilheiros();
-})();
+async function removerJogador(id) {
+  if (!confirm("Tem certeza que deseja remover este jogador?")) return;
+
+  await sb
+    .from("artilharia_oficial")
+    .delete()
+    .eq("id", id);
+
+  carregarListaArtilheiros();
+}
 
 
 // ===============================================
-// 8. SALVAR TOP 4 + TOTAL DE GOLS
+// 11. CARREGAR LISTA ORDENADA + MEDALHAS
+// ===============================================
+
+async function carregarListaArtilheiros() {
+  const { data } = await sb
+    .from("artilharia_oficial")
+    .select("*")
+    .order("gols", { ascending: false });
+
+  const div = document.getElementById("lista-artilheiros");
+  div.innerHTML = "";
+
+  data.forEach((item, index) => {
+    let medalha = "";
+    if (index === 0) medalha = "🥇";
+    else if (index === 1) medalha = "🥈";
+    else if (index === 2) medalha = "🥉";
+    else medalha = `${index + 1}º`;
+
+    const bloco = document.createElement("div");
+    bloco.classList.add("artilheiro-item");
+
+    bloco.innerHTML = `
+      <div class="medalha">${medalha}</div>
+
+      <img class="artilheiro-flag" src="${item.flag}" alt="flag">
+      <div class="artilheiro-nome">${item.jogador}</div>
+
+      <div class="artilheiro-gols">${item.gols} gols</div>
+
+      <button class="btn-gol mais" onclick="alterarGols('${item.id}', 1)">+1</button>
+      <button class="btn-gol menos" onclick="alterarGols('${item.id}', -1)">-1</button>
+
+      <button class="btn-remove" onclick="removerJogador('${item.id}')">Remover</button>
+    `;
+
+    div.appendChild(bloco);
+  });
+}
+
+
+// ===============================================
+// 12. SALVAR TOP 4
 // ===============================================
 
 async function salvarTop4() {
@@ -389,16 +357,7 @@ async function salvarTop4() {
     total_gols: Number(document.getElementById("top-total-gols").value) || 0
   };
 
-  const { error } = await sb
-    .from("extras_oficiais")
-    .upsert(updateObj);
-
-  if (error) {
-    console.error(error);
-    alert("Erro ao salvar Top 4.");
-    return;
-  }
-
+  await sb.from("extras_oficiais").upsert(updateObj);
   alert("Top 4 salvo!");
 }
 
@@ -407,29 +366,23 @@ document.getElementById("btn-salvar-top4")
 
 
 // ===============================================
-// 9. CARREGAR EXTRAS EXISTENTES
+// 13. CARREGAR EXTRAS
 // ===============================================
 
 async function carregarExtrasExistentes() {
-  const { data, error } = await sb
+  const { data } = await sb
     .from("extras_oficiais")
     .select("*")
     .eq("id", EXTRAS_ID)
     .maybeSingle();
 
-  if (error || !data) return;
+  if (!data) return;
 
   GRUPOS.forEach(g => {
     const base = g.toLowerCase();
-
-    document.getElementById(`class-${g}-1`).value =
-      data[`real_grupo_${base}_1`] || "";
-
-    document.getElementById(`class-${g}-2`).value =
-      data[`real_grupo_${base}_2`] || "";
-
-    document.getElementById(`melhor3-${g}`).value =
-      data[`melhor_3${base}`] ? "S" : "N";
+    document.getElementById(`class-${g}-1`).value = data[`real_grupo_${base}_1`] || "";
+    document.getElementById(`class-${g}-2`).value = data[`real_grupo_${base}_2`] || "";
+    document.getElementById(`melhor3-${g}`).value = data[`melhor_3${base}`] ? "S" : "N";
   });
 
   if (data.campeao) document.getElementById("top-campeao").value = data.campeao;
@@ -443,11 +396,13 @@ async function carregarExtrasExistentes() {
 
 
 // ===============================================
-// 10. INICIALIZAÇÃO GERAL
+// 14. INICIALIZAÇÃO
 // ===============================================
 
 (async function init() {
   await verificarAdmin();
   await carregarJogos();
+  await carregarTimesArtilharia();
+  await carregarListaArtilheiros();
   await carregarExtrasExistentes();
 })();
