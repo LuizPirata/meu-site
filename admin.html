@@ -54,16 +54,23 @@
   <!--         3 — ARTILHARIA        -->
   <!-- ============================= -->
   <section id="sec-artilharia" class="admin-section">
-    <h2>Artilharia Oficial</h2>
+  <h2>Artilharia Oficial</h2>
 
-    <label>Artilheiro — 1º Lugar:</label>
-    <input type="text" id="art1">
+  <div class="artilharia-add">
+      <label>Seleção:</label>
+      <select id="select-time-art"></select>
 
-    <label>Artilheiro — 2º Lugar:</label>
-    <input type="text" id="art2">
+      <label>Jogador:</label>
+      <input type="text" id="input-jogador">
 
-    <button id="btn-salvar-artilharia" class="btn-save">Salvar Artilharia</button>
-  </section>
+      <button id="btn-add-jogador" class="btn-save">Adicionar Jogador</button>
+  </div>
+
+  <h3 style="margin-top:25px; color:#ff7b00;">Artilheiros Cadastrados</h3>
+
+  <div id="lista-artilheiros"></div>
+</section>
+
 
   <!-- ============================= -->
   <!--      4 — TOP 4 / GOLS         -->

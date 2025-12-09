@@ -216,31 +216,112 @@ document.getElementById("btn-salvar-classificados")
 // 7. SALVAR ARTILHARIA
 // ===============================================
 
-async function salvarArtilharia() {
-  const art1 = document.getElementById("art1").value.trim();
-  const art2 = document.getElementById("art2").value.trim();
-
-  const updateObj = {
-    id: EXTRAS_ID,
-    artilheiro_1: art1 || null,
-    artilheiro_2: art2 || null
-  };
-
-  const { error } = await sb
-    .from("extras_oficiais")
-    .upsert(updateObj);
+async function carregarTimesArtilharia() {
+  const { data, error } = await sb
+    .from("times")
+    .select("id, nome, flag");
 
   if (error) {
-    console.error(error);
-    alert("Erro ao salvar artilharia.");
+    console.error("Erro ao carregar times:", error);
     return;
   }
 
-  alert("Artilharia salva!");
+  const sel = document.getElementById("select-time-art");
+  sel.innerHTML = "";
+
+  data.forEach(t => {
+    const opt = document.createElement("option");
+    opt.value = JSON.stringify({id: t.id, flag: t.flag});
+    opt.textContent = t.nome;
+    sel.appendChild(opt);
+  });
 }
 
-document.getElementById("btn-salvar-artilharia")
-  .addEventListener("click", salvarArtilharia);
+async function adicionarJogador() {
+  const selectData = JSON.parse(document.getElementById("select-time-art").value);
+  const jogador = document.getElementById("input-jogador").value.trim();
+
+  if (!jogador) {
+    alert("Digite o nome do jogador.");
+    return;
+  }
+
+  const novo = {
+    id: crypto.randomUUID(),
+    time_id: selectData.id,
+    jogador: jogador,
+    gols: 0,
+    flag: selectData.flag
+  };
+
+  const { error } = await sb
+    .from("artilharia_oficial")
+    .insert(novo);
+
+  if (error) {
+    console.error(error);
+    alert("Erro ao adicionar jogador.");
+    return;
+  }
+
+  document.getElementById("input-jogador").value = "";
+  carregarListaArtilheiros();
+}
+
+document.getElementById("btn-add-jogador")
+  .addEventListener("click", adicionarJogador);
+
+async function carregarListaArtilheiros() {
+  const { data, error } = await sb
+    .from("artilharia_oficial")
+    .select("*")
+    .order("gols", { ascending: false });
+
+  if (error) {
+    console.error("Erro lista artilheiros:", error);
+    return;
+  }
+
+  const div = document.getElementById("lista-artilheiros");
+  div.innerHTML = "";
+
+  data.forEach(item => {
+    const bloco = document.createElement("div");
+    bloco.classList.add("artilheiro-item");
+
+    bloco.innerHTML = `
+      <img class="artilheiro-flag" src="${item.flag}">
+      <div class="artilheiro-nome">${item.jogador}</div>
+
+      <input type="number" class="input-gol-peq" id="gol-${item.id}" value="${item.gols}">
+      <button class="btn-save-gol" onclick="salvarGols('${item.id}')">Salvar</button>
+    `;
+
+    div.appendChild(bloco);
+  });
+}
+
+async function salvarGols(id) {
+  const valor = Number(document.getElementById(`gol-${id}`).value);
+
+  const { error } = await sb
+    .from("artilharia_oficial")
+    .update({ gols: valor })
+    .eq("id", id);
+
+  if (error) {
+    console.error(error);
+    alert("Erro ao atualizar gols.");
+    return;
+  }
+
+  carregarListaArtilheiros(); // reorder ranking
+}
+
+(async function initArtilharia() {
+  await carregarTimesArtilharia();
+  await carregarListaArtilheiros();
+})();
 
 
 // ===============================================
