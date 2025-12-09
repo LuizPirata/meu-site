@@ -99,12 +99,84 @@
   <!-- ============================= -->
   <!--      5 — MATA-MATA            -->
   <!-- ============================= -->
+  
   <section id="sec-matamata" class="admin-section">
-    <h2>Chaveamento — Mata-Mata</h2>
-    <p>⚠ Nesta etapa você poderá preencher o chaveamento gerado automaticamente.</p>
+  <h2>Fase Mata-Mata</h2>
 
-    <!-- depois ligamos ao banco -->
-  </section>
+  <p class="mm-info">
+    Segunda Fase preenchida manualmente. A partir daí, o sistema avança automaticamente
+    os vencedores para Oitavas → Quartas → Semi → Final e monta a Disputa de 3º / 4º com os
+    perdedores das semifinais.
+  </p>
+
+  <div class="mm-bracket">
+
+    <!-- LADO ESQUERDO -->
+    <div class="mm-side">
+
+      <div class="mm-fase-col">
+        <h3>Segunda Fase</h3>
+        <div id="mm-segunda-left" class="mm-col"></div>
+      </div>
+
+      <div class="mm-fase-col">
+        <h3>Oitavas</h3>
+        <div id="mm-oitavas-left" class="mm-col"></div>
+      </div>
+
+      <div class="mm-fase-col">
+        <h3>Quartas</h3>
+        <div id="mm-quartas-left" class="mm-col"></div>
+      </div>
+
+      <div class="mm-fase-col">
+        <h3>Semi</h3>
+        <div id="mm-semi-left" class="mm-col"></div>
+      </div>
+
+    </div>
+
+    <!-- CENTRO (FINAL + 3º) -->
+    <div class="mm-center">
+      <div class="mm-fase-col">
+        <h3>Final</h3>
+        <div id="mm-final" class="mm-col"></div>
+      </div>
+
+      <div class="mm-fase-col">
+        <h3>Disputa 3º / 4º</h3>
+        <div id="mm-terceiro" class="mm-col"></div>
+      </div>
+    </div>
+
+    <!-- LADO DIREITO -->
+    <div class="mm-side">
+
+      <div class="mm-fase-col">
+        <h3>Segunda Fase</h3>
+        <div id="mm-segunda-right" class="mm-col"></div>
+      </div>
+
+      <div class="mm-fase-col">
+        <h3>Oitavas</h3>
+        <div id="mm-oitavas-right" class="mm-col"></div>
+      </div>
+
+      <div class="mm-fase-col">
+        <h3>Quartas</h3>
+        <div id="mm-quartas-right" class="mm-col"></div>
+      </div>
+
+      <div class="mm-fase-col">
+        <h3>Semi</h3>
+        <div id="mm-semi-right" class="mm-col"></div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
 
 </main>
 
