@@ -417,43 +417,27 @@ body {
     margin: 12px 0;
 }
 
-/* ================================
-   CENTRALIZAÇÃO DA FINAL E 3º LUGAR
-   ================================ */
-
-/* A coluna central agora NÃO cria blocos separados */
+/* === CENTRALIZAR VERTICALMENTE A FINAL === */
 .round-center {
     display: flex;
     flex-direction: column;
-    justify-content: center;   /* alinha verticalmente */
-    align-items: center;       /* centraliza horizontalmente */
+    justify-content: center;      /* Centraliza verticalmente a FINAL e 3º lugar */
+    align-items: center;          /* Centraliza horizontalmente */
+    margin-top: 0 !important;     /* Garante que nada force ela para cima */
+    margin-bottom: 0 !important;
 }
 
-/* Correção: remover fundo da final e 3º */
-.match-final,
-.match-terceiro {
-    background: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
+/* Ajusta título da final */
+.round-title-final {
+    margin-bottom: 20px;
 }
 
-/* Ajuste visual para manter proporção */
-.match-final .team-line,
-.match-terceiro .team-line {
-    font-size: 18px;
-}
-
-/* Título FINAL e 3º Lugar centralizados */
-.round-title-final,
-.round-title-terceiro {
-    text-align: center;
-    font-size: 26px;
-    margin-bottom: 10px;
-    color: #ffcf87;
-}
-
-/* 3º lugar – ajuste do tamanho do título */
-.round-title-terceiro {
-    font-size: 23px;
+/* Espaço entre FINAL e 3º lugar */
+.third-place-block {
     margin-top: 40px;
+}
+
+/* Mantém o formato dos confrontos igual ao resto */
+.match-center {
+    text-align: center;
 }
