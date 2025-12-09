@@ -286,8 +286,7 @@ body {
 
 
 /* ===================================== */
-/*  FASE MATA-MATA — BRACKET 9 COLUNAS   */
-/*  (modelo A2, sem caixas cinzas)       */
+/*     FASE MATA-MATA — BRACKET A2       */
 /* ===================================== */
 
 #grupo-MATA .mata-titulo-central {
@@ -301,25 +300,27 @@ body {
     width: 96%;
 }
 
-/* grade com 9 colunas */
+/* === GRID 9 COLUNAS === */
 #grupo-MATA .mata-grid {
     width: 96%;
     margin: 30px auto 80px auto;
     display: grid;
     grid-template-columns: repeat(9, minmax(90px, 1fr));
-    column-gap: 28px;
-    align-items: flex-start;
+    gap: 40px;
+    align-items: stretch; /* colunas = mesma altura */
 }
 
-/* cada coluna (Segunda fase, Oitavas, Quartas, etc) */
+/* === COLUNAS DA CHAVE === */
 #grupo-MATA .round-col {
     display: flex;
     flex-direction: column;
+    justify-content: center;   /* centraliza verticalmente */
     align-items: center;
     gap: 22px;
+    height: 100%;
 }
 
-/* título de cada coluna */
+/* Títulos das Fases */
 #grupo-MATA .round-title {
     color: #ffcf87;
     font-weight: bold;
@@ -330,21 +331,25 @@ body {
 
 #grupo-MATA .round-title-final {
     font-size: 22px;
+    margin-bottom: 20px;
 }
 
-/* central (FINAL) dá só um respiro extra */
+/* === FINAL — COLUNA CENTRAL === */
 #grupo-MATA .round-center {
-    justify-content: flex-start;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;   /* Agora a FINAL fica ENTRE as semifinais */
+    align-items: center !important;
 }
 
-/* cada confronto (time de cima, X, time de baixo) */
+/* estrutura de cada confronto */
 #grupo-MATA .match {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 12px 0;
 }
 
-/* linha de cada time com um risquinho embaixo */
 #grupo-MATA .team-line {
     position: relative;
     padding: 2px 0 6px 0;
@@ -369,13 +374,18 @@ body {
     font-size: 18px;
 }
 
-/* X da final um pouco maior */
+/* X da final */
 #grupo-MATA .x-final {
     font-size: 22px;
 }
 
-/* pequena responsividade: se a tela ficar estreita demais,
-   deixa rolar horizontalmente em vez de quebrar tudo */
+/* bloco de 3º lugar */
+#grupo-MATA .third-place-block {
+    margin-top: 45px;
+    text-align: center;
+}
+
+/* = RESPONSIVIDADE = */
 @media (max-width: 1100px) {
     #grupo-MATA .mata-grid {
         overflow-x: auto;
@@ -387,57 +397,6 @@ body {
         display: inline-flex;
         vertical-align: top;
         margin-right: 24px;
+        height: auto;
     }
-}
-
-/* COLUNAS DO BRACKET (A2) */
-.mata-grid {
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    gap: 40px;
-
-    /* força altura igual entre as colunas */
-    grid-auto-rows: 1fr;
-}
-
-/* garante que cada coluna tenha altura total */
-.mata-grid > .round-col {
-    height: 100%;
-}
-
-/* centralizar verticalmente o conteúdo */
-.round-col {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-/* opcional – mantém espaçamento interno */
-.round-col .match {
-    margin: 12px 0;
-}
-
-/* === CENTRALIZAR VERTICALMENTE A FINAL === */
-.round-center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;      /* Centraliza verticalmente a FINAL e 3º lugar */
-    align-items: center;          /* Centraliza horizontalmente */
-    margin-top: 0 !important;     /* Garante que nada force ela para cima */
-    margin-bottom: 0 !important;
-}
-
-/* Ajusta título da final */
-.round-title-final {
-    margin-bottom: 20px;
-}
-
-/* Espaço entre FINAL e 3º lugar */
-.third-place-block {
-    margin-top: 40px;
-}
-
-/* Mantém o formato dos confrontos igual ao resto */
-.match-center {
-    text-align: center;
 }
