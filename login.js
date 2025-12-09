@@ -7,6 +7,9 @@ const SUPABASE_ANON_KEY = 'sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+// === DEFINA O EMAIL DO ADMIN ===
+const ADMIN_EMAIL = "luizpiratafla@hotmail.com";   // TROCAR AQUI!!!
+
 // Elementos da página
 const btnLogin = document.getElementById('btn-login');
 const btnCadastrar = document.getElementById('btn-cadastrar');
@@ -18,9 +21,9 @@ function showMessage(text, color = 'white') {
   msgBox.style.color = color;
 }
 
-// -----------------------------------------
+// =========================================================
 // LOGIN
-// -----------------------------------------
+// =========================================================
 btnLogin.addEventListener('click', async (e) => {
   e.preventDefault();
   showMessage('');
@@ -40,11 +43,24 @@ btnLogin.addEventListener('click', async (e) => {
     return;
   }
 
-  // login OK → pega o username já gravado na tabela
+  // LOGIN OK
+  const user = data.user;
+
+  // ================================
+  // ADMIN → redireciona para admin.html
+  // ================================
+  if (user.email === ADMIN_EMAIL) {
+    window.location.href = "admin.html";
+    return;
+  }
+
+  // ================================
+  // USUÁRIO COMUM → mantém sua lógica atual
+  // ================================
   const { data: userRow } = await supabase
     .from('usuarios')
     .select('username')
-    .eq('user_id', data.user.id)
+    .eq('user_id', user.id)
     .maybeSingle();
 
   const username = userRow?.username || 'perfil';
@@ -53,9 +69,9 @@ btnLogin.addEventListener('click', async (e) => {
 });
 
 
-// -----------------------------------------
+// =========================================================
 // CADASTRO
-// -----------------------------------------
+// =========================================================
 btnCadastrar.addEventListener('click', async (e) => {
   e.preventDefault();
   showMessage('');
@@ -68,10 +84,10 @@ btnCadastrar.addEventListener('click', async (e) => {
     return;
   }
 
-  // --- Verificar se email já existe ---
+  // Verifica se usuário já existe
   const { data: check, error: checkError } = await supabase.auth.signInWithPassword({
     email,
-    password: "dummy-password-qualquer"
+    password: "senha-qualquer"
   });
 
   if (!checkError) {
@@ -79,11 +95,8 @@ btnCadastrar.addEventListener('click', async (e) => {
     return;
   }
 
-  // --- Criar usuário no Auth ---
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password
-  });
+  // Criar usuário
+  const { data, error } = await supabase.auth.signUp({ email, password });
 
   if (error) {
     showMessage('Erro ao cadastrar: ' + error.message, 'red');
@@ -96,17 +109,15 @@ btnCadastrar.addEventListener('click', async (e) => {
     return;
   }
 
-  // --- Criar USERNAME automaticamente ---
+  // Criar username automaticamente
   const username = email.split('@')[0];
 
-  // --- Salvar na tabela usuarios ---
+  // Salvar no banco
   await supabase.from('usuarios').insert({
     user_id: user.id,
     username: username
   });
 
-  // --- Redirecionar para página personalizada ---
+  // Redireciona
   window.location.href = `perfil.html?username=${encodeURIComponent(username)}`;
 });
-
-

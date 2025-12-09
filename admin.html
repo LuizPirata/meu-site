@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Administração do Bolão</title>
+<link rel="stylesheet" href="styles.css">
+
+<style>
+    body {
+        background: #111;
+        color: white;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+    }
+
+    h1, h2 {
+        color: #ffcf87;
+        margin-bottom: 10px;
+    }
+
+    .admin-section {
+        background: rgba(255,255,255,0.06);
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    label {
+        display: block;
+        margin-top: 8px;
+        font-size: 14px;
+    }
+
+    input, select {
+        margin-top: 4px;
+        padding: 6px;
+        border-radius: 6px;
+        border: none;
+        width: 220px;
+    }
+
+    button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border-radius: 6px;
+        background: #ff9900;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #ffaa33;
+    }
+
+    .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .success {
+        color: #00ff99;
+        margin-top: 10px;
+    }
+
+    .error {
+        color: #ff5555;
+        margin-top: 10px;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Administração do Bolão</h1>
+
+<!-- =============================================== -->
+<!--   RESULTADOS DOS GRUPOS                         -->
+<!-- =============================================== -->
+<div class="admin-section">
+    <h2>Inserir / Atualizar Resultados Oficiais — Fase de Grupos</h2>
+
+    <label>Escolha um jogo:</label>
+    <select id="jogo-select"></select>
+
+    <div class="grid-2">
+        <div>
+            <label>Gols Time da Casa:</label>
+            <input type="number" id="gols-casa">
+        </div>
+
+        <div>
+            <label>Gols Time de Fora:</label>
+            <input type="number" id="gols-fora">
+        </div>
+    </div>
+
+    <button id="btn-salvar-jogo">Salvar Resultado</button>
+    <div id="msg-jogos"></div>
+</div>
+
+
+<!-- =============================================== -->
+<!--   EXTRAS OFICIAIS                               -->
+<!-- =============================================== -->
+<div class="admin-section">
+    <h2>Extras Oficiais</h2>
+
+    <h3>Classificados por Grupo (1º e 2º)</h3>
+    <div id="classif-container"></div>
+
+    <h3>Melhores Terceiros</h3>
+    <div id="melhores-container"></div>
+
+    <h3>Artilharia</h3>
+    <label>1º Artilheiro:</label> <input id="art1">
+    <label>2º Artilheiro:</label> <input id="art2">
+
+    <h3>Top 4 Finais</h3>
+    <label>Campeão:</label><input id="camp">
+    <label>Vice:</label><input id="vice">
+    <label>3º lugar:</label><input id="terc">
+    <label>4º lugar:</label><input id="quar">
+
+    <h3>Total de Gols da Copa</h3>
+    <label>Total:</label><input id="totgols" type="number">
+
+    <button id="btn-salvar-extras">Salvar Extras</button>
+    <div id="msg-extras"></div>
+</div>
+
+
+<!-- =============================================== -->
+<!--   DEFINIR SEGUNDA FASE DO MATA-MATA             -->
+<!-- =============================================== -->
+<div class="admin-section">
+    <h2>Chaveamento - Segunda Fase (manual após resultados)</h2>
+
+    <div id="mata-mata-container"></div>
+
+    <button id="btn-salvar-mata">Salvar Mata-Mata</button>
+    <div id="msg-mata"></div>
+</div>
+
+
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js';
+
+const supabase = createClient(
+  "https://mdaqzciffsgupzbfxzgf.supabase.co",
+  "sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY"
+);
+
+// ================= PROTEÇÃO DO ADMIN =====================
+const ADMIN_EMAIL = "luizpiratafla@hotmail.com"; // <-- TROCAR
+const { data: { session } } = await supabase.auth.getSession();
+
+if (!session || session.user.email !== ADMIN_EMAIL) {
+   window.location.href = "index.html";
+}
+
+// =========================================================
+//        1) CARREGAR LISTA DE JOGOS OFICIAIS
+// =========================================================
+async function carregarJogos() {
+    let { data: jogos } = await supabase
+        .from("jogos_grupo")
+        .select("*")
+        .order("id");
+
+    const select = document.getElementById("jogo-select");
+
+    jogos.forEach(j => {
+        let opt = document.createElement("option");
+        opt.value = j.id;
+        opt.textContent = `${j.grupo} — ${j.time_casa} x ${j.time_fora}`;
+        select.appendChild(opt);
+    });
+}
+
+carregarJogos();
+
+// =========================================================
+//   1.1 SALVAR RESULTADOS OFICIAIS
+// =========================================================
+document.getElementById("btn-salvar-jogo").onclick = async () => {
+    const jogo_id = document.getElementById("jogo-select").value;
+    const gc = document.getElementById("gols-casa").value;
+    const gf = document.getElementById("gols-fora").value;
+
+    const { error } = await supabase
+        .from("resultados_oficiais")
+        .upsert({
+            jogo_id,
+            gol_casa: gc,
+            gol_fora: gf
+        });
+
+    document.getElementById("msg-jogos").textContent =
+        error ? "Erro: " + error.message : "Resultado salvo!";
+};
+
+
+// =========================================================
+//     2) MONTAR INPUTS DOS EXTRAS (DINÂMICO)
+// =========================================================
+const grupos = "ABCDEFGHIJKL".split("");
+
+// 2.1 Classificados por grupo
+const classifArea = document.getElementById("classif-container");
+
+grupos.forEach(g => {
+    classifArea.innerHTML += `
+        <div>
+            <label>Grupo ${g} — 1º colocado:</label>
+            <input id="classif_${g}_1">
+            <label>Grupo ${g} — 2º colocado:</label>
+            <input id="classif_${g}_2">
+        </div>
+        <br>
+    `;
+});
+
+// 2.2 Melhores terceiros
+const melhArea = document.getElementById("melhores-container");
+
+grupos.forEach(g => {
+    melhArea.innerHTML += `
+        <label>Grupo ${g} teve melhor 3º? (sim/nao)</label>
+        <input id="melhor_${g}">
+    `;
+});
+
+// =========================================================
+//       2.3 SALVAR EXTRAS
+// =========================================================
+document.getElementById("btn-salvar-extras").onclick = async () => {
+
+    let payload = {};
+
+    grupos.forEach(g => {
+        payload[`real_grupo_${g.toLowerCase()}_1`] =
+           document.getElementById(`classif_${g}_1`).value;
+        payload[`real_grupo_${g.toLowerCase()}_2`] =
+           document.getElementById(`classif_${g}_2`).value;
+        payload[`melhor_${g.toLowerCase()}`] =
+           document.getElementById(`melhor_${g}`).value;
+    });
+
+    payload.artilheiro_1 = document.getElementById("art1").value;
+    payload.artilheiro_2 = document.getElementById("art2").value;
+
+    payload.campeao = document.getElementById("camp").value;
+    payload.vice = document.getElementById("vice").value;
+    payload.terceiro = document.getElementById("terc").value;
+    payload.quarto = document.getElementById("quar").value;
+
+    payload.total_gols = document.getElementById("totgols").value;
+
+    const { error } = await supabase
+        .from("extras_oficiais")
+        .upsert(payload);
+
+    document.getElementById("msg-extras").textContent =
+        error ? "Erro ao salvar extras" : "Extras salvos com sucesso!";
+};
+
+// =========================================================
+//     3) ADMIN DEFINIR SEGUNDA FASE
+// =========================================================
+const mataArea = document.getElementById("mata-mata-container");
+
+for (let i = 1; i <= 16; i++) {
+    mataArea.innerHTML += `
+        <label>Jogo ${i} — Time de Casa</label>
+        <input id="m${i}_casa">
+
+        <label>Jogo ${i} — Time de Fora</label>
+        <input id="m${i}_fora">
+        <hr>
+    `;
+}
+
+document.getElementById("btn-salvar-mata").onclick = async () => {
+
+    let jogos = [];
+
+    for (let i = 1; i <= 16; i++) {
+        jogos.push({
+            id: i,
+            time_casa: document.getElementById(`m${i}_casa`).value,
+            time_fora: document.getElementById(`m${i}_fora`).value
+        });
+    }
+
+    const { error } = await supabase
+        .from("mata_mata")
+        .upsert(jogos);
+
+    document.getElementById("msg-mata").textContent =
+        error ? "Erro ao salvar mata-mata" : "Chaveamento salvo!";
+};
+
+</script>
+
+</body>
+</html>
