@@ -520,7 +520,7 @@ body {
 
 /* Padroniza o espaçamento entre o menu superior e o conteúdo das abas */
 .menu-pane {
-    margin-top: 10px !important;
+    margin-top: 1px !important;
 }
 
 
