@@ -123,14 +123,15 @@ input[type=number] {
 .artilheiro-item {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px; /* Espaço pequeno entre os itens */
   background: #1a1a1a;
-  padding: 10px 15px;
+  padding: 12px 15px;
   border-radius: 10px;
   margin-bottom: 10px;
   border: 1px solid #333;
 }
 
+/* Bandeira pequena */
 .artilheiro-flag {
   width: 35px;
   height: 25px;
@@ -138,14 +139,16 @@ input[type=number] {
   border-radius: 4px;
 }
 
+/* Nome sem flex, para não empurrar o restante */
 .artilheiro-nome {
-  flex: 1;
   font-size: 18px;
   color: white;
+  margin-right: 10px; /* pequeno espaço antes do input */
 }
 
+/* Input pequeno */
 .input-gol-peq {
-  width: 60px; 
+  width: 60px;
   height: 45px;
   font-size: 22px;
   text-align: center;
@@ -156,9 +159,10 @@ input[type=number] {
   outline: none;
 }
 
+/* Botão de salvar igual ao de adicionar jogador */
 .btn-save-gol {
   background: #ff7b00;
-  padding: 12px 25px;
+  padding: 12px 18px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -170,3 +174,4 @@ input[type=number] {
 .btn-save-gol:hover {
   background: #ffa53b;
 }
+
