@@ -497,12 +497,12 @@ body {
 
 .top-menu {
     display: flex;
-    justify-content: center;
+    justify-content: top;
     align-items: center;   /* centraliza verticalmente */
     gap: 22px;             /* mais espaço entre botões */
     padding: 25px 0;       /* aumenta espaço vertical total */
-    margin-top: 20px;      /* distância do topo */
-    margin-bottom: 25px;   /* distância até as abas de grupos */
+    margin-top: 10px;      /* distância do topo */
+    margin-bottom: 10px;   /* distância até as abas de grupos */
 }
 
 .top-menu-btn {
