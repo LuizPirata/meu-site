@@ -430,24 +430,23 @@ body {
 /*   INPUTS SÓ NO MATA-MATA  */
 /* ========================= */
 
-/* Linha com nome + input */
+/* Linha do nome do time — totalmente centralizada */
 #grupo-MATA .team-line {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 6px;
-    padding-bottom: 6px;
+    text-align: center;
+    width: 160px;      /* mesmo tamanho aproximado do bloco do placar */
+    margin: 0 auto;
     position: relative;
-    width: 140px;
+    padding-bottom: 6px;
 }
 
-/* Traço só embaixo do nome */
+/* Sub-linha centralizada sob o nome */
 #grupo-MATA .team-line::before {
     content: "";
     position: absolute;
     bottom: 0;
-    left: 0;
-    width: 60%; /* somente sob o nome */
+    left: 50%;
+    width: 80px;       /* igual para todos os nomes */
+    transform: translateX(-50%);
     border-bottom: 1px solid rgba(255,255,255,0.3);
 }
 
