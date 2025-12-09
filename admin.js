@@ -9,7 +9,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY";
 const { createClient } = supabase;
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// Admins permitidos (ou troque para checagem via tabela usuarios)
+// Admins permitidos
 const ADMIN_EMAILS = ["luizpiratafla@hotmail.com"];
 
 // Sua tabela usa PK = boolean true
@@ -48,7 +48,6 @@ async function verificarAdmin() {
   }
 
   const email = data.user.email.toLowerCase();
-
   const permitido = ADMIN_EMAILS.map(e => e.toLowerCase()).includes(email);
 
   if (!permitido) {
@@ -82,7 +81,6 @@ async function carregarJogos() {
     return;
   }
 
-  // Carregar nomes dos times
   const { data: times } = await sb
     .from("times")
     .select("id, nome");
@@ -213,9 +211,10 @@ document.getElementById("btn-salvar-classificados")
 
 
 // ===============================================
-// 7. SALVAR ARTILHARIA
+// 7. ARTILHARIA — TIMES, ADICIONAR JOGADOR, ALTERAR GOLS
 // ===============================================
 
+// Carregar seleções no dropdown
 async function carregarTimesArtilharia() {
   const { data, error } = await sb
     .from("times")
@@ -237,6 +236,8 @@ async function carregarTimesArtilharia() {
   });
 }
 
+
+// Adicionar jogador novo
 async function adicionarJogador() {
   const selectData = JSON.parse(document.getElementById("select-time-art").value);
   const jogador = document.getElementById("input-jogador").value.trim();
@@ -271,6 +272,8 @@ async function adicionarJogador() {
 document.getElementById("btn-add-jogador")
   .addEventListener("click", adicionarJogador);
 
+
+// Atualizar lista de artilheiros na tela
 async function carregarListaArtilheiros() {
   const { data, error } = await sb
     .from("artilharia_oficial")
@@ -290,26 +293,41 @@ async function carregarListaArtilheiros() {
     bloco.classList.add("artilheiro-item");
 
     bloco.innerHTML = `
-    <img class="artilheiro-flag" src="${item.flag}" alt="flag">
+      <img class="artilheiro-flag" src="${item.flag}" alt="flag">
+      <div class="artilheiro-nome">${item.jogador}</div>
+      <div class="artilheiro-gols">${item.gols} gols</div>
 
-    <div class="artilheiro-nome">${item.jogador}</div>
-
-    <input type="number" class="input-gol-peq" id="gol-${item.id}" value="${item.gols}">
-
-    <button class="btn-save-gol" onclick="salvarGols('${item.id}')">Salvar</button>
-`;
-
+      <button class="btn-gol mais" onclick="alterarGols('${item.id}', 1)">+1</button>
+      <button class="btn-gol menos" onclick="alterarGols('${item.id}', -1)">-1</button>
+    `;
 
     div.appendChild(bloco);
   });
 }
 
-async function salvarGols(id) {
-  const valor = Number(document.getElementById(`gol-${id}`).value);
+
+// Função que soma ou subtrai gols
+async function alterarGols(id, valor) {
+  const { data, error: erroBusca } = await sb
+    .from("artilharia_oficial")
+    .select("gols")
+    .eq("id", id)
+    .single();
+
+  if (erroBusca) {
+    console.error(erroBusca);
+    alert("Erro ao buscar gols.");
+    return;
+  }
+
+  let golsAtuais = Number(data.gols);
+  let novoTotal = golsAtuais + valor;
+
+  if (novoTotal < 0) novoTotal = 0;
 
   const { error } = await sb
     .from("artilharia_oficial")
-    .update({ gols: valor })
+    .update({ gols: novoTotal })
     .eq("id", id);
 
   if (error) {
@@ -318,9 +336,11 @@ async function salvarGols(id) {
     return;
   }
 
-  carregarListaArtilheiros(); // reorder ranking
+  carregarListaArtilheiros();
 }
 
+
+// Inicialização da artilharia
 (async function initArtilharia() {
   await carregarTimesArtilharia();
   await carregarListaArtilheiros();
@@ -359,7 +379,7 @@ document.getElementById("btn-salvar-top4")
 
 
 // ===============================================
-// 9. CARREGAR EXTRAS EXISTENTES AO ABRIR
+// 9. CARREGAR EXTRAS EXISTENTES
 // ===============================================
 
 async function carregarExtrasExistentes() {
@@ -371,7 +391,6 @@ async function carregarExtrasExistentes() {
 
   if (error || !data) return;
 
-  // ================== CLASSIFICADOS ===================
   GRUPOS.forEach(g => {
     const base = g.toLowerCase();
 
@@ -385,11 +404,6 @@ async function carregarExtrasExistentes() {
       data[`melhor_3${base}`] ? "S" : "N";
   });
 
-  // ================== ARTILHARIA ===================
-  if (data.artilheiro_1) document.getElementById("art1").value = data.artilheiro_1;
-  if (data.artilheiro_2) document.getElementById("art2").value = data.artilheiro_2;
-
-  // ================== TOP 4 ===================
   if (data.campeao) document.getElementById("top-campeao").value = data.campeao;
   if (data.vice) document.getElementById("top-vice").value = data.vice;
   if (data.terceiro) document.getElementById("top-terceiro").value = data.terceiro;

@@ -175,3 +175,35 @@ input[type=number] {
   background: #ffa53b;
 }
 
+.artilheiro-gols {
+  font-size: 18px;
+  color: #ffae00;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.btn-gol {
+  background: #ff7b00;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: black;
+  font-weight: bold;
+  transition: .2s;
+}
+
+.btn-gol:hover {
+  background: #ffa53b;
+}
+
+.btn-gol.menos {
+  background: #d64545;
+  color: white;
+}
+
+.btn-gol.menos:hover {
+  background: #ff6b6b;
+}
+
+
