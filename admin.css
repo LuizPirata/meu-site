@@ -376,3 +376,94 @@ input[type=number] {
 .mm-phase-center .mm-match {
   width: 220px;
 }
+
+.btn-reset {
+  margin-left: 8px;
+  background: #444;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-reset:hover {
+  background: #666;
+}
+
+.fase-titulo {
+  color: #ff7b00;
+  font-size: 22px;
+  margin-top: 40px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.grid-2-colunas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.jogo-box {
+  background: #1c1c1c;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 12px;
+}
+
+.jogo-times {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.jogo-times img {
+  width: 35px;
+  height: 25px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.jogo-select {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.jogo-input-gol {
+  width: 60px;
+  height: 40px;
+  font-size: 22px;
+  background: #333;
+  border-radius: 8px;
+  border: 1px solid #555;
+  text-align: center;
+  color: white;
+}
+
+.jogo-buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-salvar-mata {
+  background: #ff7b00;
+  color: black;
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-reset {
+  background: #444;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+.btn-reset:hover { background: #666; }

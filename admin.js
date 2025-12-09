@@ -577,7 +577,7 @@ function renderColunaMata(containerId, fase, listaJogos) {
     let htmlTime2 = "";
 
     if (ehSegundaFase) {
-      // selects
+      // Segunda Fase: selects de times
       htmlTime1 = `
         <select id="mm-t1-${jogo.id}" class="mm-time-select">
           ${montarOptionsTimes(jogo.time1)}
@@ -589,19 +589,21 @@ function renderColunaMata(containerId, fase, listaJogos) {
         </select>
       `;
     } else {
-      // exibir bandeiras + nomes
+      // Demais fases: só exibe bandeira + nome (layout A)
       htmlTime1 = `
         <div class="mm-team-info">
-          ${time1 ? `<img class="mm-flag" src="${time1.flag}">
-                     <span class="mm-team-name">${time1.nome}</span>`
-                  : `<span class="mm-team-name">—</span>`}
+          ${time1 ? `
+            <img class="mm-flag" src="${time1.flag}" alt="">
+            <span class="mm-team-name">${time1.nome}</span>`
+          : `<span class="mm-team-name">—</span>`}
         </div>
       `;
       htmlTime2 = `
         <div class="mm-team-info">
-          ${time2 ? `<img class="mm-flag" src="${time2.flag}">
-                     <span class="mm-team-name">${time2.nome}</span>`
-                  : `<span class="mm-team-name">—</span>`}
+          ${time2 ? `
+            <img class="mm-flag" src="${time2.flag}" alt="">
+            <span class="mm-team-name">${time2.nome}</span>`
+          : `<span class="mm-team-name">—</span>`}
         </div>
       `;
     }
@@ -617,14 +619,20 @@ function renderColunaMata(containerId, fase, listaJogos) {
         <input type="number" id="mm-g2-${jogo.id}" class="mm-gol-input" value="${g2}">
       </div>
 
-      <button class="btn-save mm-save-btn" onclick="salvarResultadoMata('${jogo.id}')">
-        Salvar Jogo ${jogo.jogo_no}
-      </button>
+      <div class="mm-buttons-row">
+        <button class="btn-save mm-save-btn" onclick="salvarResultadoMata('${jogo.id}')">
+          Salvar Jogo ${jogo.jogo_no}
+        </button>
+        <button class="btn-reset-mata" onclick="resetarResultadoMata('${jogo.id}')">
+          Resetar
+        </button>
+      </div>
     `;
 
     container.appendChild(bloco);
   });
 }
+
 
 
 // ===============================================
@@ -739,6 +747,110 @@ async function salvarResultadoMata(jogoId) {
 
   alert("Resultado salvo!");
   renderizarMataMata();
+}
+
+// ===============================================
+//  MATA-MATA — RESETAR JOGO
+// ===============================================
+async function resetarResultadoMata(jogoId) {
+  const jogo = encontrarJogoPorId(jogoId);
+  if (!jogo) {
+    alert("Jogo não encontrado.");
+    return;
+  }
+
+  const ok = confirm("Tem certeza que deseja resetar este confronto?");
+  if (!ok) return;
+
+  // 1) Apaga resultado da tabela mata_mata_resultados
+  const resExist = RESULTADOS_MATA[jogoId];
+  if (resExist) {
+    const { error: errDel } = await sb
+      .from("mata_mata_resultados")
+      .delete()
+      .eq("id", resExist.id);
+
+    if (errDel) {
+      console.error("Erro ao apagar resultado:", errDel);
+      alert("Erro ao apagar resultado.");
+      return;
+    }
+
+    delete RESULTADOS_MATA[jogoId];
+  }
+
+  // 2) Se for Segunda Fase, também limpa os times (time1/time2)
+  if (jogo.fase === "Segunda Fase") {
+    const { error: errUpd } = await sb
+      .from("mata_mata_oficial")
+      .update({
+        time1: null,
+        time2: null,
+        atualizado_em: new Date().toISOString()
+      })
+      .eq("id", jogoId);
+
+    if (errUpd) {
+      console.error("Erro ao limpar times:", errUpd);
+      alert("Erro ao limpar confronto.");
+      return;
+    }
+
+    jogo.time1 = null;
+    jogo.time2 = null;
+  }
+
+  // 3) Limpa jogos seguintes que dependem deste (avançados automaticamente)
+  await limparProximasFases(jogo.fase, jogo.jogo_no);
+
+  // 4) Re-renderiza a árvore
+  renderizarMataMata();
+
+  alert("Jogo resetado com sucesso!");
+}
+
+// Limpa em cascata os jogos das fases seguintes
+async function limparProximasFases(faseAtual, jogoNo) {
+  const dest = obterDestinoProximaFase(faseAtual, jogoNo);
+  if (!dest) return; // se não tem próxima fase, para aqui
+
+  const destino = encontrarJogo(dest.fase, dest.jogo_no);
+  if (!destino) return;
+
+  // 1) Zera o time (time1 ou time2) no jogo de destino
+  const updatePayload = {};
+  updatePayload[dest.campo] = null;
+
+  const { error: errUpd } = await sb
+    .from("mata_mata_oficial")
+    .update(updatePayload)
+    .eq("id", destino.id);
+
+  if (errUpd) {
+    console.error("Erro ao limpar próximo jogo:", errUpd);
+    return;
+  }
+
+  destino[dest.campo] = null;
+
+  // 2) Apaga resultado do jogo de destino
+  const resDestino = RESULTADOS_MATA[destino.id];
+  if (resDestino) {
+    const { error: errDel } = await sb
+      .from("mata_mata_resultados")
+      .delete()
+      .eq("id", resDestino.id);
+
+    if (errDel) {
+      console.error("Erro ao apagar resultado de fase seguinte:", errDel);
+      return;
+    }
+
+    delete RESULTADOS_MATA[destino.id];
+  }
+
+  // 3) Chama recursivamente para limpar o que vem depois deste
+  await limparProximasFases(dest.fase, dest.jogo_no);
 }
 
 
@@ -865,6 +977,78 @@ async function carregarExtrasExistentes() {
 
   if (typeof data.total_gols === "number")
     document.getElementById("top-total-gols").value = data.total_gols;
+}
+
+async function resetarJogo(jogoId) {
+  const jogo = encontrarJogoPorId(jogoId);
+  if (!jogo) return alert("Jogo não encontrado.");
+
+  if (!confirm("Tem certeza que deseja resetar este jogo?")) return;
+
+  console.log("🔄 Resetando jogo", jogoId);
+
+  // 1. Remover resultado salvo
+  await sb
+    .from("mata_mata_resultados")
+    .delete()
+    .eq("jogo_id", jogoId);
+
+  // 2. Limpar confronto apenas se for Segunda Fase
+  // (nas fases seguintes o time vem da fase anterior)
+  if (jogo.fase === "Segunda Fase") {
+    await sb
+      .from("mata_mata_oficial")
+      .update({
+        time1: null,
+        time2: null,
+        atualizado_em: new Date().toISOString()
+      })
+      .eq("id", jogoId);
+
+    jogo.time1 = null;
+    jogo.time2 = null;
+  }
+
+  // 3. Remover do cache interno
+  if (RESULTADOS_MATA[jogoId]) {
+    delete RESULTADOS_MATA[jogoId];
+  }
+
+  // 4. Resetar avanços automáticos
+  await limparAvancosPosteriores(jogoId);
+
+  // 5. Atualiza interface
+  renderizarMataMata();
+
+  alert("Jogo resetado com sucesso!");
+}
+
+async function limparAvancosPosteriores(jogoId) {
+  // remove propagação de vencedor para fases seguintes
+  const avancos = AVANCAMENTO[jogoId]; // mapa que já existe no seu código
+
+  if (!avancos || !avancos.proximo) return;
+
+  const destino = avancos.proximo; // id do jogo seguinte
+  const pos = avancos.pos; // time1 ou time2
+
+  // Limpando o próximo jogo
+  await sb
+    .from("mata_mata_oficial")
+    .update({
+      [pos]: null,
+      atualizado_em: new Date().toISOString()
+    })
+    .eq("id", destino);
+
+  // Também remover resultado do próximo jogo
+  await sb
+    .from("mata_mata_resultados")
+    .delete()
+    .eq("jogo_id", destino);
+
+  // Recursivo — continua limpando as próximas fases
+  await limparAvancosPosteriores(destino);
 }
 
 
