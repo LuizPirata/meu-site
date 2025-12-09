@@ -290,12 +290,15 @@ async function carregarListaArtilheiros() {
     bloco.classList.add("artilheiro-item");
 
     bloco.innerHTML = `
-      <img class="artilheiro-flag" src="${item.flag}">
-      <div class="artilheiro-nome">${item.jogador}</div>
+    <img class="artilheiro-flag" src="${item.flag}" alt="flag">
 
-      <input type="number" class="input-gol-peq" id="gol-${item.id}" value="${item.gols}">
-      <button class="btn-save-gol" onclick="salvarGols('${item.id}')">Salvar</button>
-    `;
+    <div class="artilheiro-nome">${item.jogador}</div>
+
+    <input type="number" class="input-gol-peq" id="gol-${item.id}" value="${item.gols}">
+
+    <button class="btn-save-gol" onclick="salvarGols('${item.id}')">Salvar</button>
+`;
+
 
     div.appendChild(bloco);
   });
