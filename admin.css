@@ -467,3 +467,22 @@ input[type=number] {
   cursor: pointer;
 }
 .btn-reset:hover { background: #666; }
+
+.btn-reset-mata {
+  width: 100%;
+  margin-top: 6px;
+  font-size: 13px;
+  padding: 6px 10px;
+  background: #444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.btn-reset-mata:hover {
+  background: #666;
+}
+
