@@ -300,16 +300,18 @@ async function carregarListaArtilheiros() {
     else posicaoHTML = `<span class="posicao-num">${index + 1}º</span>`;
 
     bloco.innerHTML = `
-      ${posicaoHTML}
-      <img class="artilheiro-flag" src="${item.flag}" alt="flag">
+  <img class="artilheiro-flag" src="${item.flag}" alt="flag">
 
-      <div class="artilheiro-nome">${item.jogador}</div>
+  <div class="artilheiro-nome">${item.jogador}</div>
 
-      <div class="artilheiro-gols">${item.gols} gols</div>
+  <div class="artilheiro-gols">${item.gols} gols</div>
 
-      <button class="btn-gol mais" onclick="alterarGols('${item.id}', 1)">+1</button>
-      <button class="btn-gol menos" onclick="alterarGols('${item.id}', -1)">-1</button>
-    `;
+  <button class="btn-gol mais" onclick="alterarGols('${item.id}', 1)">+1</button>
+  <button class="btn-gol menos" onclick="alterarGols('${item.id}', -1)">-1</button>
+
+  <button class="btn-remove" onclick="removerJogador('${item.id}')">Remover</button>
+`;
+
 
     div.appendChild(bloco);
 });
@@ -347,8 +349,23 @@ async function alterarGols(id, valor) {
     return;
   }
 
+ async function removerJogador(id) {
+  if (!confirm("Tem certeza que deseja remover este jogador?")) return;
+
+  const { error } = await sb
+    .from("artilharia_oficial")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    console.error(error);
+    alert("Erro ao remover jogador.");
+    return;
+  }
+
   carregarListaArtilheiros();
 }
+
 
 
 // Inicialização da artilharia

@@ -229,3 +229,20 @@ input[type=number] {
 .medal-prata { color: #c0c0c0; }
 .medal-bronze { color: #cd7f32; }
 
+.btn-remove {
+  background: #ff7b00;
+  color: black;
+  font-weight: bold;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: .2s;
+}
+
+.btn-remove:hover {
+  background: #ffa53b;
+}
+
+
