@@ -491,36 +491,49 @@ body {
     display: block;
 }
 
+/* =============================== */
+/*      MENU SUPERIOR AJUSTADO     */
+/* =============================== */
+
 .top-menu {
     display: flex;
-    gap: 12px;
-    padding: 12px;
     justify-content: center;
+    align-items: center;   /* centraliza verticalmente */
+    gap: 22px;             /* mais espaço entre botões */
+    padding: 25px 0;       /* aumenta espaço vertical total */
+    margin-top: 20px;      /* distância do topo */
+    margin-bottom: 25px;   /* distância até as abas de grupos */
 }
 
 .top-menu-btn {
-    background: #ff8800;
-    color: #fff;
+    background: linear-gradient(to right, #ff9900, #ff3300);
+    color: white;
     font-weight: bold;
-    padding: 10px 22px;
-    border-radius: 10px;
+    font-size: 19px;       /* texto maior */
+    padding: 16px 30px;    /* botões maiores */
+    height: 60px;          /* fixa altura */
+    display: flex;
+    align-items: center;   /* texto centralizado verticalmente */
+    border-radius: 12px;
     border: none;
     cursor: pointer;
-    transition: .2s;
+    transition: 0.2s ease;
 }
 
 .top-menu-btn.active {
-    background: #ff3300;
+    background: linear-gradient(to right, #ff5500, #cc2200);
 }
 
 .top-menu-btn:hover {
-    background: #ff5500;
+    transform: scale(1.05);
+    filter: brightness(1.15);
 }
+
 
 
 /* Padroniza o espaçamento entre o menu superior e o conteúdo das abas */
 .menu-pane {
-    margin-top: 1px !important;
+    margin-top: 0px !important;
 }
 
 
