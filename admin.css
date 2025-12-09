@@ -245,4 +245,20 @@ input[type=number] {
   background: #ffa53b;
 }
 
+/* Container fixo para todos os indicadores de posição */
+.pos-badge {
+  width: 40px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  margin-right: 12px;
+}
+
+/* Para números 4º, 5º, 6º... */
+.pos-num {
+  color: #d0d0d0;
+  font-weight: bold;
+  font-size: 18px;
+}
 

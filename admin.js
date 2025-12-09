@@ -316,16 +316,17 @@ async function carregarListaArtilheiros() {
 
   data.forEach((item, index) => {
     let medalha = "";
-    if (index === 0) medalha = "🥇";
-    else if (index === 1) medalha = "🥈";
-    else if (index === 2) medalha = "🥉";
-    else medalha = `${index + 1}º`;
+if (index === 0) medalha = `<span class="pos-badge">🥇</span>`;
+else if (index === 1) medalha = `<span class="pos-badge">🥈</span>`;
+else if (index === 2) medalha = `<span class="pos-badge">🥉</span>`;
+else medalha = `<span class="pos-badge pos-num">${index + 1}º</span>`;
+
 
     const bloco = document.createElement("div");
     bloco.classList.add("artilheiro-item");
 
     bloco.innerHTML = `
-      <div class="medalha">${medalha}</div>
+      ${medalha}
 
       <img class="artilheiro-flag" src="${item.flag}" alt="flag">
       <div class="artilheiro-nome">${item.jogador}</div>
