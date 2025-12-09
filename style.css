@@ -481,3 +481,39 @@ body {
     color: white;
     font-size: 14px;
 }
+
+.menu-pane {
+    display: none;
+    padding: 20px;
+}
+
+.menu-pane.active {
+    display: block;
+}
+
+.top-menu {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    justify-content: center;
+}
+
+.top-menu-btn {
+    background: #ff8800;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 22px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.top-menu-btn.active {
+    background: #ff3300;
+}
+
+.top-menu-btn:hover {
+    background: #ff5500;
+}
+

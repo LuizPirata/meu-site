@@ -9,14 +9,39 @@
 <body>
 
   <!-- MENU SUPERIOR PRINCIPAL -->
-  <nav class="menu">
-    <a href="perfil.html" class="menu-btn">Palpites</a>
-    <a href="simulacao.html" class="menu-btn">Resultados</a>
-    <a href="classificacao.html" class="menu-btn">Classificação</a>
-    <a href="artilharia.html" class="menu-btn">Artilharia</a>
-    <a href="regras.html" class="menu-btn">Regras</a>
-    <button id="logoutBtn" class="menu-btn logout-btn">Logout</button>
-  </nav>
+  <nav class="top-menu">
+    <button class="top-menu-btn active" data-pane="palpites">Palpites</button>
+    <button class="top-menu-btn" data-pane="resultados">Resultados</button>
+    <button class="top-menu-btn" data-pane="classificacao">Classificação</button>
+    <button class="top-menu-btn" data-pane="artilharia">Artilharia</button>
+    <button class="top-menu-btn" data-pane="regras">Regras</button>
+    <button onclick="logout()">Logout</button>
+</nav>
+
+<div id="pane-palpites" class="menu-pane active">
+    <!-- TODO: aqui fica todo o código atual de palpites -->
+</div>
+
+<div id="pane-resultados" class="menu-pane">
+    <h2>Resultados Oficiais</h2>
+    <div id="conteudo-resultados"></div>
+</div>
+
+<div id="pane-classificacao" class="menu-pane">
+    <h2>Classificação Geral</h2>
+    <div id="conteudo-classificacao"></div>
+</div>
+
+<div id="pane-artilharia" class="menu-pane">
+    <h2>Artilharia</h2>
+    <div id="conteudo-artilharia"></div>
+</div>
+
+<div id="pane-regras" class="menu-pane">
+    <h2>Regras do Bolão</h2>
+    <div id="conteudo-regras"></div>
+</div>
+
 
   <!-- SUB-MENU DE GRUPOS -->
   <div class="grupo-tabs">
@@ -2176,3 +2201,25 @@
 
 </body>
 </html>
+
+<script>
+document.querySelectorAll(".top-menu-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+
+        // Remove "active" de todos os botões do menu
+        document.querySelectorAll(".top-menu-btn")
+            .forEach(b => b.classList.remove("active"));
+
+        // Adiciona ativo ao clicado
+        btn.classList.add("active");
+
+        // Esconde todas as abas
+        document.querySelectorAll(".menu-pane")
+            .forEach(p => p.classList.remove("active"));
+
+        // Mostra a aba clicada
+        const alvo = "pane-" + btn.dataset.pane;
+        document.getElementById(alvo).classList.add("active");
+    });
+});
+</script>
