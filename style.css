@@ -500,7 +500,7 @@ body {
     justify-content: center;
     align-items: center;   /* centraliza verticalmente */
     gap: 22px;             /* mais espaço entre botões */
-    padding: 25px 0;       /* aumenta espaço vertical total */
+    padding: 15px 0;       /* aumenta espaço vertical total */
     margin-top: 5px;      /* distância do topo */
     margin-bottom: 1px;   /* distância até as abas de grupos */
 }
