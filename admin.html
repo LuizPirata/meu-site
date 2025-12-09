@@ -31,16 +31,12 @@
     <label>Escolha um jogo:</label>
     <select id="select-jogo"></select>
 
-    <div class="grid-2">
-      <div>
-        <label>Gols do Mandante:</label>
-        <input type="number" id="gols-casa">
-      </div>
-      <div>
-        <label>Gols do Visitante:</label>
-        <input type="number" id="gols-fora">
-      </div>
-    </div>
+    <div style="display:flex; align-items:center; gap:20px; margin-top:15px;">
+    <input type="number" id="gols-casa" class="input-gol">
+    <span style="font-size:26px; color:#ff7b00; font-weight:bold;">X</span>
+    <input type="number" id="gols-fora" class="input-gol">
+</div>
+
 
     <button id="btn-salvar-grupo" class="btn-save">Salvar Resultado</button>
   </section>
