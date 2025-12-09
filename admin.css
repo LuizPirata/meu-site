@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+  background: #0e0e0f;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+.admin-header {
+  background: #111;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 3px solid #ff7b00;
+}
+
+.admin-menu {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background: #181818;
+  border-bottom: 2px solid #333;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.admin-menu button {
+  background: #333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.admin-menu button:hover {
+  background: #ff7b00;
+}
+
+main {
+  padding: 20px;
+}
+
+.admin-section {
+  display: none;
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  border: 1px solid #333;
+}
+
+.admin-section.visible {
+  display: block;
+}
+
+h2 {
+  color: #ff7b00;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #202020;
+  color: white;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.btn-save {
+  margin-top: 20px;
+  background: #ff7b00;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: black;
+  font-weight: bold;
+}
