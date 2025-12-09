@@ -139,31 +139,31 @@ input[type=number] {
 }
 
 .artilheiro-nome {
-  .artilheiro-nome {
   flex: 1;
   font-size: 18px;
   color: white;
 }
 
 .input-gol-peq {
-  width: 50px;
-  height: 35px;
-  font-size: 18px;
+  width: 60px; 
+  height: 45px;
+  font-size: 22px;
   text-align: center;
-  border-radius: 8px;
-  background: #242424;
-  color: #fff;
-  border: 1px solid #444;
+  border-radius: 10px;
+  background: #2a2a2a;
+  color: #ffffff;
+  border: 2px solid #444;
+  outline: none;
 }
 
 .btn-save-gol {
   background: #ff7b00;
-  color: black;
-  font-weight: bold;
+  padding: 12px 25px;
   border: none;
-  padding: 10px 18px;
   border-radius: 6px;
   cursor: pointer;
+  color: black;
+  font-weight: bold;
   transition: .2s;
 }
 
