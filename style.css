@@ -401,3 +401,46 @@ body {
     }
 }
 
+/* ========================= */
+/*   INPUTS SÓ NO MATA-MATA  */
+/* ========================= */
+
+/* Linha com nome + input */
+#grupo-MATA .team-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 6px;
+    position: relative;
+    width: 140px;
+}
+
+/* Traço só embaixo do nome */
+#grupo-MATA .team-line::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60%; /* somente sob o nome */
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+/* Nome do time */
+#grupo-MATA .team-name {
+    flex: 1;
+    text-align: left;
+    white-space: nowrap;
+}
+
+/* Input de placar — exclusivo do mata-mata */
+#grupo-MATA .placar-input {
+    width: 36px;
+    height: 20px;
+    text-align: center;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.10);
+    color: white;
+    font-size: 14px;
+}
