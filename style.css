@@ -417,47 +417,43 @@ body {
     margin: 12px 0;
 }
 
-/* CENTRALIZAÇÃO EXATA DO BLOCO FINAL */
+/* ================================
+   CENTRALIZAÇÃO DA FINAL E 3º LUGAR
+   ================================ */
+
+/* A coluna central agora NÃO cria blocos separados */
 .round-center {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza tudo horizontalmente */
-    justify-content: center; /* Centraliza verticalmente entre semifinais */
+    justify-content: center;   /* alinha verticalmente */
+    align-items: center;       /* centraliza horizontalmente */
 }
 
-/* Bloco central completo */
-.final-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px; /* espaço entre FINAL e 3º lugar */
+/* Correção: remover fundo da final e 3º */
+.match-final,
+.match-terceiro {
+    background: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
 }
 
-/* Títulos centrais */
+/* Ajuste visual para manter proporção */
+.match-final .team-line,
+.match-terceiro .team-line {
+    font-size: 18px;
+}
+
+/* Título FINAL e 3º Lugar centralizados */
 .round-title-final,
 .round-title-terceiro {
     text-align: center;
     font-size: 26px;
-    color: #ffcf87;
     margin-bottom: 10px;
+    color: #ffcf87;
 }
 
-/* Estilo da final */
-.match-final {
-    background: rgba(255,255,255,0.15);
-    padding: 20px 35px;
-    border-radius: 14px;
-}
-
-/* Jogo do 3º Lugar */
-.match-terceiro {
-    background: rgba(255,255,255,0.10);
-    padding: 16px 30px;
-    border-radius: 12px;
-}
-
+/* 3º lugar – ajuste do tamanho do título */
 .round-title-terceiro {
-    margin-top: 10px;
-    font-size: 22px;
-    color: #f7d39c;
+    font-size: 23px;
+    margin-top: 40px;
 }
