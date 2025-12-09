@@ -517,3 +517,11 @@ body {
     background: #ff5500;
 }
 
+
+/* Padroniza o espaçamento entre o menu superior e o conteúdo das abas */
+.menu-pane {
+    margin-top: 40px !important;
+}
+
+
+
