@@ -501,8 +501,8 @@ body {
     align-items: center;   /* centraliza verticalmente */
     gap: 22px;             /* mais espaço entre botões */
     padding: 25px 0;       /* aumenta espaço vertical total */
-    margin-top: 10px;      /* distância do topo */
-    margin-bottom: 10px;   /* distância até as abas de grupos */
+    margin-top: 5px;      /* distância do topo */
+    margin-bottom: 1px;   /* distância até as abas de grupos */
 }
 
 .top-menu-btn {
@@ -511,7 +511,7 @@ body {
     font-weight: bold;
     font-size: 19px;       /* texto maior */
     padding: 16px 30px;    /* botões maiores */
-    height: 60px;          /* fixa altura */
+    height: 50px;          /* fixa altura */
     display: flex;
     align-items: center;   /* texto centralizado verticalmente */
     border-radius: 12px;
