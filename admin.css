@@ -262,3 +262,16 @@ input[type=number] {
   font-size: 18px;
 }
 
+.nome-container {
+  width: 180px;       /* ajuste fino aqui */
+  min-width: 180px;
+  max-width: 180px;
+  font-size: 18px;
+  font-weight: 500;
+  color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 15px;
+  display: inline-block;
+}

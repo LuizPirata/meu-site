@@ -329,7 +329,7 @@ else medalha = `<span class="pos-badge pos-num">${index + 1}º</span>`;
       ${medalha}
 
       <img class="artilheiro-flag" src="${item.flag}" alt="flag">
-      <div class="artilheiro-nome">${item.jogador}</div>
+      <div class="nome-container">${item.jogador}</div>
 
       <div class="artilheiro-gols">${item.gols} gols</div>
 
