@@ -847,6 +847,10 @@ async function initPalpitesExtras() {
     fillFlagDropdown("extra-mais-sofridos", teams);
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    initPalpitesExtras();
+});
+
 
 
 
