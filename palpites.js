@@ -780,4 +780,74 @@ function initGrupo(groupKey) {
 // Inicializar todos os grupos registrados
 Object.keys(grupos).forEach(initGrupo);
 
+// ==============================
+//  CARREGA TODAS AS SELEÇÕES
+// ==============================
+async function loadAllTeams() {
+    const { data, error } = await supabase
+        .from("times")
+        .select("*")
+        .order("nome", { ascending: true });
+
+    if (error) {
+        console.error("Erro ao carregar seleções:", error);
+        return [];
+    }
+
+    return data;
+}
+
+function fillFlagDropdown(selectId, teams) {
+    const select = document.getElementById(selectId);
+    if (!select) return;
+
+    select.innerHTML = `<option value="">Selecione...</option>`;
+
+    teams.forEach(t => {
+        select.innerHTML += `
+            <option value="${t.id}" data-flag="${t.flag}">
+                ${t.nome}
+            </option>
+        `;
+    });
+}
+
+function fillGroupDropdowns(teams) {
+    const grupos = "ABCDEFGHIJKL".split("");
+
+    grupos.forEach(g => {
+        const timesGrupo = teams.filter(t => t.grupo_id === g);
+
+        const s1 = document.getElementById(`extra-grupo-${g}-1`);
+        const s2 = document.getElementById(`extra-grupo-${g}-2`);
+
+        if (s1) fillFlagDropdown(`extra-grupo-${g}-1`, timesGrupo);
+        if (s2) fillFlagDropdown(`extra-grupo-${g}-2`, timesGrupo);
+    });
+}
+
+async function initPalpitesExtras() {
+    const teams = await loadAllTeams();
+
+    // Preenche os grupos
+    fillGroupDropdowns(teams);
+
+    // Artilheiros
+    fillFlagDropdown("extra-art1-time", teams);
+    fillFlagDropdown("extra-art2-time", teams);
+
+    // Top 4
+    fillFlagDropdown("extra-top-campeao", teams);
+    fillFlagDropdown("extra-top-vice", teams);
+    fillFlagDropdown("extra-top-terceiro", teams);
+    fillFlagDropdown("extra-top-quarto", teams);
+
+    // Mais gols / Mais sofridos
+    fillFlagDropdown("extra-mais-gols", teams);
+    fillFlagDropdown("extra-mais-sofridos", teams);
+}
+
+
+
+
 
