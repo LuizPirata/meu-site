@@ -2548,66 +2548,61 @@
 
 
 
-<!-- MOTOR DE PALPITES (A, B, C...) — DEVE VIR ANTES DOS SCRIPTS QUE USAM SUAS FUNÇÕES -->
-<script src="palpites.js"></script>
-
-<script>
     // ==========================
     //  TABS DE GRUPOS (A, B, C...)
     // ==========================
-
+    
     const tabs  = document.querySelectorAll(".grupo-tab");
     const panes = document.querySelectorAll(".grupo-pane");
 
     tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
+      tab.addEventListener("click", () => {
+        const group = tab.dataset.group;
 
-            const group = tab.dataset.group;
+        // Ativa destaque no botão
+        tabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
 
-            // Ativa destaque no botão
-            tabs.forEach(t => t.classList.remove("active"));
-            tab.classList.add("active");
-
-            // Mostra painel correspondente
-            panes.forEach(p => {
-                p.classList.toggle("active", p.id === "grupo-" + group);
-            });
-
-            // Se usuário clicou na aba PALPITES EXTRAS → carrega dropdowns
-            if (group === "EXTRA") {
-                console.log("Carregando Palpites Extras...");
-                initPalpitesExtras(); // AGORA A FUNÇÃO EXISTE
-            }
+        // Mostra painel correspondente
+        panes.forEach(p => {
+          p.classList.toggle("active", p.id === "grupo-" + group);
         });
+
+        // 👉 CHAMADA NECESSÁRIA PARA CARREGAR OS DROPDOWNS
+        if (group === "EXTRA") {
+            console.log("Carregando Palpites Extras...");
+            initPalpitesExtras();
+        }
+      });
     });
 </script>
 
-<script>
-    // ==============================
-    //  MENU SUPERIOR DE NAVEGAÇÃO
-    // ==============================
 
-    document.querySelectorAll(".top-menu-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
 
-            // Remove "active" de todos
-            document.querySelectorAll(".top-menu-btn")
-                .forEach(b => b.classList.remove("active"));
-
-            // Marca o clicado
-            btn.classList.add("active");
-
-            // Esconde todas as abas principais
-            document.querySelectorAll(".menu-pane")
-                .forEach(p => p.classList.remove("active"));
-
-            // Exibe a aba correspondente
-            const alvo = "pane-" + btn.dataset.pane;
-            document.getElementById(alvo).classList.add("active");
-        });
-    });
-</script>
+  <!-- MOTOR DE PALPITES (A, B, C, D...) -->
+  <script src="palpites.js"></script>
 
 </body>
 </html>
 
+<script>
+document.querySelectorAll(".top-menu-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+
+        // Remove "active" de todos os botões do menu
+        document.querySelectorAll(".top-menu-btn")
+            .forEach(b => b.classList.remove("active"));
+
+        // Adiciona ativo ao clicado
+        btn.classList.add("active");
+
+        // Esconde todas as abas
+        document.querySelectorAll(".menu-pane")
+            .forEach(p => p.classList.remove("active"));
+
+        // Mostra a aba clicada
+        const alvo = "pane-" + btn.dataset.pane;
+        document.getElementById(alvo).classList.add("active");
+    });
+});
+</script>
