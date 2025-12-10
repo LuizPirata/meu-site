@@ -672,4 +672,43 @@ body {
   margin-top: 6px;
 }
 
+/* ========================= */
+/*   ARtilheiros – nova linha */
+/* ========================= */
+
+.extras-art-linha {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 12px 0;
+}
+
+.extras-input-text-inline {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: white;
+}
+
+.extras-select-inline {
+    width: 260px;
+    padding: 10px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: white;
+}
+
+/* ========================= */
+/*  TOP 4 — vertical simples */
+/* ========================= */
+
+.extras-top4-coluna {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
 
