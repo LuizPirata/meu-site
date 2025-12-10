@@ -779,5 +779,78 @@ body {
     color: #fff;
 }
 
+#simulacao-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.sim-titulo-central {
+  text-align: center;
+  background: linear-gradient(to right, #ff9900, #ff0000);
+  padding: 14px;
+  margin: 15px auto;
+  font-size: 28px;
+  border-radius: 12px;
+}
+
+.sim-fase-titulo {
+  color: #ffcf87;
+  margin: 25px 0 10px;
+  font-size: 22px;
+  text-align: left;
+}
+
+.sim-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.sim-jogo {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.sim-time-linha {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sim-flag {
+  width: 28px;
+  height: 20px;
+  border-radius: 3px;
+  object-fit: cover;
+}
+
+.sim-time {
+  flex: 1;
+  font-size: 15px;
+}
+
+.sim-placar {
+  width: 46px;
+  height: 26px;
+  text-align: center;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.20);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+.sim-x {
+  text-align: center;
+  font-weight: bold;
+  margin: 8px 0;
+}
+
+.sim-vencedor {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #ccc;
+}
 
 

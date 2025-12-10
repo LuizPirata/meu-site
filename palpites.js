@@ -750,11 +750,191 @@ function recalcularGrupo(groupKey) {
   const group = grupos[groupKey];
   if (!group) return;
 
-  const stats = createEmptyStats(group.teams);
+    const stats = createEmptyStats(group.teams);
   processMatchesGroup(group, stats);
   let order = ordenarGeral(group.teams, stats);
   order = aplicarConfrontoDireto(order, stats);
+
+  // 🔹 salva para uso pela Simulação
+  classificacoes[groupKey] = { stats, order };
+
   renderTabelaGroup(group, stats, order);
+}
+
+function getColocado(groupKey, posicao) {
+  const info = classificacoes[groupKey];
+  if (!info) return null;
+
+  const { stats, order } = info;
+  if (order.length < posicao) return null;
+
+  const teamId = order[posicao - 1];
+  const st = stats[teamId];
+
+  return {
+    id: teamId,
+    name: st.name,
+    flag: st.flag,
+    pts: st.pts,
+    sg: st.sg,
+    gf: st.gf,
+    group: groupKey
+  };
+}
+
+function getMelhoresTerceiros() {
+  const terceiros = [];
+
+  "ABCDEFGHIJKL".split("").forEach(g => {
+    const t3 = getColocado(g, 3);
+    if (!t3) return;
+    terceiros.push(t3);
+  });
+
+  // ordena: Pts > SG > GF > Nome (A-Z)
+  terceiros.sort((a, b) => {
+    if (b.pts !== a.pts) return b.pts - a.pts;
+    if (b.sg  !== a.sg)  return b.sg  - a.sg;
+    if (b.gf  !== a.gf)  return b.gf  - a.gf;
+    return a.name.localeCompare(b.name, "pt-BR");
+  });
+
+  return terceiros.slice(0, 8);
+}
+
+function pickThirdFromPools(listaGrupos, melhoresTerceiros, usadosGrupos) {
+  for (const g of listaGrupos) {
+    const t = melhoresTerceiros.find(t => t.group === g);
+    if (t && !usadosGrupos.has(g)) {
+      usadosGrupos.add(g);
+      return t;
+    }
+  }
+  return null; // em teoria não devia acontecer
+}
+
+function montarSegundaFase() {
+  const melhores3 = getMelhoresTerceiros();
+  const usados3 = new Set();
+
+  const jogo = [];
+
+  // Jogo 1 - 1º E x 3º ABCDF
+  jogo[1] = {
+    id: 1,
+    home: getColocado("E", 1),
+    away: pickThirdFromPools(["A","B","C","D","F"], melhores3, usados3)
+  };
+
+  // Jogo 2 - 1º I x 3° CDFGH
+  jogo[2] = {
+    id: 2,
+    home: getColocado("I", 1),
+    away: pickThirdFromPools(["C","D","F","G","H"], melhores3, usados3)
+  };
+
+  // Jogo 3 - 2º A x 2º B
+  jogo[3] = {
+    id: 3,
+    home: getColocado("A", 2),
+    away: getColocado("B", 2)
+  };
+
+  // Jogo 4 - 1° F x 2° C
+  jogo[4] = {
+    id: 4,
+    home: getColocado("F", 1),
+    away: getColocado("C", 2)
+  };
+
+  // Jogo 5 - 2° K x 2° L
+  jogo[5] = {
+    id: 5,
+    home: getColocado("K", 2),
+    away: getColocado("L", 2)
+  };
+
+  // Jogo 6 - 1º H x 2° J
+  jogo[6] = {
+    id: 6,
+    home: getColocado("H", 1),
+    away: getColocado("J", 2)
+  };
+
+  // Jogo 7 - 1° D x 3° BEFIJ
+  jogo[7] = {
+    id: 7,
+    home: getColocado("D", 1),
+    away: pickThirdFromPools(["B","E","F","I","J"], melhores3, usados3)
+  };
+
+  // Jogo 8 - 1° G x 3° AEHIJ
+  jogo[8] = {
+    id: 8,
+    home: getColocado("G", 1),
+    away: pickThirdFromPools(["A","E","H","I","J"], melhores3, usados3)
+  };
+
+  // Jogo 9 - 1º C x 2° F
+  jogo[9] = {
+    id: 9,
+    home: getColocado("C", 1),
+    away: getColocado("F", 2)
+  };
+
+  // Jogo 10 -  2º E x 2º I
+  jogo[10] = {
+    id: 10,
+    home: getColocado("E", 2),
+    away: getColocado("I", 2)
+  };
+
+  // Jogo 11 - 1º A x 3º CEFHI
+  jogo[11] = {
+    id: 11,
+    home: getColocado("A", 1),
+    away: pickThirdFromPools(["C","E","F","H","I"], melhores3, usados3)
+  };
+
+  // Jogo 12 - 1º L x 3° EHIJK
+  jogo[12] = {
+    id: 12,
+    home: getColocado("L", 1),
+    away: pickThirdFromPools(["E","H","I","J","K"], melhores3, usados3)
+  };
+
+  // Jogo 13 - 1º J x 2º H
+  jogo[13] = {
+    id: 13,
+    home: getColocado("J", 1),
+    away: getColocado("H", 2)
+  };
+
+  // Jogo 14 - 2° D x 2° G
+  jogo[14] = {
+    id: 14,
+    home: getColocado("D", 2),
+    away: getColocado("G", 2)
+  };
+
+  // Jogo 15 - 1° B x 3° EFGIJ
+  jogo[15] = {
+    id: 15,
+    home: getColocado("B", 1),
+    away: pickThirdFromPools(["E","F","G","I","J"], melhores3, usados3)
+  };
+
+  // Jogo 16 - 1º K x 3° DEIJL
+  jogo[16] = {
+    id: 16,
+    home: getColocado("K", 1),
+    away: pickThirdFromPools(["D","E","I","J","L"], melhores3, usados3)
+  };
+
+  return jogo;
+}
+
+
 }
 
 // Inicializar listeners de todos os inputs do grupo
