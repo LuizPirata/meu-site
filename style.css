@@ -535,5 +535,141 @@ body {
     margin-top: 0px !important;
 }
 
+/* ===================================== */
+/*          PALPITES EXTRAS             */
+/* ===================================== */
+
+#grupo-EXTRA {
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+}
+
+.extras-wrapper {
+  margin-top: 5px;
+}
+
+.extras-title {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.extras-bloco {
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.extras-subtitle {
+  font-size: 19px;
+  margin: 0 0 6px 0;
+  color: #ffcf87;
+}
+
+.extras-desc {
+  font-size: 13px;
+  color: #ccc;
+  margin: 0 0 12px 0;
+}
+
+/* GRID DOS 12 GRUPOS (A–L) */
+.extras-grupos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+/* Em telas largas, força 6 por linha (A–F / G–L) */
+@media (min-width: 1100px) {
+  .extras-grupos-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+.extras-grupo-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  padding: 10px 10px 12px 10px;
+  font-size: 13px;
+}
+
+.extras-grupo-header {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.extras-select-grupo {
+  width: 100%;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #202020;
+  color: #fff;
+  margin-top: 3px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.extras-m3-label {
+  display: block;
+  margin-top: 3px;
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+
+.extras-m3-opcoes {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+}
+
+/* Campos de texto / selects gerais */
+.extras-input-text,
+.extras-input-number,
+.extras-select-full {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #555;
+  background: #202020;
+  color: #fff;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Linha dos artilheiros (lado a lado) */
+.extras-art-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.extras-art-card {
+  flex: 1 1 260px;
+}
+
+/* TOP 4 + seleções de mais/menos gols */
+.extras-top4-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.extras-total-gols {
+  margin-top: 15px;
+}
+
+.extras-tip {
+  font-size: 12px;
+  color: #bbb;
+  margin-top: 6px;
+}
 
 
