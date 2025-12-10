@@ -711,4 +711,39 @@ body {
     gap: 14px;
 }
 
+/* =============================== */
+/* Largura padrão para inputs e selects */
+/* =============================== */
+
+.extras-input-text-inline,
+.extras-select-inline,
+.extras-select-full,
+.extras-select-gols {
+    width: 350px !important;
+    max-width: 350px !important;
+}
+
+/* Deixa inputs e dropdowns alinhados */
+.extras-art-linha {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.extras-art-linha label {
+    width: 160px; /* alinha os textos */
+    text-align: right;
+}
+
+/* Layout vertical para Top 4 e Gols */
+.extras-top4-coluna,
+.extras-gols-coluna {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
+}
+
 
