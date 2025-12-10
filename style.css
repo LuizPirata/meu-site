@@ -755,4 +755,29 @@ body {
     font-size: 15px;
 }
 
+/* =============================== */
+/*   Palpites de Gols - dropdowns  */
+/* =============================== */
+
+#extra-mais-gols,
+#extra-mais-sofridos {
+    width: 350px;
+    max-width: 350px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background: #202020;
+    color: #fff;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+/* Deixa a lista interna escura também */
+#extra-mais-gols option,
+#extra-mais-sofridos option {
+    background: #202020;
+    color: #fff;
+}
+
+
 
