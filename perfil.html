@@ -11,8 +11,10 @@
   <!-- MENU SUPERIOR PRINCIPAL (agora dinâmico) -->
   <nav class="top-menu">
     <button class="top-menu-btn active" data-pane="pane-palpites">Palpites</button>
-    <button class="top-menu-btn" data-pane="pane-resultados">Resultados</button>
+    <button class="top-menu-btn" data-target="pane-simulacao">Simulação</button>
+    <button class="top-menu-btn" data-pane="pane-resultados">Resultados Oficiais</button>
     <button class="top-menu-btn" data-pane="pane-classificacao">Classificação</button>
+    <button class="top-menu-btn" data-target="pane-pontuacao">Pontuação Geral</button>
     <button class="top-menu-btn" data-pane="pane-artilharia">Artilharia</button>
     <button class="top-menu-btn" data-pane="pane-regras">Regras</button>
     <button id="logoutBtn" class="top-menu-btn logout-btn">Logout</button>
@@ -2155,6 +2157,16 @@
   <div id="pane-regras" class="menu-pane">
     <div id="conteudo-regras"></div>
   </div>
+
+  <div id="pane-simulacao" class="menu-pane">
+    <h2 style="text-align:center; margin-top:20px;">Simulação de Resultados</h2>
+    <p style="text-align:center; color:#ccc;">(Conteúdo será implementado depois)</p>
+</div>
+
+   <div id="pane-pontuacao" class="menu-pane">
+    <h2 style="text-align:center; margin-top:20px;">Pontuação Geral dos Usuários</h2>
+    <p style="text-align:center; color:#ccc;">(Ranking será implementado depois)</p>
+</div>
 
   <!-- ========== SCRIPT: LOGIN + TABS ========== -->
     <script type="module">
