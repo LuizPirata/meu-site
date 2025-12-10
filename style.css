@@ -633,7 +633,9 @@ body {
 /* Campos de texto / selects gerais */
 .extras-input-text,
 .extras-input-number,
-.extras-select-full {
+.extras-select-full,
+.extras-select-inline,
+.extras-select-gols {
   width: 100%;
   padding: 8px;
   border-radius: 8px;
