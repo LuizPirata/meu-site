@@ -8,39 +8,22 @@
 </head>
 <body>
 
-  <!-- MENU SUPERIOR PRINCIPAL -->
+  <!-- MENU SUPERIOR PRINCIPAL (agora dinâmico) -->
   <nav class="top-menu">
-    <button class="top-menu-btn active" data-pane="palpites">Palpites</button>
-    <button class="top-menu-btn" data-pane="resultados">Resultados</button>
-    <button class="top-menu-btn" data-pane="classificacao">Classificação</button>
-    <button class="top-menu-btn" data-pane="artilharia">Artilharia</button>
-    <button class="top-menu-btn" data-pane="regras">Regras</button>
-    <button onclick="logout()">Logout</button>
-</nav>
+    <button class="top-menu-btn active" data-pane="pane-palpites">Palpites</button>
+    <button class="top-menu-btn" data-pane="pane-resultados">Resultados</button>
+    <button class="top-menu-btn" data-pane="pane-classificacao">Classificação</button>
+    <button class="top-menu-btn" data-pane="pane-artilharia">Artilharia</button>
+    <button class="top-menu-btn" data-pane="pane-regras">Regras</button>
+    <button id="logoutBtn" class="top-menu-btn logout-btn">Logout</button>
+  </nav>
 
-<div id="pane-palpites" class="menu-pane active">
-    <!-- TODO: aqui fica todo o código atual de palpites -->
-</div>
-
-<div id="pane-resultados" class="menu-pane">
-    <div id="conteudo-resultados"></div>
-</div>
-
-<div id="pane-classificacao" class="menu-pane">
-    <div id="conteudo-classificacao"></div>
-</div>
-
-<div id="pane-artilharia" class="menu-pane">
-    <div id="conteudo-artilharia"></div>
-</div>
-
-<div id="pane-regras" class="menu-pane">
-    <div id="conteudo-regras"></div>
-</div>
-
+  <!-- PANE PRINCIPAL: TUDO QUE JÁ EXISTE (GRUPOS, MATA, EXTRAS) -->
+  <div id="pane-palpites" class="menu-pane active">
 
   <!-- SUB-MENU DE GRUPOS -->
   <div class="grupo-tabs">
+
     <button class="grupo-tab active" data-group="A">Grupo A</button>
     <button class="grupo-tab" data-group="B">Grupo B</button>
     <button class="grupo-tab" data-group="C">Grupo C</button>
@@ -2153,12 +2136,28 @@
     <h2 class="grupo-placeholder">Palpites Extras – Em construção</h2>
 </div>
 
-  <!-- ===== PLACEHOLDERS GRUPOS K–L (Apenas estes!) ========= -->
-  <!-- 
+  <!-- FIM DO PANE DE PALPITES (tudo que já existia) -->
+  </div> <!-- fecha div id="pane-palpites" -->
 
+  <!-- =============== OUTROS PANES (por enquanto vazios) =============== -->
+  <div id="pane-resultados" class="menu-pane">
+    <div id="conteudo-resultados"></div>
+  </div>
+
+  <div id="pane-classificacao" class="menu-pane">
+    <div id="conteudo-classificacao"></div>
+  </div>
+
+  <div id="pane-artilharia" class="menu-pane">
+    <div id="conteudo-artilharia"></div>
+  </div>
+
+  <div id="pane-regras" class="menu-pane">
+    <div id="conteudo-regras"></div>
+  </div>
 
   <!-- ========== SCRIPT: LOGIN + TABS ========== -->
-  <script type="module">
+    <script type="module">
     import { createClient } from "https://esm.sh/@supabase/supabase-js";
 
     const supabase = createClient(
@@ -2174,8 +2173,31 @@
       window.location.href = "index.html";
     });
 
-    // Tabs
-    const tabs = document.querySelectorAll(".grupo-tab");
+    // ==========================
+    //  MENU SUPERIOR (Palpites / Resultados / ...)
+    // ==========================
+    const topButtons = document.querySelectorAll(".top-menu-btn");
+    const menuPanes  = document.querySelectorAll(".menu-pane");
+
+    topButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const targetId = btn.dataset.pane;   // ex: "pane-palpites"
+
+        // ativa visual do botão
+        topButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        // mostra só o pane correspondente
+        menuPanes.forEach(p => {
+          p.classList.toggle("active", p.id === targetId);
+        });
+      });
+    });
+
+    // ==========================
+    //  TABS DE GRUPOS (A, B, C...)
+    // ==========================
+    const tabs  = document.querySelectorAll(".grupo-tab");
     const panes = document.querySelectorAll(".grupo-pane");
 
     tabs.forEach(tab => {
@@ -2191,6 +2213,7 @@
       });
     });
   </script>
+
 
   <!-- MOTOR DE PALPITES (A, B, C, D...) -->
   <script src="palpites.js"></script>
