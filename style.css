@@ -535,48 +535,5 @@ body {
     margin-top: 0px !important;
 }
 
-/* ===== NOVO LAYOUT PARA CLASSIFICAÇÃO + LADO DIREITO ===== */
-
-.grupo-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 20px;
-}
-
-/* Coluna esquerda (tabela) puxada para a esquerda */
-.grupo-left {
-    flex: 0 0 60%;   /* 60% da largura total */
-}
-
-/* Coluna direita (novo bloco) */
-.grupo-right {
-    flex: 0 0 35%;  /* 35% da largura total */
-}
-
-/* Bloco dos dropdowns */
-.classificados-box {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 20px;
-    border-radius: 12px;
-}
-
-.classificados-box h3 {
-    margin-top: 0;
-    color: #ff9900;
-    text-align: center;
-}
-
-.class-select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-    margin-bottom: 14px;
-    background: #222;
-    color: white;
-    border: 1px solid #555;
-    border-radius: 8px;
-}
 
 
