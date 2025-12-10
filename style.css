@@ -693,15 +693,6 @@ body {
     color: white;
 }
 
-.extras-select-inline {
-    width: 260px;
-    padding: 10px;
-    border-radius: 6px;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.25);
-    color: white;
-}
-
 /* ========================= */
 /*  TOP 4 — vertical simples */
 /* ========================= */
@@ -720,9 +711,15 @@ body {
 .extras-select-inline,
 .extras-select-full,
 .extras-select-gols {
-    width: 350px !important;
-    max-width: 350px !important;
-}
+    width: 350px;
+    max-width: 350px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background: #202020;
+    color: #fff;
+    font-size: 14px;
+    margin-top: 4px;}
 
 /* Deixa inputs e dropdowns alinhados */
 .extras-art-linha {
