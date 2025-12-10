@@ -2744,25 +2744,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<!-- SCRIPT DO MENU SUPERIOR -->
-<script>
-document.querySelectorAll(".top-menu-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-
-        document.querySelectorAll(".top-menu-btn")
-            .forEach(b => b.classList.remove("active"));
-
-        btn.classList.add("active");
-
-        document.querySelectorAll(".menu-pane")
-            .forEach(p => p.classList.remove("active"));
-
-        const alvo = "pane-" + btn.dataset.pane;
-        document.getElementById(alvo).classList.add("active");
-    });
-});
-</script>
-
 </body>
 </html>
 
