@@ -2704,59 +2704,24 @@
 
 
 
-<!-- MOTOR DE PALPITES -->
-<script src="palpites.js"></script>
+  <!-- MOTOR DE PALPITES (A, B, C, D...) -->
+  <script src="palpites.js"></script>
 
-<!-- SCRIPT QUE PREENCHE A SIMULAÇÃO -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-
-    const btnSim = document.querySelector('[data-pane="simulacao"]');
-
-    if (btnSim) {
-        btnSim.addEventListener("click", async () => {
-            console.log("Abrindo Simulação…");
-
-            if (typeof montarSegundaFase !== "function") {
-                console.error("ERRO: montarSegundaFase() não existe ainda!");
-                return;
-            }
-
-            const jogos32 = montarSegundaFase();
-
-            for (let i = 1; i <= 16; i++) {
-                const jogo = jogos32[i];
-                const bloco = document.getElementById(`jogo-32-${i}`);
-                if (!bloco || !jogo) continue;
-
-                bloco.querySelector(".home-name").textContent = jogo.home.name;
-                bloco.querySelector(".home-flag").src = jogo.home.flag;
-                bloco.querySelector(".away-name").textContent = jogo.away.name;
-                bloco.querySelector(".away-flag").src = jogo.away.flag;
-
-                bloco.querySelector(".home-gols").value = "";
-                bloco.querySelector(".away-gols").value = "";
-                bloco.querySelector(".winner-name").textContent = "";
-            }
-        });
-    }
-
-});
-</script>
-
-<!-- SCRIPT DO MENU SUPERIOR -->
-<script>
 document.querySelectorAll(".top-menu-btn").forEach(btn => {
     btn.addEventListener("click", () => {
 
+        // Remove "active" de todos os botões do menu
         document.querySelectorAll(".top-menu-btn")
             .forEach(b => b.classList.remove("active"));
 
+        // Adiciona ativo ao clicado
         btn.classList.add("active");
 
+        // Esconde todas as abas
         document.querySelectorAll(".menu-pane")
             .forEach(p => p.classList.remove("active"));
 
+        // Mostra a aba clicada
         const alvo = "pane-" + btn.dataset.pane;
         document.getElementById(alvo).classList.add("active");
     });
