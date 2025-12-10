@@ -2512,18 +2512,22 @@
     <script type="module">
     import { createClient } from "https://esm.sh/@supabase/supabase-js";
 
-    const supabase = createClient(
-      "https://mdaqzciffsgupzbfxzgf.supabase.co",
-      "sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY"
-    );
+    // cria o client normalmente
+  const supabaseClient = createClient(
+    "https://mdaqzciffsgupzbfxzgf.supabase.co",
+    "sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY"
+  );
 
-    const { data: { session }} = await supabase.auth.getSession();
-    if (!session) window.location.href = "index.html";
+  // 👇 expõe o client como global para os outros scripts
+  window.supabase = supabaseClient;
 
-    document.getElementById("logoutBtn").addEventListener("click", async () => {
-      await supabase.auth.signOut();
-      window.location.href = "index.html";
-    });
+  const { data: { session }} = await supabaseClient.auth.getSession();
+  if (!session) window.location.href = "index.html";
+
+  document.getElementById("logoutBtn").addEventListener("click", async () => {
+    await supabaseClient.auth.signOut();
+    window.location.href = "index.html";
+  });
 
     // ==========================
     //  MENU SUPERIOR (Palpites / Resultados / ...)
