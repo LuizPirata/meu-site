@@ -1,8 +1,7 @@
 // ==========================================================
 //  PALPITES.JS
 //  Motor genérico de classificação para os GRUPOS (A, B, C...)
-//  - Atualiza P, J, V, E, D, GF, GC, SG
-//  - Aplica confronto direto completo (head-to-head) por grupo
+//  + integração com Supabase para a SIMULAÇÃO
 // ==========================================================
 
 // ---------- CONFIGURAÇÃO DOS GRUPOS ----------
@@ -150,384 +149,388 @@ const grupoC = {
 // GRUPO D
 // ===============================
 const grupoD = {
-    tableBodyId: "grupoD-body",
-    teams: [
-        { id: "eua", name: "Estados Unidos", flag: "eua.png" },
-        { id: "australia",       name: "Austrália", flag: "australia.png" },
-        { id: "europac",   name: "Europa C", flag: "europad.png" },
-        { id: "paraguai",  name: "Paraguai", flag: "paraguai.png" }
-    ],
-    matches: [
-        // 1ª rodada
-        { id: "D1", home: "eua",       away: "paraguai", homeSelector:'input[data-jogo="D1"][data-time="eua"]',       awaySelector:'input[data-jogo="D1"][data-time="paraguai"]' },
-        { id: "D2", home: "australia", away: "europac",  homeSelector:'input[data-jogo="D2"][data-time="australia"]', awaySelector:'input[data-jogo="D2"][data-time="europac"]' },
+  tableBodyId: "grupoD-body",
+  teams: [
+    { id: "eua",       name: "Estados Unidos", flag: "eua.png" },
+    { id: "australia", name: "Austrália",      flag: "australia.png" },
+    { id: "europac",   name: "Europa C",       flag: "europad.png" },
+    { id: "paraguai",  name: "Paraguai",       flag: "paraguai.png" }
+  ],
+  matches: [
+    // 1ª rodada
+    { id: "D1", home: "eua",       away: "paraguai", homeSelector:'input[data-jogo="D1"][data-time="eua"]',       awaySelector:'input[data-jogo="D1"][data-time="paraguai"]' },
+    { id: "D2", home: "australia", away: "europac",  homeSelector:'input[data-jogo="D2"][data-time="australia"]', awaySelector:'input[data-jogo="D2"][data-time="europac"]' },
 
-        // 2ª rodada
-        { id: "D3", home: "europac",   away: "paraguai", homeSelector:'input[data-jogo="D3"][data-time="europac"]',   awaySelector:'input[data-jogo="D3"][data-time="paraguai"]' },
-        { id: "D4", home: "eua",       away: "australia",homeSelector:'input[data-jogo="D4"][data-time="eua"]',       awaySelector:'input[data-jogo="D4"][data-time="australia"]' },
+    // 2ª rodada
+    { id: "D3", home: "europac",   away: "paraguai", homeSelector:'input[data-jogo="D3"][data-time="europac"]',   awaySelector:'input[data-jogo="D3"][data-time="paraguai"]' },
+    { id: "D4", home: "eua",       away: "australia",homeSelector:'input[data-jogo="D4"][data-time="eua"]',       awaySelector:'input[data-jogo="D4"][data-time="australia"]' },
 
-        // 3ª rodada
-        { id: "D5", home: "europac",   away: "eua",      homeSelector:'input[data-jogo="D5"][data-time="europac"]',   awaySelector:'input[data-jogo="D5"][data-time="eua"]' },
-        { id: "D6", home: "paraguai",  away: "australia",homeSelector:'input[data-jogo="D6"][data-time="paraguai"]',  awaySelector:'input[data-jogo="D6"][data-time="australia"]' }
-    ]
+    // 3ª rodada
+    { id: "D5", home: "europac",   away: "eua",      homeSelector:'input[data-jogo="D5"][data-time="europac"]',   awaySelector:'input[data-jogo="D5"][data-time="eua"]' },
+    { id: "D6", home: "paraguai",  away: "australia",homeSelector:'input[data-jogo="D6"][data-time="paraguai"]',  awaySelector:'input[data-jogo="D6"][data-time="australia"]' }
+  ]
 };
+
 // ===============================
 // GRUPO E
 // ===============================
 const grupoE = {
-    tableBodyId: "grupoE-body",
-    teams: [
-        { id: "alemanha",     name: "Alemanha",        flag: "alemanha.png" },
-        { id: "costadomarfim",name: "Costa do Marfim", flag: "costadomarfim.png" },
-        { id: "curacao",      name: "Curaçao",         flag: "curacao.png" },
-        { id: "equador",      name: "Equador",         flag: "equador.png" }
-    ],
-    matches: [
-        // 1ª rodada
-        { id: "E1", home: "alemanha", away: "curacao",
-          homeSelector:'input[data-jogo="E1"][data-time="alemanha"]',
-          awaySelector:'input[data-jogo="E1"][data-time="curacao"]'
-        },
-        { id: "E2", home: "costadomarfim", away: "equador",
-          homeSelector:'input[data-jogo="E2"][data-time="costadomarfim"]',
-          awaySelector:'input[data-jogo="E2"][data-time="equador"]'
-        },
+  tableBodyId: "grupoE-body",
+  teams: [
+    { id: "alemanha",     name: "Alemanha",        flag: "alemanha.png" },
+    { id: "costadomarfim",name: "Costa do Marfim", flag: "costadomarfim.png" },
+    { id: "curacao",      name: "Curaçao",         flag: "curacao.png" },
+    { id: "equador",      name: "Equador",         flag: "equador.png" }
+  ],
+  matches: [
+    // 1ª rodada
+    { id: "E1", home: "alemanha", away: "curacao",
+      homeSelector:'input[data-jogo="E1"][data-time="alemanha"]',
+      awaySelector:'input[data-jogo="E1"][data-time="curacao"]'
+    },
+    { id: "E2", home: "costadomarfim", away: "equador",
+      homeSelector:'input[data-jogo="E2"][data-time="costadomarfim"]',
+      awaySelector:'input[data-jogo="E2"][data-time="equador"]'
+    },
 
-        // 2ª rodada
-        { id: "E3", home: "alemanha", away: "costadomarfim",
-          homeSelector:'input[data-jogo="E3"][data-time="alemanha"]',
-          awaySelector:'input[data-jogo="E3"][data-time="costadomarfim"]'
-        },
-        { id: "E4", home: "equador", away: "curacao",
-          homeSelector:'input[data-jogo="E4"][data-time="equador"]',
-          awaySelector:'input[data-jogo="E4"][data-time="curacao"]'
-        },
+    // 2ª rodada
+    { id: "E3", home: "alemanha", away: "costadomarfim",
+      homeSelector:'input[data-jogo="E3"][data-time="alemanha"]',
+      awaySelector:'input[data-jogo="E3"][data-time="costadomarfim"]'
+    },
+    { id: "E4", home: "equador", away: "curacao",
+      homeSelector:'input[data-jogo="E4"][data-time="equador"]',
+      awaySelector:'input[data-jogo="E4"][data-time="curacao"]'
+    },
 
-        // 3ª rodada
-        { id: "E5", home: "equador", away: "alemanha",
-          homeSelector:'input[data-jogo="E5"][data-time="equador"]',
-          awaySelector:'input[data-jogo="E5"][data-time="alemanha"]'
-        },
-        { id: "E6", home: "curacao", away: "costadomarfim",
-          homeSelector:'input[data-jogo="E6"][data-time="curacao"]',
-          awaySelector:'input[data-jogo="E6"][data-time="costadomarfim"]'
-        }
-    ]
+    // 3ª rodada
+    { id: "E5", home: "equador", away: "alemanha",
+      homeSelector:'input[data-jogo="E5"][data-time="equador"]',
+      awaySelector:'input[data-jogo="E5"][data-time="alemanha"]'
+    },
+    { id: "E6", home: "curacao", away: "costadomarfim",
+      homeSelector:'input[data-jogo="E6"][data-time="curacao"]',
+      awaySelector:'input[data-jogo="E6"][data-time="costadomarfim"]'
+    }
+  ]
 };
+
 // ===============================
 // GRUPO F
 // ===============================
 const grupoF = {
-    tableBodyId: "grupoF-body",
-    teams: [
-        { id: "holanda", name: "Holanda", flag: "holanda.png" },
-        { id: "japao", name: "Japão",  flag: "japao.png" },
-        { id: "europab",   name: "Europa B",    flag: "europad.png" },
-        { id: "tunisia", name: "Tunísia",  flag: "tunisia.png" }
-    ],
-    matches: [
-        // 1ª rodada
-        { id: "F1", home: "holanda", away: "japao",
-          homeSelector:'input[data-jogo="F1"][data-time="holanda"]',
-          awaySelector:'input[data-jogo="F1"][data-time="japao"]'
-        },
-        { id: "F2", home: "europab", away: "tunisia",
-          homeSelector:'input[data-jogo="F2"][data-time="europab"]',
-          awaySelector:'input[data-jogo="F2"][data-time="tunisia"]'
-        },
+  tableBodyId: "grupoF-body",
+  teams: [
+    { id: "holanda", name: "Holanda", flag: "holanda.png" },
+    { id: "japao",   name: "Japão",   flag: "japao.png" },
+    { id: "europab", name: "Europa B",flag: "europad.png" },
+    { id: "tunisia", name: "Tunísia", flag: "tunisia.png" }
+  ],
+  matches: [
+    // 1ª rodada
+    { id: "F1", home: "holanda", away: "japao",
+      homeSelector:'input[data-jogo="F1"][data-time="holanda"]',
+      awaySelector:'input[data-jogo="F1"][data-time="japao"]'
+    },
+    { id: "F2", home: "europab", away: "tunisia",
+      homeSelector:'input[data-jogo="F2"][data-time="europab"]',
+      awaySelector:'input[data-jogo="F2"][data-time="tunisia"]'
+    },
 
-        // 2ª rodada
-        { id: "F3", home: "holanda", away: "europab",
-          homeSelector:'input[data-jogo="F3"][data-time="holanda"]',
-          awaySelector:'input[data-jogo="F3"][data-time="europab"]'
-        },
-        { id: "F4", home: "tunisia", away: "japao",
-          homeSelector:'input[data-jogo="F4"][data-time="tunisia"]',
-          awaySelector:'input[data-jogo="F4"][data-time="japao"]'
-        },
+    // 2ª rodada
+    { id: "F3", home: "holanda", away: "europab",
+      homeSelector:'input[data-jogo="F3"][data-time="holanda"]',
+      awaySelector:'input[data-jogo="F3"][data-time="europab"]'
+    },
+    { id: "F4", home: "tunisia", away: "japao",
+      homeSelector:'input[data-jogo="F4"][data-time="tunisia"]',
+      awaySelector:'input[data-jogo="F4"][data-time="japao"]'
+    },
 
-        // 3ª rodada
-        { id: "F5", home: "tunisia", away: "holanda",
-          homeSelector:'input[data-jogo="F5"][data-time="tunisia"]',
-          awaySelector:'input[data-jogo="F5"][data-time="holanda"]'
-        },
-        { id: "F6", home: "japao", away: "europab",
-          homeSelector:'input[data-jogo="F6"][data-time="japao"]',
-          awaySelector:'input[data-jogo="F6"][data-time="europab"]'
-        }
-    ]
+    // 3ª rodada
+    { id: "F5", home: "tunisia", away: "holanda",
+      homeSelector:'input[data-jogo="F5"][data-time="tunisia"]',
+      awaySelector:'input[data-jogo="F5"][data-time="holanda"]'
+    },
+    { id: "F6", home: "japao", away: "europab",
+      homeSelector:'input[data-jogo="F6"][data-time="japao"]',
+      awaySelector:'input[data-jogo="F6"][data-time="europab"]'
+    }
+  ]
 };
+
 // ===============================
 // GRUPO G
 // ===============================
 const grupoG = {
-    tableBodyId: "grupoG-body",
-    teams: [
-        { id: "belgica", name: "Bélgica", flag: "belgica.png" },
-        { id: "egito",   name: "Egito",   flag: "egito.png" },
-        { id: "ira",     name: "Irã",     flag: "ira.png" },
-        { id: "nz",      name: "Nova Zelândia", flag: "novazelandia.png" }
-    ],
-    matches: [
-        // 1ª rodada
-        { id: "G1", home: "belgica", away: "egito",
-          homeSelector:'input[data-jogo="G1"][data-time="belgica"]',
-          awaySelector:'input[data-jogo="G1"][data-time="egito"]'
-        },
-        { id: "G2", home: "ira", away: "nz",
-          homeSelector:'input[data-jogo="G2"][data-time="ira"]',
-          awaySelector:'input[data-jogo="G2"][data-time="nz"]'
-        },
+  tableBodyId: "grupoG-body",
+  teams: [
+    { id: "belgica", name: "Bélgica",         flag: "belgica.png" },
+    { id: "egito",   name: "Egito",           flag: "egito.png" },
+    { id: "ira",     name: "Irã",             flag: "ira.png" },
+    { id: "nz",      name: "Nova Zelândia",   flag: "novazelandia.png" }
+  ],
+  matches: [
+    // 1ª rodada
+    { id: "G1", home: "belgica", away: "egito",
+      homeSelector:'input[data-jogo="G1"][data-time="belgica"]',
+      awaySelector:'input[data-jogo="G1"][data-time="egito"]'
+    },
+    { id: "G2", home: "ira", away: "nz",
+      homeSelector:'input[data-jogo="G2"][data-time="ira"]',
+      awaySelector:'input[data-jogo="G2"][data-time="nz"]'
+    },
 
-        // 2ª rodada
-        { id: "G3", home: "belgica", away: "ira",
-          homeSelector:'input[data-jogo="G3"][data-time="belgica"]',
-          awaySelector:'input[data-jogo="G3"][data-time="ira"]'
-        },
-        { id: "G4", home: "nz", away: "egito",
-          homeSelector:'input[data-jogo="G4"][data-time="nz"]',
-          awaySelector:'input[data-jogo="G4"][data-time="egito"]'
-        },
+    // 2ª rodada
+    { id: "G3", home: "belgica", away: "ira",
+      homeSelector:'input[data-jogo="G3"][data-time="belgica"]',
+      awaySelector:'input[data-jogo="G3"][data-time="ira"]'
+    },
+    { id: "G4", home: "nz", away: "egito",
+      homeSelector:'input[data-jogo="G4"][data-time="nz"]',
+      awaySelector:'input[data-jogo="G4"][data-time="egito"]'
+    },
 
-        // 3ª rodada
-        { id: "G5", home: "nz", away: "belgica",
-          homeSelector:'input[data-jogo="G5"][data-time="nz"]',
-          awaySelector:'input[data-jogo="G5"][data-time="belgica"]'
-        },
-        { id: "G6", home: "egito", away: "ira",
-          homeSelector:'input[data-jogo="G6"][data-time="egito"]',
-          awaySelector:'input[data-jogo="G6"][data-time="ira"]'
-        }
-    ]
+    // 3ª rodada
+    { id: "G5", home: "nz", away: "belgica",
+      homeSelector:'input[data-jogo="G5"][data-time="nz"]',
+      awaySelector:'input[data-jogo="G5"][data-time="belgica"]'
+    },
+    { id: "G6", home: "egito", away: "ira",
+      homeSelector:'input[data-jogo="G6"][data-time="egito"]',
+      awaySelector:'input[data-jogo="G6"][data-time="ira"]'
+    }
+  ]
 };
+
 // ===============================
 // GRUPO H
 // ===============================
 const grupoH = {
-    tableBodyId: "grupoH-body",
-    teams: [
-        { id: "espanha",   name: "Espanha", flag: "espanha.png" },
-        { id: "arabia",    name: "Arábia Saudita", flag: "arabia.png" },
-        { id: "caboverde", name: "Cabo Verde", flag: "caboverde.png" },
-        { id: "uruguai",   name: "Uruguai", flag: "uruguai.png" }
-    ],
-    matches: [
+  tableBodyId: "grupoH-body",
+  teams: [
+    { id: "espanha",   name: "Espanha",        flag: "espanha.png" },
+    { id: "arabia",    name: "Arábia Saudita", flag: "arabia.png" },
+    { id: "caboverde", name: "Cabo Verde",     flag: "caboverde.png" },
+    { id: "uruguai",   name: "Uruguai",        flag: "uruguai.png" }
+  ],
+  matches: [
+    // 1ª rodada
+    { id: "H1", home: "espanha", away: "caboverde",
+      homeSelector:'input[data-jogo="H1"][data-time="espanha"]',
+      awaySelector:'input[data-jogo="H1"][data-time="caboverde"]'
+    },
+    { id: "H2", home: "arabia", away: "uruguai",
+      homeSelector:'input[data-jogo="H2"][data-time="arabia"]',
+      awaySelector:'input[data-jogo="H2"][data-time="uruguai"]'
+    },
 
-        // 1ª rodada
-        { id: "H1", home: "espanha", away: "caboverde",
-          homeSelector:'input[data-jogo="H1"][data-time="espanha"]',
-          awaySelector:'input[data-jogo="H1"][data-time="caboverde"]'
-        },
-        { id: "H2", home: "arabia", away: "uruguai",
-          homeSelector:'input[data-jogo="H2"][data-time="arabia"]',
-          awaySelector:'input[data-jogo="H2"][data-time="uruguai"]'
-        },
+    // 2ª rodada
+    { id: "H3", home: "espanha", away: "arabia",
+      homeSelector:'input[data-jogo="H3"][data-time="espanha"]',
+      awaySelector:'input[data-jogo="H3"][data-time="arabia"]'
+    },
+    { id: "H4", home: "uruguai", away: "caboverde",
+      homeSelector:'input[data-jogo="H4"][data-time="uruguai"]',
+      awaySelector:'input[data-jogo="H4"][data-time="caboverde"]'
+    },
 
-        // 2ª rodada
-        { id: "H3", home: "espanha", away: "arabia",
-          homeSelector:'input[data-jogo="H3"][data-time="espanha"]',
-          awaySelector:'input[data-jogo="H3"][data-time="arabia"]'
-        },
-        { id: "H4", home: "uruguai", away: "caboverde",
-          homeSelector:'input[data-jogo="H4"][data-time="uruguai"]',
-          awaySelector:'input[data-jogo="H4"][data-time="caboverde"]'
-        },
-
-        // 3ª rodada
-        { id: "H5", home: "uruguai", away: "espanha",
-          homeSelector:'input[data-jogo="H5"][data-time="uruguai"]',
-          awaySelector:'input[data-jogo="H5"][data-time="espanha"]'
-        },
-        { id: "H6", home: "caboverde", away: "arabia",
-          homeSelector:'input[data-jogo="H6"][data-time="caboverde"]',
-          awaySelector:'input[data-jogo="H6"][data-time="arabia"]'
-        }
-    ]
+    // 3ª rodada
+    { id: "H5", home: "uruguai", away: "espanha",
+      homeSelector:'input[data-jogo="H5"][data-time="uruguai"]',
+      awaySelector:'input[data-jogo="H5"][data-time="espanha"]'
+    },
+    { id: "H6", home: "caboverde", away: "arabia",
+      homeSelector:'input[data-jogo="H6"][data-time="caboverde"]',
+      awaySelector:'input[data-jogo="H6"][data-time="arabia"]'
+    }
+  ]
 };
+
 // ===============================
 // GRUPO I
 // ===============================
 const grupoI = {
-    tableBodyId: "grupoI-body",
-    teams: [
-        { id: "franca",  name: "França", flag: "franca.png" },
-        { id: "inter2",  name: "Intercontinental 2", flag: "europad.png" },
-        { id: "noruega", name: "Noruega", flag: "noruega.png" },
-        { id: "senegal", name: "Senegal", flag: "senegal.png" }
-    ],
-    matches: [
+  tableBodyId: "grupoI-body",
+  teams: [
+    { id: "franca",  name: "França",           flag: "franca.png" },
+    { id: "inter2",  name: "Intercontinental 2", flag: "europad.png" },
+    { id: "noruega", name: "Noruega",          flag: "noruega.png" },
+    { id: "senegal", name: "Senegal",          flag: "senegal.png" }
+  ],
+  matches: [
+    // 1ª Rodada
+    { id: "I1", home: "franca", away: "senegal",
+      homeSelector:'input[data-jogo="I1"][data-time="franca"]',
+      awaySelector:'input[data-jogo="I1"][data-time="senegal"]'
+    },
 
-        // 1ª Rodada
-        { id: "I1", home: "franca", away: "senegal",
-          homeSelector:'input[data-jogo="I1"][data-time="franca"]',
-          awaySelector:'input[data-jogo="I1"][data-time="senegal"]'
-        },
+    { id: "I2", home: "inter2", away: "noruega",
+      homeSelector:'input[data-jogo="I2"][data-time="inter2"]',
+      awaySelector:'input[data-jogo="I2"][data-time="noruega"]'
+    },
 
-        { id: "I2", home: "inter2", away: "noruega",
-          homeSelector:'input[data-jogo="I2"][data-time="inter2"]',
-          awaySelector:'input[data-jogo="I2"][data-time="noruega"]'
-        },
+    // 2ª Rodada
+    { id: "I3", home: "franca", away: "inter2",
+      homeSelector:'input[data-jogo="I3"][data-time="franca"]',
+      awaySelector:'input[data-jogo="I3"][data-time="inter2"]'
+    },
 
-        // 2ª Rodada
-        { id: "I3", home: "franca", away: "inter2",
-          homeSelector:'input[data-jogo="I3"][data-time="franca"]',
-          awaySelector:'input[data-jogo="I3"][data-time="inter2"]'
-        },
+    { id: "I4", home: "noruega", away: "senegal",
+      homeSelector:'input[data-jogo="I4"][data-time="noruega"]',
+      awaySelector:'input[data-jogo="I4"][data-time="senegal"]'
+    },
 
-        { id: "I4", home: "noruega", away: "senegal",
-          homeSelector:'input[data-jogo="I4"][data-time="noruega"]',
-          awaySelector:'input[data-jogo="I4"][data-time="senegal"]'
-        },
+    // 3ª Rodada
+    { id: "I5", home: "noruega", away: "franca",
+      homeSelector:'input[data-jogo="I5"][data-time="noruega"]',
+      awaySelector:'input[data-jogo="I5"][data-time="franca"]'
+    },
 
-        // 3ª Rodada
-        { id: "I5", home: "noruega", away: "franca",
-          homeSelector:'input[data-jogo="I5"][data-time="noruega"]',
-          awaySelector:'input[data-jogo="I5"][data-time="franca"]'
-        },
-
-        { id: "I6", home: "senegal", away: "inter2",
-          homeSelector:'input[data-jogo="I6"][data-time="senegal"]',
-          awaySelector:'input[data-jogo="I6"][data-time="inter2"]'
-        }
-    ]
+    { id: "I6", home: "senegal", away: "inter2",
+      homeSelector:'input[data-jogo="I6"][data-time="senegal"]',
+      awaySelector:'input[data-jogo="I6"][data-time="inter2"]'
+    }
+  ]
 };
+
 // ===============================
 // GRUPO J
 // ===============================
 const grupoJ = {
-    tableBodyId: "grupoJ-body",
-    teams: [
-        { id: "argentina", name: "Argentina", flag: "argentina.png" },
-        { id: "argelia",   name: "Argélia",   flag: "argelia.png" },
-        { id: "jordania",  name: "Jordânia",  flag: "jordania.png" },
-        { id: "austria",   name: "Áustria",   flag: "austria.png" }
-    ],
-    matches: [
-        // 1ª Rodada
-        { id: "J1", home: "argentina", away: "argelia",
-          homeSelector:'input[data-jogo="J1"][data-time="argentina"]',
-          awaySelector:'input[data-jogo="J1"][data-time="argelia"]'
-        },
+  tableBodyId: "grupoJ-body",
+  teams: [
+    { id: "argentina", name: "Argentina", flag: "argentina.png" },
+    { id: "argelia",   name: "Argélia",   flag: "argelia.png" },
+    { id: "jordania",  name: "Jordânia",  flag: "jordania.png" },
+    { id: "austria",   name: "Áustria",   flag: "austria.png" }
+  ],
+  matches: [
+    // 1ª Rodada
+    { id: "J1", home: "argentina", away: "argelia",
+      homeSelector:'input[data-jogo="J1"][data-time="argentina"]',
+      awaySelector:'input[data-jogo="J1"][data-time="argelia"]'
+    },
 
-        { id: "J2", home: "austria", away: "jordania",
-          homeSelector:'input[data-jogo="J2"][data-time="austria"]',
-          awaySelector:'input[data-jogo="J2"][data-time="jordania"]'
-        },
+    { id: "J2", home: "austria", away: "jordania",
+      homeSelector:'input[data-jogo="J2"][data-time="austria"]',
+      awaySelector:'input[data-jogo="J2"][data-time="jordania"]'
+    },
 
-        // 2ª Rodada
-        { id: "J3", home: "argentina", away: "austria",
-          homeSelector:'input[data-jogo="J3"][data-time="argentina"]',
-          awaySelector:'input[data-jogo="J3"][data-time="austria"]'
-        },
+    // 2ª Rodada
+    { id: "J3", home: "argentina", away: "austria",
+      homeSelector:'input[data-jogo="J3"][data-time="argentina"]',
+      awaySelector:'input[data-jogo="J3"][data-time="austria"]'
+    },
 
-        { id: "J4", home: "jordania", away: "argelia",
-          homeSelector:'input[data-jogo="J4"][data-time="jordania"]',
-          awaySelector:'input[data-jogo="J4"][data-time="argelia"]'
-        },
+    { id: "J4", home: "jordania", away: "argelia",
+      homeSelector:'input[data-jogo="J4"][data-time="jordania"]',
+      awaySelector:'input[data-jogo="J4"][data-time="argelia"]'
+    },
 
-        // 3ª Rodada
-        { id: "J5", home: "jordania", away: "argentina",
-          homeSelector:'input[data-jogo="J5"][data-time="jordania"]',
-          awaySelector:'input[data-jogo="J5"][data-time="argentina"]'
-        },
+    // 3ª Rodada
+    { id: "J5", home: "jordania", away: "argentina",
+      homeSelector:'input[data-jogo="J5"][data-time="jordania"]',
+      awaySelector:'input[data-jogo="J5"][data-time="argentina"]'
+    },
 
-        { id: "J6", home: "argelia", away: "austria",
-          homeSelector:'input[data-jogo="J6"][data-time="argelia"]',
-          awaySelector:'input[data-jogo="J6"][data-time="austria"]'
-        }
-    ]
+    { id: "J6", home: "argelia", away: "austria",
+      homeSelector:'input[data-jogo="J6"][data-time="argelia"]',
+      awaySelector:'input[data-jogo="J6"][data-time="austria"]'
+    }
+  ]
 };
+
 // ===============================
 // GRUPO K
 // ===============================
 const grupoK = {
-    tableBodyId: "grupoK-body",
-    teams: [
-        { id: "portugal",     name: "Portugal",          flag: "portugal.png" },
-        { id: "colombia",     name: "Colômbia",          flag: "colombia.png" },
-        { id: "inter1",       name: "Intercontinental 1", flag: "europad.png" },
-        { id: "uzbequistao",  name: "Uzbequistão",       flag: "uzbequistao.png" }
-    ],
-    matches: [
+  tableBodyId: "grupoK-body",
+  teams: [
+    { id: "portugal",    name: "Portugal",          flag: "portugal.png" },
+    { id: "colombia",    name: "Colômbia",          flag: "colombia.png" },
+    { id: "inter1",      name: "Intercontinental 1",flag: "europad.png" },
+    { id: "uzbequistao", name: "Uzbequistão",       flag: "uzbequistao.png" }
+  ],
+  matches: [
+    // 1ª Rodada
+    { id: "K1", home: "portugal", away: "inter1",
+      homeSelector:'input[data-jogo="K1"][data-time="portugal"]',
+      awaySelector:'input[data-jogo="K1"][data-time="inter1"]'
+    },
 
-        // 1ª Rodada
-        { id: "K1", home: "portugal", away: "inter1",
-          homeSelector:'input[data-jogo="K1"][data-time="portugal"]',
-          awaySelector:'input[data-jogo="K1"][data-time="inter1"]'
-        },
+    { id: "K2", home: "uzbequistao", away: "colombia",
+      homeSelector:'input[data-jogo="K2"][data-time="uzbequistao"]',
+      awaySelector:'input[data-jogo="K2"][data-time="colombia"]'
+    },
 
-        { id: "K2", home: "uzbequistao", away: "colombia",
-          homeSelector:'input[data-jogo="K2"][data-time="uzbequistao"]',
-          awaySelector:'input[data-jogo="K2"][data-time="colombia"]'
-        },
+    // 2ª Rodada
+    { id: "K3", home: "portugal", away: "uzbequistao",
+      homeSelector:'input[data-jogo="K3"][data-time="portugal"]',
+      awaySelector:'input[data-jogo="K3"][data-time="uzbequistao"]'
+    },
 
-        // 2ª Rodada
-        { id: "K3", home: "portugal", away: "uzbequistao",
-          homeSelector:'input[data-jogo="K3"][data-time="portugal"]',
-          awaySelector:'input[data-jogo="K3"][data-time="uzbequistao"]'
-        },
+    { id: "K4", home: "colombia", away: "inter1",
+      homeSelector:'input[data-jogo="K4"][data-time="colombia"]',
+      awaySelector:'input[data-jogo="K4"][data-time="inter1"]'
+    },
 
-        { id: "K4", home: "colombia", away: "inter1",
-          homeSelector:'input[data-jogo="K4"][data-time="colombia"]',
-          awaySelector:'input[data-jogo="K4"][data-time="inter1"]'
-        },
+    // 3ª Rodada
+    { id: "K5", home: "colombia", away: "portugal",
+      homeSelector:'input[data-jogo="K5"][data-time="colombia"]',
+      awaySelector:'input[data-jogo="K5"][data-time="portugal"]'
+    },
 
-        // 3ª Rodada
-        { id: "K5", home: "colombia", away: "portugal",
-          homeSelector:'input[data-jogo="K5"][data-time="colombia"]',
-          awaySelector:'input[data-jogo="K5"][data-time="portugal"]'
-        },
-
-        { id: "K6", home: "inter1", away: "uzbequistao",
-          homeSelector:'input[data-jogo="K6"][data-time="inter1"]',
-          awaySelector:'input[data-jogo="K6"][data-time="uzbequistao"]'
-        }
-    ]
+    { id: "K6", home: "inter1", away: "uzbequistao",
+      homeSelector:'input[data-jogo="K6"][data-time="inter1"]',
+      awaySelector:'input[data-jogo="K6"][data-time="uzbequistao"]'
+    }
+  ]
 };
+
 // ===============================
 // GRUPO L
 // ===============================
 const grupoL = {
-    tableBodyId: "grupoL-body",
-    teams: [
-        { id: "inglaterra", name: "Inglaterra", flag: "inglaterra.png" },
-        { id: "croacia",    name: "Croácia",    flag: "croacia.png" },
-        { id: "gana",       name: "Gana",       flag: "gana.png" },
-        { id: "panama",     name: "Panamá",     flag: "panama.png" }
-    ],
-    matches: [
-        // 1ª Rodada
-        { id: "L1", home: "inglaterra", away: "croacia",
-          homeSelector:'input[data-jogo="L1"][data-time="inglaterra"]',
-          awaySelector:'input[data-jogo="L1"][data-time="croacia"]'
-        },
-        { id: "L2", home: "gana", away: "panama",
-          homeSelector:'input[data-jogo="L2"][data-time="gana"]',
-          awaySelector:'input[data-jogo="L2"][data-time="panama"]'
-        },
+  tableBodyId: "grupoL-body",
+  teams: [
+    { id: "inglaterra", name: "Inglaterra", flag: "inglaterra.png" },
+    { id: "croacia",    name: "Croácia",    flag: "croacia.png" },
+    { id: "gana",       name: "Gana",       flag: "gana.png" },
+    { id: "panama",     name: "Panamá",     flag: "panama.png" }
+  ],
+  matches: [
+    // 1ª Rodada
+    { id: "L1", home: "inglaterra", away: "croacia",
+      homeSelector:'input[data-jogo="L1"][data-time="inglaterra"]',
+      awaySelector:'input[data-jogo="L1"][data-time="croacia"]'
+    },
+    { id: "L2", home: "gana", away: "panama",
+      homeSelector:'input[data-jogo="L2"][data-time="gana"]',
+      awaySelector:'input[data-jogo="L2"][data-time="panama"]'
+    },
 
-        // 2ª Rodada
-        { id: "L3", home: "inglaterra", away: "gana",
-          homeSelector:'input[data-jogo="L3"][data-time="inglaterra"]',
-          awaySelector:'input[data-jogo="L3"][data-time="gana"]'
-        },
-        { id: "L4", home: "panama", away: "croacia",
-          homeSelector:'input[data-jogo="L4"][data-time="panama"]',
-          awaySelector:'input[data-jogo="L4"][data-time="croacia"]'
-        },
+    // 2ª Rodada
+    { id: "L3", home: "inglaterra", away: "gana",
+      homeSelector:'input[data-jogo="L3"][data-time="inglaterra"]',
+      awaySelector:'input[data-jogo="L3"][data-time="gana"]'
+    },
+    { id: "L4", home: "panama", away: "croacia",
+      homeSelector:'input[data-jogo="L4"][data-time="panama"]',
+      awaySelector:'input[data-jogo="L4"][data-time="croacia"]'
+    },
 
-        // 3ª Rodada
-        { id: "L5", home: "panama", away: "inglaterra",
-          homeSelector:'input[data-jogo="L5"][data-time="panama"]',
-          awaySelector:'input[data-jogo="L5"][data-time="inglaterra"]'
-        },
-        { id: "L6", home: "croacia", away: "gana",
-          homeSelector:'input[data-jogo="L6"][data-time="croacia"]',
-          awaySelector:'input[data-jogo="L6"][data-time="gana"]'
-        }
-    ]
+    // 3ª Rodada
+    { id: "L5", home: "panama", away: "inglaterra",
+      homeSelector:'input[data-jogo="L5"][data-time="panama"]',
+      awaySelector:'input[data-jogo="L5"][data-time="inglaterra"]'
+    },
+    { id: "L6", home: "croacia", away: "gana",
+      homeSelector:'input[data-jogo="L6"][data-time="croacia"]',
+      awaySelector:'input[data-jogo="L6"][data-time="gana"]'
+    }
+  ]
 };
-
 
 // ---------- REGISTRO GLOBAL DE GRUPOS ----------
 const grupos = {
@@ -546,10 +549,9 @@ const grupos = {
 };
 
 // ==========================================================
-//  MOTOR GENÉRICO
+//  MOTOR GENÉRICO (para tabela local, se você ainda usar)
 // ==========================================================
 
-// Cria estrutura base de estatísticas para um grupo
 function createEmptyStats(teams) {
   const stats = {};
   teams.forEach(t => {
@@ -571,7 +573,6 @@ function createEmptyStats(teams) {
   return stats;
 }
 
-// Processa todos os jogos de um grupo
 function processMatchesGroup(groupConfig, stats) {
   const { matches } = groupConfig;
 
@@ -623,7 +624,6 @@ function processMatchesGroup(groupConfig, stats) {
     home.pts += homePts;
     away.pts += awayPts;
 
-    // Head-to-head
     if (!home.h2h[match.away]) home.h2h[match.away] = { gf: 0, ga: 0, pts: 0 };
     if (!away.h2h[match.home]) away.h2h[match.home] = { gf: 0, ga: 0, pts: 0 };
 
@@ -636,13 +636,11 @@ function processMatchesGroup(groupConfig, stats) {
     away.h2h[match.home].pts += awayPts;
   }
 
-  // saldo de gols
   for (const t of Object.values(stats)) {
     t.sg = t.gf - t.gc;
   }
 }
 
-// Ordenação inicial
 function ordenarGeral(teams, stats) {
   const order = teams.map(t => t.id);
   order.sort((aId, bId) => {
@@ -650,14 +648,13 @@ function ordenarGeral(teams, stats) {
     const b = stats[bId];
 
     if (b.pts !== a.pts) return b.pts - a.pts;
-    if (b.sg !== a.sg) return b.sg - a.sg;
-    if (b.gf !== a.gf) return b.gf - a.gf;
+    if (b.sg !== a.sg)   return b.sg - a.sg;
+    if (b.gf !== a.gf)   return b.gf - a.gf;
     return 0;
   });
   return order;
 }
 
-// Confronto direto (mini-tabela)
 function aplicarConfrontoDireto(order, stats) {
   const finalOrder = [];
   let i = 0;
@@ -665,7 +662,6 @@ function aplicarConfrontoDireto(order, stats) {
   while (i < order.length) {
     let j = i + 1;
 
-    // agrupa times empatados em pts, sg, gf
     while (j < order.length) {
       const a = stats[order[i]];
       const b = stats[order[j]];
@@ -700,12 +696,11 @@ function aplicarConfrontoDireto(order, stats) {
 
       mini.sort((a, b) => {
         if (b.pts !== a.pts) return b.pts - a.pts;
-        if (b.sg !== a.sg)  return b.sg  - a.sg;
-        if (b.gf !== a.gf)  return b.gf  - a.gf;
+        if (b.sg  !== a.sg)  return b.sg  - a.sg;
+        if (b.gf  !== a.gf)  return b.gf  - a.gf;
         return 0;
       });
 
-      // ✅ sem o ponto na frente de mini
       finalOrder.push(...mini.map(x => x.id));
     }
 
@@ -716,12 +711,10 @@ function aplicarConfrontoDireto(order, stats) {
 }
 
 // ------------------------------------
-//  REGISTRO DAS CLASSIFICAÇÕES
-//  (para uso na Simulação)
+//  REGISTRO DAS CLASSIFICAÇÕES LOCAIS
 // ------------------------------------
-const classificacoes = {};
+const classificacoesLocais = {};
 
-// Recalcular grupo
 function recalcularGrupo(groupKey) {
   const group = grupos[groupKey];
   if (!group) return;
@@ -731,72 +724,46 @@ function recalcularGrupo(groupKey) {
   let order = ordenarGeral(group.teams, stats);
   order = aplicarConfrontoDireto(order, stats);
 
-  // salva para uso pela Simulação
-  classificacoes[groupKey] = { stats, order };
+  classificacoesLocais[groupKey] = { stats, order };
 
   renderTabelaGroup(group, stats, order);
 }
 
-// pega o time em uma certa posição (1º, 2º, 3º...)
-function getColocado(groupKey, posicao) {
-  const info = classificacoes[groupKey];
-  if (!info) return null;
-
-  const { stats, order } = info;
-  if (order.length < posicao) return null;
-
-  const teamId = order[posicao - 1];
-  const st = stats[teamId];
-
-  return {
-    id: teamId,
-    name: st.name,
-    flag: st.flag,
-    pts: st.pts,
-    sg: st.sg,
-    gf: st.gf,
-    group: groupKey
-  };
-}
-
-// retorna os 8 melhores 3º colocados
-function getMelhoresTerceiros() {
-  const terceiros = [];
-
-  "ABCDEFGHIJKL".split("").forEach(g => {
-    const t3 = getColocado(g, 3);
-    if (!t3) return;
-    terceiros.push(t3);
-  });
-
-  // ordena: Pts > SG > GF > Nome (A-Z)
-  terceiros.sort((a, b) => {
-    if (b.pts !== a.pts) return b.pts - a.pts;
-    if (b.sg  !== a.sg)  return b.sg  - a.sg;
-    if (b.gf  !== a.gf)  return b.gf  - a.gf;
-    return a.name.localeCompare(b.name, "pt-BR");
-  });
-
-  return terceiros.slice(0, 8);
-}
-
-// escolhe um 3º colocado da lista de grupos permitidos (A,B,C...)
-function pickThirdFromPools(listaGrupos, melhoresTerceiros, usadosGrupos) {
-  for (const g of listaGrupos) {
-    const t = melhoresTerceiros.find(t => t.group === g);
-    if (t && !usadosGrupos.has(g)) {
-      usadosGrupos.add(g);
-      return t;
-    }
+function renderTabelaGroup(group, stats, order) {
+  const tbody = document.getElementById(group.tableBodyId);
+  if (!tbody) {
+    console.error("Elemento não encontrado:", group.tableBodyId);
+    return;
   }
-  return null; // em teoria não deveria acontecer
+
+  tbody.innerHTML = "";
+
+  order.forEach((teamId, index) => {
+    const st = stats[teamId];
+    const meta = group.teams.find(t => t.id === teamId);
+
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+      <td class="time-cell">
+        <span class="posicao">${index + 1}º</span>
+        <img src="${meta.flag}" class="flag">
+        <span class="time-nome">${meta.name}</span>
+      </td>
+      <td>${st.pts}</td>
+      <td>${st.j}</td>
+      <td>${st.v}</td>
+      <td>${st.e}</td>
+      <td>${st.d}</td>
+      <td>${st.gf}</td>
+      <td>${st.gc}</td>
+      <td>${st.sg}</td>
+    `;
+
+    tbody.appendChild(tr);
+  });
 }
 
-// ------------------------------------
-//  INICIALIZAÇÃO DOS GRUPOS
-// ------------------------------------
-
-// Inicializar listeners de todos os inputs do grupo
 function initGrupo(groupKey) {
   const config = grupos[groupKey];
   if (!config) return;
@@ -808,278 +775,289 @@ function initGrupo(groupKey) {
     if (!homeInput || !awayInput) return;
 
     const handler = () => recalcularGrupo(groupKey);
-
     homeInput.addEventListener("input", handler);
     awayInput.addEventListener("input", handler);
   });
 
-  // calcula a classificação inicial
   recalcularGrupo(groupKey);
 }
 
-// Inicializar todos os grupos registrados
 Object.keys(grupos).forEach(initGrupo);
 
-// =====================================
-//   RENDERIZAÇÃO DA TABELA DE GRUPO
-// =====================================
-function renderTabelaGroup(group, stats, order) {
+// ======================================================
+//  FUNÇÕES PARA PALPITES EXTRAS (Supabase "times")
+// ======================================================
 
-    const tbody = document.getElementById(group.tableBodyId);
-    if (!tbody) {
-        console.error("Elemento não encontrado:", group.tableBodyId);
-        return;
-    }
-
-    tbody.innerHTML = "";
-
-    order.forEach((teamId, index) => {
-        const st = stats[teamId];
-        const meta = group.teams.find(t => t.id === teamId);
-
-        const tr = document.createElement("tr");
-
-        tr.innerHTML = `
-            <td class="time-cell">
-                <span class="posicao">${index + 1}º</span>
-                <img src="${meta.flag}" class="flag">
-                <span class="time-nome">${meta.name}</span>
-            </td>
-            <td>${st.pts}</td>
-            <td>${st.j}</td>
-            <td>${st.v}</td>
-            <td>${st.e}</td>
-            <td>${st.d}</td>
-            <td>${st.gf}</td>
-            <td>${st.gc}</td>
-            <td>${st.sg}</td>
-        `;
-
-        tbody.appendChild(tr);
-    });
-}
-
-
-
-//  // ==============================
-//  //  CARREGA TODAS AS SELEÇÕES
-//  // ==============================
-//
 async function loadAllTeams() {
-    const { data, error } = await supabase
-        .from("times")
-        .select("*")
-        .order("nome", { ascending: true });
+  if (typeof supabase === "undefined") {
+    console.error("Supabase não encontrado (window.supabase).");
+    return [];
+  }
 
-    if (error) {
-        console.error("Erro ao carregar seleções:", error);
-        return [];
-    }
+  const { data, error } = await supabase
+    .from("times")
+    .select("*")
+    .order("nome", { ascending: true });
 
-    return data;
+  if (error) {
+    console.error("Erro ao carregar seleções:", error);
+    return [];
+  }
+
+  return data;
 }
 
 function fillFlagDropdown(selectId, teams) {
-    const select = document.getElementById(selectId);
-    if (!select) return;
+  const select = document.getElementById(selectId);
+  if (!select) return;
 
-    select.innerHTML = `<option value="">Selecione...</option>`;
+  select.innerHTML = `<option value="">Selecione...</option>`;
 
-    teams.forEach(t => {
-        select.innerHTML += `
-            <option value="${t.id}" data-flag="${t.flag}">
-                ${t.nome}
-            </option>
-        `;
-    });
+  teams.forEach(t => {
+    select.innerHTML += `
+      <option value="${t.id}" data-flag="${t.flag}">
+        ${t.nome}
+      </option>
+    `;
+  });
 }
 
 function fillGroupDropdowns(teams) {
-    const grupos = "ABCDEFGHIJKL".split("");
+  const gruposLetras = "ABCDEFGHIJKL".split("");
 
-    grupos.forEach(g => {
-        const timesGrupo = teams.filter(t => t.grupo_id === g);
+  gruposLetras.forEach(g => {
+    const timesGrupo = teams.filter(t => t.grupo_id === g);
 
-        const s1 = document.getElementById(`extra-grupo-${g}-1`);
-        const s2 = document.getElementById(`extra-grupo-${g}-2`);
-
-        if (s1) fillFlagDropdown(`extra-grupo-${g}-1`, timesGrupo);
-        if (s2) fillFlagDropdown(`extra-grupo-${g}-2`, timesGrupo);
-    });
+    if (document.getElementById(`extra-grupo-${g}-1`)) {
+      fillFlagDropdown(`extra-grupo-${g}-1`, timesGrupo);
+    }
+    if (document.getElementById(`extra-grupo-${g}-2`)) {
+      fillFlagDropdown(`extra-grupo-${g}-2`, timesGrupo);
+    }
+  });
 }
 
 async function initPalpitesExtras() {
-    const teams = await loadAllTeams();
+  const teams = await loadAllTeams();
 
-    // Preenche os grupos
-    fillGroupDropdowns(teams);
+  fillGroupDropdowns(teams);
 
-    // Artilheiros
-    fillFlagDropdown("extra-art1-time", teams);
-    fillFlagDropdown("extra-art2-time", teams);
+  // Artilheiros
+  fillFlagDropdown("extra-art1-time", teams);
+  fillFlagDropdown("extra-art2-time", teams);
 
-    // Top 4
-    fillFlagDropdown("extra-top-campeao", teams);
-    fillFlagDropdown("extra-top-vice", teams);
-    fillFlagDropdown("extra-top-terceiro", teams);
-    fillFlagDropdown("extra-top-quarto", teams);
+  // Top 4
+  fillFlagDropdown("extra-top-campeao", teams);
+  fillFlagDropdown("extra-top-vice", teams);
+  fillFlagDropdown("extra-top-terceiro", teams);
+  fillFlagDropdown("extra-top-quarto", teams);
 
-    // Mais gols / Mais sofridos
-    fillFlagDropdown("extra-mais-gols", teams);
-    fillFlagDropdown("extra-mais-sofridos", teams);
-}
-
-// ===============================================
-//  LER CLASSIFICAÇÃO DOS GRUPOS A–L
-// ===============================================
-function getClassificacaoGrupo(grupoLetra) {
-    const tbody = document.getElementById(`tabela-grupo${grupoLetra}-body`);
-    if (!tbody) return null;
-
-    const linhas = tbody.querySelectorAll("tr");
-    if (linhas.length < 3) return null; // precisa pelo menos 3 times
-
-    const extractData = (tr) => {
-        const nome = tr.querySelector(".time-nome")?.textContent.trim();
-        const flag = tr.querySelector(".flag")?.src;
-        return { nome, flag };
-    };
-
-    return {
-        primeiro: extractData(linhas[0]),
-        segundo:  extractData(linhas[1]),
-        terceiro: extractData(linhas[2])
-    };
-}
-
-
-// ===============================================
-//  LISTA DOS 12 TERCEIROS — ESCOLHENDO OS 8 MELHORES
-// ===============================================
-function escolherMelhoresTerceiros(terceiros) {
-
-    // Aqui futuramente aplicaremos critérios reais de desempate.
-    // Por enquanto, vamos manter a ORDEM FIXA dos grupos permitidos em cada chave
-    // e apenas devolver o objeto correspondente.
-
-    return terceiros; // retorna todos — filtro será feito pelo chaveamento
+  // Mais gols / Mais sofridos
+  fillFlagDropdown("extra-mais-gols", teams);
+  fillFlagDropdown("extra-mais-sofridos", teams);
 }
 
 // ======================================================
-//  FORÇA A RE-CALCULAR TODOS OS GRUPOS A–L
+//  CLASSIFICAÇÃO PARA SIMULAÇÃO – VIA SUPABASE
 // ======================================================
-function recalcularTodosOsGrupos() {
-    const gruposLetras = "ABCDEFGHIJKL".split("");
 
-    gruposLetras.forEach(g => {
-        if (typeof grupos[g] !== "undefined") {
-            recalcularGrupo(g);
-        }
-    });
+// LÊ a classificação de um grupo A–L diretamente do Supabase
+async function getClassificacaoGrupo(grupoLetra) {
+  if (typeof supabase === "undefined") {
+    console.error("Supabase não encontrado (window.supabase).");
+    return null;
+  }
+
+  const { data, error } = await supabase
+    .from("classificacao_grupos")
+    .select("grupo_id, time_nome, time_flag, pontos, saldo_gols, gols_marcados, gols_sofridos")
+    .eq("grupo_id", grupoLetra)
+    .order("pontos", { ascending: false })
+    .order("saldo_gols", { ascending: false })
+    .order("gols_marcados", { ascending: false })
+    .order("time_nome", { ascending: true });
+
+  if (error) {
+    console.error("Erro ao ler classificação do grupo", grupoLetra, error);
+    return null;
+  }
+
+  if (!data || data.length < 3) {
+    console.warn(`Grupo ${grupoLetra}: menos de 3 registros na tabela classificacao_grupos.`);
+    return null;
+  }
+
+  const mapLinha = (linha, pos, grupo) => ({
+    nome: linha.time_nome,
+    flag: linha.time_flag,
+    pontos: linha.pontos,
+    sg: linha.saldo_gols,
+    gf: linha.gols_marcados,
+    gc: linha.gols_sofridos,
+    grupo
+  });
+
+  return {
+    primeiro: mapLinha(data[0], 1, grupoLetra),
+    segundo:  mapLinha(data[1], 2, grupoLetra),
+    terceiro: mapLinha(data[2], 3, grupoLetra),
+    lista: data
+  };
 }
 
+// Escolhe os 8 melhores terceiros de TODOS os grupos
+function escolherMelhoresTerceiros(terceirosPorGrupo) {
+  const lista = Object.entries(terceirosPorGrupo)
+    .filter(([, t]) => !!t)
+    .map(([grupo, t]) => ({
+      grupo,
+      ...t
+    }));
 
-// ===============================================
-//  MONTA OS 16 CONFRONTOS DA SEGUNDA FASE (32)
-// ===============================================
-function montarSegundaFase() {
+  // Ordenação real: pontos > saldo > gols marcados > nome
+  lista.sort((a, b) => {
+    if (b.pontos !== a.pontos) return b.pontos - a.pontos;
+    if (b.sg     !== a.sg)     return b.sg     - a.sg;
+    if (b.gf     !== a.gf)     return b.gf     - a.gf;
+    return a.nome.localeCompare(b.nome, "pt-BR");
+  });
 
-    const grupos = "ABCDEFGHIJKL".split("");
+  const top8 = lista.slice(0, 8);
+  const mapa = {};
 
-    const classificacoes = {};
-    const terceiros = {};
+  top8.forEach(t => {
+    mapa[t.grupo] = t;
+  });
 
-    // Captura classificação de cada grupo
-    grupos.forEach(g => {
-        const dados = getClassificacaoGrupo(g);
-        if (!dados) return;
+  return mapa; // { "A": terceiroA, "D": terceiroD, ... } apenas se estiver entre os 8
+}
 
-        classificacoes[g] = {
-            primeiro: dados.primeiro,
-            segundo: dados.segundo
-        };
+// ======================================================
+//  MONTA OS 16 CONFRONTOS DA SEGUNDA FASE (32) – SUPABASE
+// ======================================================
+async function montarSegundaFase() {
+  const gruposLetras = "ABCDEFGHIJKL".split("");
 
-        terceiros[g] = dados.terceiro;
-    });
+  const classificacoes = {};
+  const terceiros = {};
 
-    // Temporariamente, consideramos todos os terceiros como válidos
-    const melhores3 = escolherMelhoresTerceiros(terceiros);
+  for (const g of gruposLetras) {
+    const dados = await getClassificacaoGrupo(g);
+    if (!dados) continue;
 
-    // Função auxiliar
-    const pick3 = (lista) => {
-        for (const g of lista) {
-            if (melhores3[g]) return melhores3[g];
-        }
-        return { nome: "—", flag: "" };
+    classificacoes[g] = {
+      primeiro: dados.primeiro,
+      segundo:  dados.segundo
     };
 
-    // AGORA MONTAMOS OS 16 JOGOS seguindo seu chaveamento FIXO:
-    const jogos = {
+    terceiros[g] = dados.terceiro; // já vem com pontos, sg, gf, grupo...
+  }
 
-        1:  { home: classificacoes["E"].primeiro, away: pick3(["A","B","C","D","F"]) },
-        2:  { home: classificacoes["I"].primeiro, away: pick3(["C","D","F","G","H"]) },
-        3:  { home: classificacoes["A"].segundo,  away: classificacoes["B"].segundo },
-        4:  { home: classificacoes["F"].primeiro, away: classificacoes["C"].segundo },
-        5:  { home: classificacoes["K"].segundo,  away: classificacoes["L"].segundo },
-        6:  { home: classificacoes["H"].primeiro, away: classificacoes["J"].segundo },
-        7:  { home: classificacoes["D"].primeiro, away: pick3(["B","E","F","I","J"]) },
-        8:  { home: classificacoes["G"].primeiro, away: pick3(["A","E","H","I","J"]) },
+  const melhores3 = escolherMelhoresTerceiros(terceiros);
 
-        9:  { home: classificacoes["C"].primeiro, away: classificacoes["F"].segundo },
-        10: { home: classificacoes["E"].segundo,  away: classificacoes["I"].segundo },
-        11: { home: classificacoes["A"].primeiro, away: pick3(["C","E","F","H","I"]) },
-        12: { home: classificacoes["L"].primeiro, away: pick3(["E","H","I","J","K"]) },
+  const pick3 = (lista) => {
+    for (const g of lista) {
+      if (melhores3[g]) return melhores3[g];
+    }
+    return { nome: "—", flag: "", grupo: null };
+  };
 
-        13: { home: classificacoes["J"].primeiro, away: classificacoes["H"].segundo },
-        14: { home: classificacoes["D"].segundo,  away: classificacoes["G"].segundo },
-        15: { home: classificacoes["B"].primeiro, away: pick3(["E","F","G","I","J"]) },
-        16: { home: classificacoes["K"].primeiro, away: pick3(["D","E","I","J","L"]) }
+  const jogos = {
+    1:  { home: classificacoes["E"]?.primeiro, away: pick3(["A","B","C","D","F"]) },
+    2:  { home: classificacoes["I"]?.primeiro, away: pick3(["C","D","F","G","H"]) },
+    3:  { home: classificacoes["A"]?.segundo,  away: classificacoes["B"]?.segundo },
+    4:  { home: classificacoes["F"]?.primeiro, away: classificacoes["C"]?.segundo },
+    5:  { home: classificacoes["K"]?.segundo,  away: classificacoes["L"]?.segundo },
+    6:  { home: classificacoes["H"]?.primeiro, away: classificacoes["J"]?.segundo },
+    7:  { home: classificacoes["D"]?.primeiro, away: pick3(["B","E","F","I","J"]) },
+    8:  { home: classificacoes["G"]?.primeiro, away: pick3(["A","E","H","I","J"]) },
 
-    };
+    9:  { home: classificacoes["C"]?.primeiro, away: classificacoes["F"]?.segundo },
+    10: { home: classificacoes["E"]?.segundo,  away: classificacoes["I"]?.segundo },
+    11: { home: classificacoes["A"]?.primeiro, away: pick3(["C","E","F","H","I"]) },
+    12: { home: classificacoes["L"]?.primeiro, away: pick3(["E","H","I","J","K"]) },
 
-    return jogos;
+    13: { home: classificacoes["J"]?.primeiro, away: classificacoes["H"]?.segundo },
+    14: { home: classificacoes["D"]?.segundo,  away: classificacoes["G"]?.segundo },
+    15: { home: classificacoes["B"]?.primeiro, away: pick3(["E","F","G","I","J"]) },
+    16: { home: classificacoes["K"]?.primeiro, away: pick3(["D","E","I","J","L"]) }
+  };
+
+  return jogos;
 }
 
 // ===================================================================
 //  PREENCHE OS 16 JOGOS NA TELA DA SIMULAÇÃO
 // ===================================================================
 function preencherSimulacao(jogos32) {
+  for (let i = 1; i <= 16; i++) {
+    const jogo = jogos32[i];
+    const bloco = document.getElementById(`jogo-32-${i}`);
 
-    for (let i = 1; i <= 16; i++) {
-        const jogo = jogos32[i];
-        const bloco = document.getElementById(`jogo-32-${i}`);
+    if (!bloco || !jogo) continue;
 
-        if (!bloco || !jogo) continue;
+    const homeNomeEl  = bloco.querySelector(".home-name");
+    const awayNomeEl  = bloco.querySelector(".away-name");
+    const homeFlagEl  = bloco.querySelector(".home-flag");
+    const awayFlagEl  = bloco.querySelector(".away-flag");
+    const homeGolsEl  = bloco.querySelector(".home-gols");
+    const awayGolsEl  = bloco.querySelector(".away-gols");
+    const winnerEl    = bloco.querySelector(".winner-name");
 
-        bloco.querySelector(".home-name").textContent = jogo.home?.nome ?? "—";
-        bloco.querySelector(".home-flag").src = jogo.home?.flag ?? "";
-        bloco.querySelector(".away-name").textContent = jogo.away?.nome ?? "—";
-        bloco.querySelector(".away-flag").src = jogo.away?.flag ?? "";
+    if (homeNomeEl) homeNomeEl.textContent = jogo.home?.nome ?? "—";
+    if (awayNomeEl) awayNomeEl.textContent = jogo.away?.nome ?? "—";
+    if (homeFlagEl) homeFlagEl.src        = jogo.home?.flag ?? "";
+    if (awayFlagEl) awayFlagEl.src        = jogo.away?.flag ?? "";
 
-        bloco.querySelector(".home-gols").value = "";
-        bloco.querySelector(".away-gols").value = "";
-        bloco.querySelector(".winner-name").textContent = "";
-    }
+    if (homeGolsEl) homeGolsEl.value = "";
+    if (awayGolsEl) awayGolsEl.value = "";
+    if (winnerEl)   winnerEl.textContent = "";
+  }
 }
 
-// ============================================================
-//  EVENTO DE ABERTURA DA ABA SIMULAÇÃO
-// ============================================================
-
-document.querySelector('[data-pane="pane-simulacao"]')?.addEventListener("click", () => {
-
-    console.log(">>> CLICOU NA ABA SIMULAÇÃO <<<");
-
-    // 1) Recalcula todos os grupos primeiro
-    recalcularTodosOsGrupos();
-    console.log("Grupos recalculados");
-
-    // 2) Monta os confrontos da segunda fase
-    const jogos32 = montarSegundaFase();
-    console.log("Confrontos gerados:", jogos32);
-
-    // 3) Preenche a interface
+// ===================================================================
+//  FUNÇÃO PRINCIPAL: ATUALIZAR SIMULAÇÃO AO CLICAR NA ABA
+// ===================================================================
+async function atualizarSimulacaoMataMata() {
+  try {
+    const jogos32 = await montarSegundaFase();
+    if (!jogos32) {
+      console.warn("Não foi possível montar jogos da Segunda Fase.");
+      return;
+    }
     preencherSimulacao(jogos32);
-    console.log("Simulação preenchida");
-});
+  } catch (e) {
+    console.error("Erro ao atualizar simulação do mata-mata:", e);
+  }
+}
 
+// ===================================================================
+//  INTEGRAÇÃO COM O BOTÃO "SIMULAÇÃO" DO MENU SUPERIOR
+// ===================================================================
+document.addEventListener("DOMContentLoaded", () => {
+  // Clona os 16 jogos da Segunda Fase (já existia no seu HTML)
+  const container = document.querySelector(".fase32");
+  const modelo = document.getElementById("jogo-32-modelo");
+
+  if (container && modelo) {
+    container.querySelectorAll(".sim-jogo:not(.modelo)").forEach(j => j.remove());
+
+    for (let i = 1; i <= 16; i++) {
+      const novo = modelo.cloneNode(true);
+      novo.id = `jogo-32-${i}`;
+      novo.classList.remove("modelo");
+      novo.style.display = ""; // garante que aparece
+      container.appendChild(novo);
+    }
+
+    modelo.style.display = "none";
+  }
+
+  // Quando clicar em "Simulação" no topo, atualiza os jogos
+  const btnSimulacao = document.querySelector('.top-menu-btn[data-pane="pane-simulacao"]');
+  if (btnSimulacao) {
+    btnSimulacao.addEventListener("click", () => {
+      atualizarSimulacaoMataMata();
+    });
+  }
+});
