@@ -2715,7 +2715,7 @@ document.querySelector('[data-pane="pane-simulacao"]').addEventListener("click",
 
     // 1️⃣ Recalcula todos os grupos antes de ler a classificação NO SUPABASE
     if (typeof recalcularTodosOsGrupos === "function") {
-        recalcularTodosOsGrupos();
+        await recalcularTodosOsGrupos();
         console.log("✔ Grupos recalculados e enviados ao Supabase");
     } else {
         console.error("❌ Função recalcularTodosOsGrupos() não encontrada!");

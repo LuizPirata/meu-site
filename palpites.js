@@ -1130,6 +1130,20 @@ async function montarSegundaFase() {
 // ===================================================================
 function preencherSimulacao(jogos32) {
 
+// Zera tudo antes de preencher novamente
+    for (let i = 1; i <= 16; i++) {
+        const bloco = document.getElementById(`jogo-32-${i}`);
+        if (!bloco) continue;
+
+        bloco.querySelector(".home-name").textContent = "—";
+        bloco.querySelector(".home-flag").src = "";
+        bloco.querySelector(".away-name").textContent = "—";
+        bloco.querySelector(".away-flag").src = "";
+        bloco.querySelector(".home-gols").value = "";
+        bloco.querySelector(".away-gols").value = "";
+        bloco.querySelector(".winner-name").textContent = "";
+    }
+
   for (let i = 1; i <= 16; i++) {
     const jogo = jogos32[i];
     const bloco = document.getElementById(`jogo-32-${i}`);
