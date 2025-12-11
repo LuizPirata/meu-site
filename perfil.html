@@ -2709,31 +2709,35 @@
 //  PREENCHE A ABA SIMULAÇÃO QUANDO O BOTÃO DO MENU SUPERIOR FOR CLICADO
 // =================================================================================
 
-document.querySelector('[data-pane="pane-simulacao"]').addEventListener("click", () => {
+document.querySelector('[data-pane="pane-simulacao"]').addEventListener("click", async () => {
 
     console.log(">>> CLICOU NA ABA SIMULAÇÃO <<<");
 
-    // 1️⃣ Recalcula todos os grupos antes de ler a classificação
-    if (typeof recalcularGrupo === "function") {
-        Object.keys(grupos).forEach(g => recalcularGrupo(g)); 
-        console.log("✔ Grupos recalculados");
+    // 1️⃣ Recalcula todos os grupos antes de ler a classificação NO SUPABASE
+    if (typeof recalcularTodosOsGrupos === "function") {
+        recalcularTodosOsGrupos();
+        console.log("✔ Grupos recalculados e enviados ao Supabase");
     } else {
-        console.error("❌ Função recalcularGrupo() não encontrada!");
+        console.error("❌ Função recalcularTodosOsGrupos() não encontrada!");
     }
 
-    // 2️⃣ Monta os confrontos da Segunda Fase
+    // 2️⃣ Monta os confrontos da Segunda Fase (AGORA ASSÍNCRONO!)
     if (typeof montarSegundaFase !== "function") {
         console.error("❌ Função montarSegundaFase() não existe!");
         return;
     }
 
-    const jogos32 = montarSegundaFase();
-    console.log("✔ Confrontos gerados:", jogos32);
+    try {
+        const jogos32 = await montarSegundaFase();  // 👈 AQUI ESTÁ A ALTERAÇÃO PRINCIPAL!
+        console.log("✔ Confrontos carregados do Supabase:", jogos32);
 
-    // 3️⃣ Preenche a interface da simulação
-    preencherSimulacao(jogos32);
+        // 3️⃣ Preenche a interface da simulação
+        preencherSimulacao(jogos32);
+
+    } catch (e) {
+        console.error("❌ Erro ao montar a Segunda Fase:", e);
+    }
 });
-
 </script>
 
 

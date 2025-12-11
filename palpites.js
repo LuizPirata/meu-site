@@ -1,7 +1,10 @@
 // ==========================================================
 //  PALPITES.JS
 //  Motor genérico de classificação para os GRUPOS (A, B, C...)
-//  + integração com Supabase para a SIMULAÇÃO
+//  - Atualiza P, J, V, E, D, GF, GC, SG
+//  - Aplica confronto direto completo (head-to-head) por grupo
+//  - Salva classificação no Supabase em classificacao_grupos
+//  - Monta Simulação lendo a classificação do Supabase
 // ==========================================================
 
 // ---------- CONFIGURAÇÃO DOS GRUPOS ----------
@@ -177,10 +180,10 @@ const grupoD = {
 const grupoE = {
   tableBodyId: "grupoE-body",
   teams: [
-    { id: "alemanha",     name: "Alemanha",        flag: "alemanha.png" },
-    { id: "costadomarfim",name: "Costa do Marfim", flag: "costadomarfim.png" },
-    { id: "curacao",      name: "Curaçao",         flag: "curacao.png" },
-    { id: "equador",      name: "Equador",         flag: "equador.png" }
+    { id: "alemanha",      name: "Alemanha",        flag: "alemanha.png" },
+    { id: "costadomarfim", name: "Costa do Marfim", flag: "costadomarfim.png" },
+    { id: "curacao",       name: "Curaçao",         flag: "curacao.png" },
+    { id: "equador",       name: "Equador",         flag: "equador.png" }
   ],
   matches: [
     // 1ª rodada
@@ -221,10 +224,10 @@ const grupoE = {
 const grupoF = {
   tableBodyId: "grupoF-body",
   teams: [
-    { id: "holanda", name: "Holanda", flag: "holanda.png" },
-    { id: "japao",   name: "Japão",   flag: "japao.png" },
-    { id: "europab", name: "Europa B",flag: "europad.png" },
-    { id: "tunisia", name: "Tunísia", flag: "tunisia.png" }
+    { id: "holanda", name: "Holanda",   flag: "holanda.png" },
+    { id: "japao",   name: "Japão",     flag: "japao.png" },
+    { id: "europab", name: "Europa B",  flag: "europad.png" },
+    { id: "tunisia", name: "Tunísia",   flag: "tunisia.png" }
   ],
   matches: [
     // 1ª rodada
@@ -265,10 +268,10 @@ const grupoF = {
 const grupoG = {
   tableBodyId: "grupoG-body",
   teams: [
-    { id: "belgica", name: "Bélgica",         flag: "belgica.png" },
-    { id: "egito",   name: "Egito",           flag: "egito.png" },
-    { id: "ira",     name: "Irã",             flag: "ira.png" },
-    { id: "nz",      name: "Nova Zelândia",   flag: "novazelandia.png" }
+    { id: "belgica", name: "Bélgica",        flag: "belgica.png" },
+    { id: "egito",   name: "Egito",          flag: "egito.png" },
+    { id: "ira",     name: "Irã",            flag: "ira.png" },
+    { id: "nz",      name: "Nova Zelândia",  flag: "novazelandia.png" }
   ],
   matches: [
     // 1ª rodada
@@ -309,12 +312,13 @@ const grupoG = {
 const grupoH = {
   tableBodyId: "grupoH-body",
   teams: [
-    { id: "espanha",   name: "Espanha",        flag: "espanha.png" },
-    { id: "arabia",    name: "Arábia Saudita", flag: "arabia.png" },
-    { id: "caboverde", name: "Cabo Verde",     flag: "caboverde.png" },
-    { id: "uruguai",   name: "Uruguai",        flag: "uruguai.png" }
+    { id: "espanha",   name: "Espanha",       flag: "espanha.png" },
+    { id: "arabia",    name: "Arábia Saudita",flag: "arabia.png" },
+    { id: "caboverde", name: "Cabo Verde",    flag: "caboverde.png" },
+    { id: "uruguai",   name: "Uruguai",       flag: "uruguai.png" }
   ],
   matches: [
+
     // 1ª rodada
     { id: "H1", home: "espanha", away: "caboverde",
       homeSelector:'input[data-jogo="H1"][data-time="espanha"]',
@@ -353,12 +357,13 @@ const grupoH = {
 const grupoI = {
   tableBodyId: "grupoI-body",
   teams: [
-    { id: "franca",  name: "França",           flag: "franca.png" },
-    { id: "inter2",  name: "Intercontinental 2", flag: "europad.png" },
-    { id: "noruega", name: "Noruega",          flag: "noruega.png" },
-    { id: "senegal", name: "Senegal",          flag: "senegal.png" }
+    { id: "franca",  name: "França",              flag: "franca.png" },
+    { id: "inter2",  name: "Intercontinental 2",  flag: "europad.png" },
+    { id: "noruega", name: "Noruega",             flag: "noruega.png" },
+    { id: "senegal", name: "Senegal",             flag: "senegal.png" }
   ],
   matches: [
+
     // 1ª Rodada
     { id: "I1", home: "franca", away: "senegal",
       homeSelector:'input[data-jogo="I1"][data-time="franca"]',
@@ -447,12 +452,13 @@ const grupoJ = {
 const grupoK = {
   tableBodyId: "grupoK-body",
   teams: [
-    { id: "portugal",    name: "Portugal",          flag: "portugal.png" },
-    { id: "colombia",    name: "Colômbia",          flag: "colombia.png" },
-    { id: "inter1",      name: "Intercontinental 1",flag: "europad.png" },
-    { id: "uzbequistao", name: "Uzbequistão",       flag: "uzbequistao.png" }
+    { id: "portugal",     name: "Portugal",           flag: "portugal.png" },
+    { id: "colombia",     name: "Colômbia",           flag: "colombia.png" },
+    { id: "inter1",       name: "Intercontinental 1", flag: "europad.png" },
+    { id: "uzbequistao",  name: "Uzbequistão",        flag: "uzbequistao.png" }
   ],
   matches: [
+
     // 1ª Rodada
     { id: "K1", home: "portugal", away: "inter1",
       homeSelector:'input[data-jogo="K1"][data-time="portugal"]',
@@ -532,6 +538,7 @@ const grupoL = {
   ]
 };
 
+
 // ---------- REGISTRO GLOBAL DE GRUPOS ----------
 const grupos = {
   A: grupoA,
@@ -549,9 +556,10 @@ const grupos = {
 };
 
 // ==========================================================
-//  MOTOR GENÉRICO (para tabela local, se você ainda usar)
+//  MOTOR GENÉRICO
 // ==========================================================
 
+// Cria estrutura base de estatísticas para um grupo
 function createEmptyStats(teams) {
   const stats = {};
   teams.forEach(t => {
@@ -573,6 +581,7 @@ function createEmptyStats(teams) {
   return stats;
 }
 
+// Processa todos os jogos de um grupo
 function processMatchesGroup(groupConfig, stats) {
   const { matches } = groupConfig;
 
@@ -624,6 +633,7 @@ function processMatchesGroup(groupConfig, stats) {
     home.pts += homePts;
     away.pts += awayPts;
 
+    // Head-to-head
     if (!home.h2h[match.away]) home.h2h[match.away] = { gf: 0, ga: 0, pts: 0 };
     if (!away.h2h[match.home]) away.h2h[match.home] = { gf: 0, ga: 0, pts: 0 };
 
@@ -636,11 +646,13 @@ function processMatchesGroup(groupConfig, stats) {
     away.h2h[match.home].pts += awayPts;
   }
 
+  // saldo de gols
   for (const t of Object.values(stats)) {
     t.sg = t.gf - t.gc;
   }
 }
 
+// Ordenação inicial
 function ordenarGeral(teams, stats) {
   const order = teams.map(t => t.id);
   order.sort((aId, bId) => {
@@ -648,13 +660,14 @@ function ordenarGeral(teams, stats) {
     const b = stats[bId];
 
     if (b.pts !== a.pts) return b.pts - a.pts;
-    if (b.sg !== a.sg)   return b.sg - a.sg;
-    if (b.gf !== a.gf)   return b.gf - a.gf;
+    if (b.sg !== a.sg) return b.sg - a.sg;
+    if (b.gf !== a.gf) return b.gf - a.gf;
     return 0;
   });
   return order;
 }
 
+// Confronto direto (mini-tabela)
 function aplicarConfrontoDireto(order, stats) {
   const finalOrder = [];
   let i = 0;
@@ -662,6 +675,7 @@ function aplicarConfrontoDireto(order, stats) {
   while (i < order.length) {
     let j = i + 1;
 
+    // agrupa times empatados em pts, sg, gf
     while (j < order.length) {
       const a = stats[order[i]];
       const b = stats[order[j]];
@@ -696,8 +710,8 @@ function aplicarConfrontoDireto(order, stats) {
 
       mini.sort((a, b) => {
         if (b.pts !== a.pts) return b.pts - a.pts;
-        if (b.sg  !== a.sg)  return b.sg  - a.sg;
-        if (b.gf  !== a.gf)  return b.gf  - a.gf;
+        if (b.sg !== a.sg)  return b.sg  - a.sg;
+        if (b.gf !== a.gf)  return b.gf  - a.gf;
         return 0;
       });
 
@@ -711,10 +725,52 @@ function aplicarConfrontoDireto(order, stats) {
 }
 
 // ------------------------------------
-//  REGISTRO DAS CLASSIFICAÇÕES LOCAIS
+//  REGISTRO DAS CLASSIFICAÇÕES (em memória)
 // ------------------------------------
-const classificacoesLocais = {};
+const classificacoes = {};
 
+// ------------------------------------
+//  SALVAR CLASSIFICAÇÃO NO SUPABASE
+// ------------------------------------
+async function salvarClassificacaoNoSupabase(groupKey, stats, order) {
+  if (typeof supabase === "undefined") {
+    console.warn("Supabase não disponível, pulando salvamento da classificação.");
+    return;
+  }
+
+  const rows = order.map((teamId) => {
+    const st = stats[teamId];
+    return {
+      grupo_id: groupKey,
+      time_id: st.id,
+      pontos: st.pts,
+      jogos: st.j,
+      vitorias: st.v,
+      empates: st.e,
+      derrotas: st.d,
+      gols_marcados: st.gf,
+      gols_sufridos: st.gc,      // se a coluna correta for gols_sofridos, troque o nome aqui
+      gols_sofridos: st.gc,      // coloquei os dois por segurança
+      saldo_gols: st.sg,
+      time_nome: st.name,
+      time_flag: st.flag
+      // se a tabela tiver coluna "posicao", pode adicionar:
+      // posicao: index + 1
+    };
+  });
+
+  const { error } = await supabase
+    .from("classificacao_grupos")
+    .upsert(rows, { onConflict: "grupo_id,time_id" });
+
+  if (error) {
+    console.error("Erro ao salvar classificação do grupo", groupKey, error);
+  } else {
+    console.log("Classificação salva no Supabase para o grupo", groupKey);
+  }
+}
+
+// Recalcular grupo
 function recalcularGrupo(groupKey) {
   const group = grupos[groupKey];
   if (!group) return;
@@ -724,12 +780,106 @@ function recalcularGrupo(groupKey) {
   let order = ordenarGeral(group.teams, stats);
   order = aplicarConfrontoDireto(order, stats);
 
-  classificacoesLocais[groupKey] = { stats, order };
+  // salva para uso interno
+  classificacoes[groupKey] = { stats, order };
 
+  // renderiza na tela
   renderTabelaGroup(group, stats, order);
+
+  // salva no Supabase (não trava a interface)
+  salvarClassificacaoNoSupabase(groupKey, stats, order)
+    .catch(err => console.error("Erro inesperado ao salvar classificação:", err));
 }
 
+// pega o time em uma certa posição (1º, 2º, 3º...)
+// (ainda usado em algumas partes; mantive)
+function getColocado(groupKey, posicao) {
+  const info = classificacoes[groupKey];
+  if (!info) return null;
+
+  const { stats, order } = info;
+  if (order.length < posicao) return null;
+
+  const teamId = order[posicao - 1];
+  const st = stats[teamId];
+
+  return {
+    id: teamId,
+    name: st.name,
+    flag: st.flag,
+    pts: st.pts,
+    sg: st.sg,
+    gf: st.gf,
+    group: groupKey
+  };
+}
+
+// retorna os 8 melhores 3º colocados
+function getMelhoresTerceiros() {
+  const terceiros = [];
+
+  "ABCDEFGHIJKL".split("").forEach(g => {
+    const t3 = getColocado(g, 3);
+    if (!t3) return;
+    terceiros.push(t3);
+  });
+
+  // ordena: Pts > SG > GF > Nome (A-Z)
+  terceiros.sort((a, b) => {
+    if (b.pts !== a.pts) return b.pts - a.pts;
+    if (b.sg  !== a.sg)  return b.sg  - a.sg;
+    if (b.gf  !== a.gf)  return b.gf  - a.gf;
+    return a.name.localeCompare(b.name, "pt-BR");
+  });
+
+  return terceiros.slice(0, 8);
+}
+
+// escolhe um 3º colocado da lista de grupos permitidos (A,B,C...)
+function pickThirdFromPools(listaGrupos, melhoresTerceiros, usadosGrupos) {
+  for (const g of listaGrupos) {
+    const t = melhoresTerceiros.find(t => t.group === g);
+    if (t && !usadosGrupos.has(g)) {
+      usadosGrupos.add(g);
+      return t;
+    }
+  }
+  return null;
+}
+
+// ------------------------------------
+//  INICIALIZAÇÃO DOS GRUPOS
+// ------------------------------------
+
+// Inicializar listeners de todos os inputs do grupo
+function initGrupo(groupKey) {
+  const config = grupos[groupKey];
+  if (!config) return;
+
+  config.matches.forEach(match => {
+    const homeInput = document.querySelector(match.homeSelector);
+    const awayInput = document.querySelector(match.awaySelector);
+
+    if (!homeInput || !awayInput) return;
+
+    const handler = () => recalcularGrupo(groupKey);
+
+    homeInput.addEventListener("input", handler);
+    awayInput.addEventListener("input", handler);
+  });
+
+  // calcula a classificação inicial
+  recalcularGrupo(groupKey);
+}
+
+// Inicializar todos os grupos registrados
+Object.keys(grupos).forEach(initGrupo);
+
+// =====================================
+//   RENDERIZAÇÃO DA TABELA DE GRUPO
+// =====================================
 function renderTabelaGroup(group, stats, order) {
+
   const tbody = document.getElementById(group.tableBodyId);
   if (!tbody) {
     console.error("Elemento não encontrado:", group.tableBodyId);
@@ -764,36 +914,13 @@ function renderTabelaGroup(group, stats, order) {
   });
 }
 
-function initGrupo(groupKey) {
-  const config = grupos[groupKey];
-  if (!config) return;
 
-  config.matches.forEach(match => {
-    const homeInput = document.querySelector(match.homeSelector);
-    const awayInput = document.querySelector(match.awaySelector);
 
-    if (!homeInput || !awayInput) return;
-
-    const handler = () => recalcularGrupo(groupKey);
-    homeInput.addEventListener("input", handler);
-    awayInput.addEventListener("input", handler);
-  });
-
-  recalcularGrupo(groupKey);
-}
-
-Object.keys(grupos).forEach(initGrupo);
-
-// ======================================================
-//  FUNÇÕES PARA PALPITES EXTRAS (Supabase "times")
-// ======================================================
+//  // ==============================
+//  //  CARREGA TODAS AS SELEÇÕES (EXTRAS)
+//  // ==============================
 
 async function loadAllTeams() {
-  if (typeof supabase === "undefined") {
-    console.error("Supabase não encontrado (window.supabase).");
-    return [];
-  }
-
   const { data, error } = await supabase
     .from("times")
     .select("*")
@@ -828,18 +955,18 @@ function fillGroupDropdowns(teams) {
   gruposLetras.forEach(g => {
     const timesGrupo = teams.filter(t => t.grupo_id === g);
 
-    if (document.getElementById(`extra-grupo-${g}-1`)) {
-      fillFlagDropdown(`extra-grupo-${g}-1`, timesGrupo);
-    }
-    if (document.getElementById(`extra-grupo-${g}-2`)) {
-      fillFlagDropdown(`extra-grupo-${g}-2`, timesGrupo);
-    }
+    const s1 = document.getElementById(`extra-grupo-${g}-1`);
+    const s2 = document.getElementById(`extra-grupo-${g}-2`);
+
+    if (s1) fillFlagDropdown(`extra-grupo-${g}-1`, timesGrupo);
+    if (s2) fillFlagDropdown(`extra-grupo-${g}-2`, timesGrupo);
   });
 }
 
 async function initPalpitesExtras() {
   const teams = await loadAllTeams();
 
+  // Preenche os grupos
   fillGroupDropdowns(teams);
 
   // Artilheiros
@@ -857,130 +984,142 @@ async function initPalpitesExtras() {
   fillFlagDropdown("extra-mais-sofridos", teams);
 }
 
-// ======================================================
-//  CLASSIFICAÇÃO PARA SIMULAÇÃO – VIA SUPABASE
-// ======================================================
-
-// LÊ a classificação de um grupo A–L diretamente do Supabase
-async function getClassificacaoGrupo(grupoLetra) {
+// ===============================================
+//  LER CLASSIFICAÇÃO DIRETO DO SUPABASE (p/ SIMULAÇÃO)
+// ===============================================
+async function getClassificacaoGrupoFromSupabase(grupoLetra) {
   if (typeof supabase === "undefined") {
-    console.error("Supabase não encontrado (window.supabase).");
+    console.warn("Supabase não disponível para carregar classificação.");
     return null;
   }
 
   const { data, error } = await supabase
     .from("classificacao_grupos")
-    .select("grupo_id, time_nome, time_flag, pontos, saldo_gols, gols_marcados, gols_sofridos")
-    .eq("grupo_id", grupoLetra)
-    .order("pontos", { ascending: false })
-    .order("saldo_gols", { ascending: false })
-    .order("gols_marcados", { ascending: false })
-    .order("time_nome", { ascending: true });
+    .select("time_id, time_nome, time_flag, pontos, saldo_gols, gols_marcados")
+    .eq("grupo_id", grupoLetra);
 
   if (error) {
-    console.error("Erro ao ler classificação do grupo", grupoLetra, error);
+    console.error("Erro ao carregar classificação do grupo", grupoLetra, error);
     return null;
   }
 
   if (!data || data.length < 3) {
-    console.warn(`Grupo ${grupoLetra}: menos de 3 registros na tabela classificacao_grupos.`);
+    console.warn("Classificação incompleta no Supabase para o grupo", grupoLetra);
     return null;
   }
 
-  const mapLinha = (linha, pos, grupo) => ({
-    nome: linha.time_nome,
-    flag: linha.time_flag,
-    pontos: linha.pontos,
-    sg: linha.saldo_gols,
-    gf: linha.gols_marcados,
-    gc: linha.gols_sofridos,
-    grupo
+  // Ordenar do mesmo jeito básico (Pts > SG > GF > Nome)
+  data.sort((a, b) => {
+    if (b.pontos !== a.pontos) return b.pontos - a.pontos;
+    if (b.saldo_gols !== a.saldo_gols) return b.saldo_gols - a.saldo_gols;
+    if (b.gols_marcados !== a.gols_marcados) return b.gols_marcados - a.gols_marcados;
+    return a.time_nome.localeCompare(b.time_nome, "pt-BR");
+  });
+
+  const toObj = (row) => ({
+    id: row.time_id,
+    nome: row.time_nome,
+    flag: row.time_flag,
+    pts: row.pontos,
+    sg: row.saldo_gols,
+    gf: row.gols_marcados,
+    group: grupoLetra
   });
 
   return {
-    primeiro: mapLinha(data[0], 1, grupoLetra),
-    segundo:  mapLinha(data[1], 2, grupoLetra),
-    terceiro: mapLinha(data[2], 3, grupoLetra),
-    lista: data
+    primeiro: toObj(data[0]),
+    segundo:  toObj(data[1]),
+    terceiro: toObj(data[2])
   };
 }
 
-// Escolhe os 8 melhores terceiros de TODOS os grupos
-function escolherMelhoresTerceiros(terceirosPorGrupo) {
-  const lista = Object.entries(terceirosPorGrupo)
-    .filter(([, t]) => !!t)
-    .map(([grupo, t]) => ({
-      grupo,
-      ...t
-    }));
-
-  // Ordenação real: pontos > saldo > gols marcados > nome
-  lista.sort((a, b) => {
-    if (b.pontos !== a.pontos) return b.pontos - a.pontos;
-    if (b.sg     !== a.sg)     return b.sg     - a.sg;
-    if (b.gf     !== a.gf)     return b.gf     - a.gf;
-    return a.nome.localeCompare(b.nome, "pt-BR");
-  });
-
-  const top8 = lista.slice(0, 8);
-  const mapa = {};
-
-  top8.forEach(t => {
-    mapa[t.grupo] = t;
-  });
-
-  return mapa; // { "A": terceiroA, "D": terceiroD, ... } apenas se estiver entre os 8
+// ===============================================
+//  LISTA DOS 12 TERCEIROS — ESCOLHENDO OS 8 MELHORES
+//  (para simulação; aqui ainda é "fake", só repassa)
+// ===============================================
+function escolherMelhoresTerceiros(terceiros) {
+  return terceiros; // por enquanto, retorna tudo; o filtro é pelo chaveamento
 }
 
 // ======================================================
-//  MONTA OS 16 CONFRONTOS DA SEGUNDA FASE (32) – SUPABASE
+//  FORÇA A RE-CALCULAR TODOS OS GRUPOS A–L (NA MEMÓRIA)
 // ======================================================
-async function montarSegundaFase() {
+function recalcularTodosOsGrupos() {
   const gruposLetras = "ABCDEFGHIJKL".split("");
+
+  gruposLetras.forEach(g => {
+    if (typeof grupos[g] !== "undefined") {
+      recalcularGrupo(g);
+    }
+  });
+}
+
+
+// ===============================================
+//  MONTA OS 16 CONFRONTOS DA SEGUNDA FASE (32)
+//  LENDO DO SUPABASE
+// ===============================================
+async function montarSegundaFase() {
+
+  const letras = "ABCDEFGHIJKL".split("");
 
   const classificacoes = {};
   const terceiros = {};
 
-  for (const g of gruposLetras) {
-    const dados = await getClassificacaoGrupo(g);
+  for (const g of letras) {
+    const dados = await getClassificacaoGrupoFromSupabase(g);
     if (!dados) continue;
 
     classificacoes[g] = {
-      primeiro: dados.primeiro,
-      segundo:  dados.segundo
+      primeiro: { nome: dados.primeiro.nome, flag: dados.primeiro.flag },
+      segundo:  { nome: dados.segundo.nome,  flag: dados.segundo.flag  }
     };
 
-    terceiros[g] = dados.terceiro; // já vem com pontos, sg, gf, grupo...
+    terceiros[g] = {
+      nome: dados.terceiro.nome,
+      flag: dados.terceiro.flag,
+      group: g
+    };
   }
 
+  // Temporariamente, consideramos todos os terceiros como válidos
   const melhores3 = escolherMelhoresTerceiros(terceiros);
 
+  // Função auxiliar
   const pick3 = (lista) => {
     for (const g of lista) {
       if (melhores3[g]) return melhores3[g];
     }
-    return { nome: "—", flag: "", grupo: null };
+    return { nome: "—", flag: "" };
   };
 
+  const safe = (grupo, tipo) => {
+    const base = classificacoes[grupo]?.[tipo];
+    return base || { nome: "—", flag: "" };
+  };
+
+  // AGORA MONTAMOS OS 16 JOGOS seguindo seu chaveamento FIXO:
   const jogos = {
-    1:  { home: classificacoes["E"]?.primeiro, away: pick3(["A","B","C","D","F"]) },
-    2:  { home: classificacoes["I"]?.primeiro, away: pick3(["C","D","F","G","H"]) },
-    3:  { home: classificacoes["A"]?.segundo,  away: classificacoes["B"]?.segundo },
-    4:  { home: classificacoes["F"]?.primeiro, away: classificacoes["C"]?.segundo },
-    5:  { home: classificacoes["K"]?.segundo,  away: classificacoes["L"]?.segundo },
-    6:  { home: classificacoes["H"]?.primeiro, away: classificacoes["J"]?.segundo },
-    7:  { home: classificacoes["D"]?.primeiro, away: pick3(["B","E","F","I","J"]) },
-    8:  { home: classificacoes["G"]?.primeiro, away: pick3(["A","E","H","I","J"]) },
 
-    9:  { home: classificacoes["C"]?.primeiro, away: classificacoes["F"]?.segundo },
-    10: { home: classificacoes["E"]?.segundo,  away: classificacoes["I"]?.segundo },
-    11: { home: classificacoes["A"]?.primeiro, away: pick3(["C","E","F","H","I"]) },
-    12: { home: classificacoes["L"]?.primeiro, away: pick3(["E","H","I","J","K"]) },
+    1:  { home: safe("E","primeiro"), away: pick3(["A","B","C","D","F"]) },
+    2:  { home: safe("I","primeiro"), away: pick3(["C","D","F","G","H"]) },
+    3:  { home: safe("A","segundo"),  away: safe("B","segundo") },
+    4:  { home: safe("F","primeiro"), away: safe("C","segundo") },
+    5:  { home: safe("K","segundo"),  away: safe("L","segundo") },
+    6:  { home: safe("H","primeiro"), away: safe("J","segundo") },
+    7:  { home: safe("D","primeiro"), away: pick3(["B","E","F","I","J"]) },
+    8:  { home: safe("G","primeiro"), away: pick3(["A","E","H","I","J"]) },
 
-    13: { home: classificacoes["J"]?.primeiro, away: classificacoes["H"]?.segundo },
-    14: { home: classificacoes["D"]?.segundo,  away: classificacoes["G"]?.segundo },
-    15: { home: classificacoes["B"]?.primeiro, away: pick3(["E","F","G","I","J"]) },
-    16: { home: classificacoes["K"]?.primeiro, away: pick3(["D","E","I","J","L"]) }
+    9:  { home: safe("C","primeiro"), away: safe("F","segundo") },
+    10: { home: safe("E","segundo"),  away: safe("I","segundo") },
+    11: { home: safe("A","primeiro"), away: pick3(["C","E","F","H","I"]) },
+    12: { home: safe("L","primeiro"), away: pick3(["E","H","I","J","K"]) },
+
+    13: { home: safe("J","primeiro"), away: safe("H","segundo") },
+    14: { home: safe("D","segundo"),  away: safe("G","segundo") },
+    15: { home: safe("B","primeiro"), away: pick3(["E","F","G","I","J"]) },
+    16: { home: safe("K","primeiro"), away: pick3(["D","E","I","J","L"]) }
+
   };
 
   return jogos;
@@ -990,74 +1129,24 @@ async function montarSegundaFase() {
 //  PREENCHE OS 16 JOGOS NA TELA DA SIMULAÇÃO
 // ===================================================================
 function preencherSimulacao(jogos32) {
+
   for (let i = 1; i <= 16; i++) {
     const jogo = jogos32[i];
     const bloco = document.getElementById(`jogo-32-${i}`);
 
     if (!bloco || !jogo) continue;
 
-    const homeNomeEl  = bloco.querySelector(".home-name");
-    const awayNomeEl  = bloco.querySelector(".away-name");
-    const homeFlagEl  = bloco.querySelector(".home-flag");
-    const awayFlagEl  = bloco.querySelector(".away-flag");
-    const homeGolsEl  = bloco.querySelector(".home-gols");
-    const awayGolsEl  = bloco.querySelector(".away-gols");
-    const winnerEl    = bloco.querySelector(".winner-name");
+    bloco.querySelector(".home-name").textContent = jogo.home?.nome ?? "—";
+    bloco.querySelector(".home-flag").src       = jogo.home?.flag ?? "";
+    bloco.querySelector(".away-name").textContent = jogo.away?.nome ?? "—";
+    bloco.querySelector(".away-flag").src       = jogo.away?.flag ?? "";
 
-    if (homeNomeEl) homeNomeEl.textContent = jogo.home?.nome ?? "—";
-    if (awayNomeEl) awayNomeEl.textContent = jogo.away?.nome ?? "—";
-    if (homeFlagEl) homeFlagEl.src        = jogo.home?.flag ?? "";
-    if (awayFlagEl) awayFlagEl.src        = jogo.away?.flag ?? "";
+    const hg = bloco.querySelector(".home-gols");
+    const ag = bloco.querySelector(".away-gols");
+    const wn = bloco.querySelector(".winner-name");
 
-    if (homeGolsEl) homeGolsEl.value = "";
-    if (awayGolsEl) awayGolsEl.value = "";
-    if (winnerEl)   winnerEl.textContent = "";
+    if (hg) hg.value = "";
+    if (ag) ag.value = "";
+    if (wn) wn.textContent = "";
   }
 }
-
-// ===================================================================
-//  FUNÇÃO PRINCIPAL: ATUALIZAR SIMULAÇÃO AO CLICAR NA ABA
-// ===================================================================
-async function atualizarSimulacaoMataMata() {
-  try {
-    const jogos32 = await montarSegundaFase();
-    if (!jogos32) {
-      console.warn("Não foi possível montar jogos da Segunda Fase.");
-      return;
-    }
-    preencherSimulacao(jogos32);
-  } catch (e) {
-    console.error("Erro ao atualizar simulação do mata-mata:", e);
-  }
-}
-
-// ===================================================================
-//  INTEGRAÇÃO COM O BOTÃO "SIMULAÇÃO" DO MENU SUPERIOR
-// ===================================================================
-document.addEventListener("DOMContentLoaded", () => {
-  // Clona os 16 jogos da Segunda Fase (já existia no seu HTML)
-  const container = document.querySelector(".fase32");
-  const modelo = document.getElementById("jogo-32-modelo");
-
-  if (container && modelo) {
-    container.querySelectorAll(".sim-jogo:not(.modelo)").forEach(j => j.remove());
-
-    for (let i = 1; i <= 16; i++) {
-      const novo = modelo.cloneNode(true);
-      novo.id = `jogo-32-${i}`;
-      novo.classList.remove("modelo");
-      novo.style.display = ""; // garante que aparece
-      container.appendChild(novo);
-    }
-
-    modelo.style.display = "none";
-  }
-
-  // Quando clicar em "Simulação" no topo, atualiza os jogos
-  const btnSimulacao = document.querySelector('.top-menu-btn[data-pane="pane-simulacao"]');
-  if (btnSimulacao) {
-    btnSimulacao.addEventListener("click", () => {
-      atualizarSimulacaoMataMata();
-    });
-  }
-});
