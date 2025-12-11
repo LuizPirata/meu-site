@@ -820,6 +820,36 @@ function initGrupo(groupKey) {
 // Inicializar todos os grupos registrados
 Object.keys(grupos).forEach(initGrupo);
 
+// =====================================
+//   RENDERIZAÇÃO DA TABELA DE GRUPO
+// =====================================
+function renderTabelaGroup(group, stats, order) {
+    const tabela = document.querySelector(group.tableSelector);
+    if (!tabela) return;
+
+    tabela.innerHTML = "";
+
+    order.forEach((teamId, index) => {
+        const st = stats[teamId];
+
+        const row = `
+            <tr>
+                <td><strong>${index + 1}º</strong> ${st.name}</td>
+                <td>${st.pts}</td>
+                <td>${st.j}</td>
+                <td>${st.v}</td>
+                <td>${st.e}</td>
+                <td>${st.d}</td>
+                <td>${st.gf}</td>
+                <td>${st.gc}</td>
+                <td>${st.sg}</td>
+            </tr>
+        `;
+        tabela.innerHTML += row;
+    });
+}
+
+
 
 //  // ==============================
 //  //  CARREGA TODAS AS SELEÇÕES
