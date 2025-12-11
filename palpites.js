@@ -824,28 +824,38 @@ Object.keys(grupos).forEach(initGrupo);
 //   RENDERIZAÇÃO DA TABELA DE GRUPO
 // =====================================
 function renderTabelaGroup(group, stats, order) {
-    const tabela = document.querySelector(group.tableSelector);
-    if (!tabela) return;
 
-    tabela.innerHTML = "";
+    const tbody = document.getElementById(group.tableBodyId);
+    if (!tbody) {
+        console.error("Elemento não encontrado:", group.tableBodyId);
+        return;
+    }
+
+    tbody.innerHTML = "";
 
     order.forEach((teamId, index) => {
         const st = stats[teamId];
+        const meta = group.teams.find(t => t.id === teamId);
 
-        const row = `
-            <tr>
-                <td><strong>${index + 1}º</strong> ${st.name}</td>
-                <td>${st.pts}</td>
-                <td>${st.j}</td>
-                <td>${st.v}</td>
-                <td>${st.e}</td>
-                <td>${st.d}</td>
-                <td>${st.gf}</td>
-                <td>${st.gc}</td>
-                <td>${st.sg}</td>
-            </tr>
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+            <td class="time-cell">
+                <span class="posicao">${index + 1}º</span>
+                <img src="${meta.flag}" class="flag">
+                <span class="time-nome">${meta.name}</span>
+            </td>
+            <td>${st.pts}</td>
+            <td>${st.j}</td>
+            <td>${st.v}</td>
+            <td>${st.e}</td>
+            <td>${st.d}</td>
+            <td>${st.gf}</td>
+            <td>${st.gc}</td>
+            <td>${st.sg}</td>
         `;
-        tabela.innerHTML += row;
+
+        tbody.appendChild(tr);
     });
 }
 
