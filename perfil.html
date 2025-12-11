@@ -2703,27 +2703,26 @@
 
   <!-- MOTOR DE PALPITES (A, B, C, D...) -->
   <script src="palpites.js"></script>
+
 <script>
-document.querySelectorAll(".top-menu-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
+document.querySelector('[data-pane="pane-simulacao"]').addEventListener("click", () => {
+    console.log("Abrindo Simulação…");
 
-        // Remove "active" de todos os botões do menu
-        document.querySelectorAll(".top-menu-btn")
-            .forEach(b => b.classList.remove("active"));
+    const jogos32 = montarSegundaFase();
 
-        // Adiciona ativo ao clicado
-        btn.classList.add("active");
+    for (let i = 1; i <= 16; i++) {
+        const jogo = jogos32[i];
+        const bloco = document.getElementById(`jogo-32-${i}`);
+        if (!bloco || !jogo) continue;
 
-        // Esconde todas as abas
-        document.querySelectorAll(".menu-pane")
-            .forEach(p => p.classList.remove("active"));
-
-        // Mostra a aba clicada
-        const alvo = "pane-" + btn.dataset.pane;
-        document.getElementById(alvo).classList.add("active");
-    });
+        bloco.querySelector(".home-name").textContent = jogo.home.name;
+        bloco.querySelector(".home-flag").src = jogo.home.flag;
+        bloco.querySelector(".away-name").textContent = jogo.away.name;
+        bloco.querySelector(".away-flag").src = jogo.away.flag;
+    }
 });
 </script>
+
 
 <script>
 // ======================================================
