@@ -1062,11 +1062,24 @@ function preencherSimulacao(jogos32) {
     }
 }
 
+// ============================================================
+//  EVENTO DE ABERTURA DA ABA SIMULAÇÃO
+// ============================================================
 
+document.querySelector('[data-pane="pane-simulacao"]')?.addEventListener("click", () => {
 
+    console.log(">>> CLICOU NA ABA SIMULAÇÃO <<<");
 
+    // 1) Recalcula todos os grupos primeiro
+    recalcularTodosOsGrupos();
+    console.log("Grupos recalculados");
 
+    // 2) Monta os confrontos da segunda fase
+    const jogos32 = montarSegundaFase();
+    console.log("Confrontos gerados:", jogos32);
 
-
-
+    // 3) Preenche a interface
+    preencherSimulacao(jogos32);
+    console.log("Simulação preenchida");
+});
 
