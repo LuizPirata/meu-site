@@ -2628,19 +2628,60 @@
 
   <!-- ========== SCRIPT: LOGIN + TABS ========== -->
     <script type="module">
-    import { createClient } from "https://esm.sh/@supabase/supabase-js";
+import { createClient } from "https://esm.sh/@supabase/supabase-js";
 
-    // cria o client normalmente
-  const supabaseClient = createClient(
-    "https://mdaqzciffsgupzbfxzgf.supabase.co",
-    "sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY"
-  );
+const supabaseClient = createClient(
+  "https://mdaqzciffsgupzbfxzgf.supabase.co",
+  "sb_publishable_5A4XlgwAjib2nde_qe5WQA_F9qCTghY"
+);
 
-  // 👇 expõe o client como global para os outros scripts
-  window.supabase = supabaseClient;
+// deixa supabase global
+window.supabase = supabaseClient;
 
-  const { data: { session }} = await supabaseClient.auth.getSession();
-  if (!session) window.location.href = "index.html";
+// valida login
+const { data: { session }} = await supabaseClient.auth.getSession();
+if (!session) window.location.href = "index.html";
+
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+  await supabaseClient.auth.signOut();
+  window.location.href = "index.html";
+});
+
+// MENU SUPERIOR
+const topButtons = document.querySelectorAll(".top-menu-btn");
+const menuPanes  = document.querySelectorAll(".menu-pane");
+
+topButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const target = btn.dataset.pane;
+    topButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    menuPanes.forEach(p => p.classList.toggle("active", p.id === target));
+  });
+});
+
+// SUB-MENU GRUPOS
+const tabs  = document.querySelectorAll(".grupo-tab");
+const panes = document.querySelectorAll(".grupo-pane");
+
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    const group = tab.dataset.group;
+
+    tabs.forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+
+    panes.forEach(p => p.classList.toggle("active", p.id === `grupo-${group}`));
+
+    if (group === "EXTRA") {
+      if (typeof initPalpitesExtras === "function") {
+        initPalpitesExtras();
+      }
+    }
+  });
+});
+</script>
 
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
@@ -2649,70 +2690,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const userId = session.user.id;
 
-    // 1️⃣ Carrega palpites existentes no Supabase
     aplicarPalpitesNosInputs(userId);
-
-    // 2️⃣ Ativa salvamento automático
     ativarSalvamentoAutomatico(userId);
 });
-
-  document.getElementById("logoutBtn").addEventListener("click", async () => {
-    await supabaseClient.auth.signOut();
-    window.location.href = "index.html";
-  });
-
-    // ==========================
-    //  MENU SUPERIOR (Palpites / Resultados / ...)
-    // ==========================
-    const topButtons = document.querySelectorAll(".top-menu-btn");
-    const menuPanes  = document.querySelectorAll(".menu-pane");
-
-    topButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const targetId = btn.dataset.pane;   // ex: "pane-palpites"
-
-        // ativa visual do botão
-        topButtons.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-
-        // mostra só o pane correspondente
-        menuPanes.forEach(p => {
-          p.classList.toggle("active", p.id === targetId);
-        });
-      });
-    });
-
-
-
-    // ==========================
-    //  TABS DE GRUPOS (A, B, C...)
-    // ==========================
-    
-    const tabs  = document.querySelectorAll(".grupo-tab");
-    const panes = document.querySelectorAll(".grupo-pane");
-
-    tabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        const group = tab.dataset.group;
-
-        // Ativa destaque no botão
-        tabs.forEach(t => t.classList.remove("active"));
-        tab.classList.add("active");
-
-        // Mostra painel correspondente
-        panes.forEach(p => {
-          p.classList.toggle("active", p.id === "grupo-" + group);
-        });
-
-        // 👉 CHAMADA NECESSÁRIA PARA CARREGAR OS DROPDOWNS
-        if (group === "EXTRA") {
-            console.log("Carregando Palpites Extras...");
-            initPalpitesExtras();
-        }
-      });
-    });
 </script>
-
 
 
   <!-- MOTOR DE PALPITES (A, B, C, D...) -->
