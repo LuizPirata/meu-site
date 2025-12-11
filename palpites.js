@@ -1040,20 +1040,25 @@ function montarSegundaFase() {
     return jogos;
 }
 
-// ======================================================
-//  PREENCHE VISUALMENTE OS 16 JOGOS NA SIMULAÇÃO
-// ======================================================
+// ===================================================================
+//  PREENCHE OS 16 JOGOS NA TELA DA SIMULAÇÃO
+// ===================================================================
 function preencherSimulacao(jogos32) {
 
     for (let i = 1; i <= 16; i++) {
         const jogo = jogos32[i];
         const bloco = document.getElementById(`jogo-32-${i}`);
+
         if (!bloco || !jogo) continue;
 
-        bloco.querySelector(".home-name").textContent = jogo.home?.nome || "—";
-        bloco.querySelector(".home-flag").src = jogo.home?.flag || "";
-        bloco.querySelector(".away-name").textContent = jogo.away?.nome || "—";
-        bloco.querySelector(".away-flag").src = jogo.away?.flag || "";
+        bloco.querySelector(".home-name").textContent = jogo.home?.nome ?? "—";
+        bloco.querySelector(".home-flag").src = jogo.home?.flag ?? "";
+        bloco.querySelector(".away-name").textContent = jogo.away?.nome ?? "—";
+        bloco.querySelector(".away-flag").src = jogo.away?.flag ?? "";
+
+        bloco.querySelector(".home-gols").value = "";
+        bloco.querySelector(".away-gols").value = "";
+        bloco.querySelector(".winner-name").textContent = "";
     }
 }
 

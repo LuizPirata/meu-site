@@ -2705,19 +2705,35 @@
   <script src="palpites.js"></script>
 
 <script>
-document.querySelector('[data-pane="simulacao"]').addEventListener("click", () => {
+// =================================================================================
+//  PREENCHE A ABA SIMULAÇÃO QUANDO O BOTÃO DO MENU SUPERIOR FOR CLICADO
+// =================================================================================
 
-    console.log("Abrindo Simulação…");
+document.querySelector('[data-pane="pane-simulacao"]').addEventListener("click", () => {
 
-    // 1) recalcula tudo ANTES de montar a simulação
-    recalcularTodosOsGrupos();
+    console.log(">>> CLICOU NA ABA SIMULAÇÃO <<<");
 
-    // 2) obtém os confrontos
+    // 1️⃣ Recalcula todos os grupos antes de ler a classificação
+    if (typeof recalcularGrupo === "function") {
+        Object.keys(grupos).forEach(g => recalcularGrupo(g)); 
+        console.log("✔ Grupos recalculados");
+    } else {
+        console.error("❌ Função recalcularGrupo() não encontrada!");
+    }
+
+    // 2️⃣ Monta os confrontos da Segunda Fase
+    if (typeof montarSegundaFase !== "function") {
+        console.error("❌ Função montarSegundaFase() não existe!");
+        return;
+    }
+
     const jogos32 = montarSegundaFase();
+    console.log("✔ Confrontos gerados:", jogos32);
 
-    // 3) preenche visualmente
+    // 3️⃣ Preenche a interface da simulação
     preencherSimulacao(jogos32);
 });
+
 </script>
 
 
