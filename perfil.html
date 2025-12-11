@@ -2755,6 +2755,105 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+// ===============================================
+//  LER CLASSIFICAÇÃO DOS GRUPOS A–L
+// ===============================================
+function getClassificacaoGrupo(grupoLetra) {
+    const tbody = document.getElementById(`tabela-grupo${grupoLetra}-body`);
+    if (!tbody) return null;
+
+    const linhas = tbody.querySelectorAll("tr");
+    if (linhas.length < 3) return null; // precisa pelo menos 3 times
+
+    const extractData = (tr) => {
+        const nome = tr.querySelector(".time-nome")?.textContent.trim();
+        const flag = tr.querySelector(".flag")?.src;
+        return { nome, flag };
+    };
+
+    return {
+        primeiro: extractData(linhas[0]),
+        segundo:  extractData(linhas[1]),
+        terceiro: extractData(linhas[2])
+    };
+}
+
+
+// ===============================================
+//  LISTA DOS 12 TERCEIROS — ESCOLHENDO OS 8 MELHORES
+// ===============================================
+function escolherMelhoresTerceiros(terceiros) {
+
+    // Aqui futuramente aplicaremos critérios reais de desempate.
+    // Por enquanto, vamos manter a ORDEM FIXA dos grupos permitidos em cada chave
+    // e apenas devolver o objeto correspondente.
+
+    return terceiros; // retorna todos — filtro será feito pelo chaveamento
+}
+
+
+
+// ===============================================
+//  MONTA OS 16 CONFRONTOS DA SEGUNDA FASE (32)
+// ===============================================
+function montarSegundaFase() {
+
+    const grupos = "ABCDEFGHIJKL".split("");
+
+    const classificacoes = {};
+    const terceiros = {};
+
+    // Captura classificação de cada grupo
+    grupos.forEach(g => {
+        const dados = getClassificacaoGrupo(g);
+        if (!dados) return;
+
+        classificacoes[g] = {
+            primeiro: dados.primeiro,
+            segundo: dados.segundo
+        };
+
+        terceiros[g] = dados.terceiro;
+    });
+
+    // Temporariamente, consideramos todos os terceiros como válidos
+    const melhores3 = escolherMelhoresTerceiros(terceiros);
+
+    // Função auxiliar
+    const pick3 = (lista) => {
+        for (const g of lista) {
+            if (melhores3[g]) return melhores3[g];
+        }
+        return { nome: "—", flag: "" };
+    };
+
+    // AGORA MONTAMOS OS 16 JOGOS seguindo seu chaveamento FIXO:
+    const jogos = {
+
+        1:  { home: classificacoes["E"].primeiro, away: pick3(["A","B","C","D","F"]) },
+        2:  { home: classificacoes["I"].primeiro, away: pick3(["C","D","F","G","H"]) },
+        3:  { home: classificacoes["A"].segundo,  away: classificacoes["B"].segundo },
+        4:  { home: classificacoes["F"].primeiro, away: classificacoes["C"].segundo },
+        5:  { home: classificacoes["K"].segundo,  away: classificacoes["L"].segundo },
+        6:  { home: classificacoes["H"].primeiro, away: classificacoes["J"].segundo },
+        7:  { home: classificacoes["D"].primeiro, away: pick3(["B","E","F","I","J"]) },
+        8:  { home: classificacoes["G"].primeiro, away: pick3(["A","E","H","I","J"]) },
+
+        9:  { home: classificacoes["C"].primeiro, away: classificacoes["F"].segundo },
+        10: { home: classificacoes["E"].segundo,  away: classificacoes["I"].segundo },
+        11: { home: classificacoes["A"].primeiro, away: pick3(["C","E","F","H","I"]) },
+        12: { home: classificacoes["L"].primeiro, away: pick3(["E","H","I","J","K"]) },
+
+        13: { home: classificacoes["J"].primeiro, away: classificacoes["H"].segundo },
+        14: { home: classificacoes["D"].segundo,  away: classificacoes["G"].segundo },
+        15: { home: classificacoes["B"].primeiro, away: pick3(["E","F","G","I","J"]) },
+        16: { home: classificacoes["K"].primeiro, away: pick3(["D","E","I","J","L"]) }
+
+    };
+
+    return jogos;
+}
+
 
 </body>
 </html>
