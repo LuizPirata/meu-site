@@ -2705,21 +2705,18 @@
   <script src="palpites.js"></script>
 
 <script>
-document.querySelector('[data-pane="pane-simulacao"]').addEventListener("click", () => {
+document.querySelector('[data-pane="simulacao"]').addEventListener("click", () => {
+
     console.log("Abrindo Simulação…");
 
+    // 1) recalcula tudo ANTES de montar a simulação
+    recalcularTodosOsGrupos();
+
+    // 2) obtém os confrontos
     const jogos32 = montarSegundaFase();
 
-    for (let i = 1; i <= 16; i++) {
-        const jogo = jogos32[i];
-        const bloco = document.getElementById(`jogo-32-${i}`);
-        if (!bloco || !jogo) continue;
-
-        bloco.querySelector(".home-name").textContent = jogo.home.name;
-        bloco.querySelector(".home-flag").src = jogo.home.flag;
-        bloco.querySelector(".away-name").textContent = jogo.away.name;
-        bloco.querySelector(".away-flag").src = jogo.away.flag;
-    }
+    // 3) preenche visualmente
+    preencherSimulacao(jogos32);
 });
 </script>
 

@@ -965,6 +965,18 @@ function escolherMelhoresTerceiros(terceiros) {
     return terceiros; // retorna todos — filtro será feito pelo chaveamento
 }
 
+// ======================================================
+//  FORÇA A RE-CALCULAR TODOS OS GRUPOS A–L
+// ======================================================
+function recalcularTodosOsGrupos() {
+    const gruposLetras = "ABCDEFGHIJKL".split("");
+
+    gruposLetras.forEach(g => {
+        if (typeof grupos[g] !== "undefined") {
+            recalcularGrupo(g);
+        }
+    });
+}
 
 
 // ===============================================
@@ -1027,6 +1039,24 @@ function montarSegundaFase() {
 
     return jogos;
 }
+
+// ======================================================
+//  PREENCHE VISUALMENTE OS 16 JOGOS NA SIMULAÇÃO
+// ======================================================
+function preencherSimulacao(jogos32) {
+
+    for (let i = 1; i <= 16; i++) {
+        const jogo = jogos32[i];
+        const bloco = document.getElementById(`jogo-32-${i}`);
+        if (!bloco || !jogo) continue;
+
+        bloco.querySelector(".home-name").textContent = jogo.home?.nome || "—";
+        bloco.querySelector(".home-flag").src = jogo.home?.flag || "";
+        bloco.querySelector(".away-name").textContent = jogo.away?.nome || "—";
+        bloco.querySelector(".away-flag").src = jogo.away?.flag || "";
+    }
+}
+
 
 
 
