@@ -2642,6 +2642,20 @@
   const { data: { session }} = await supabaseClient.auth.getSession();
   if (!session) window.location.href = "index.html";
 
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) return;
+
+    const userId = session.user.id;
+
+    // 1️⃣ Carrega palpites existentes no Supabase
+    aplicarPalpitesNosInputs(userId);
+
+    // 2️⃣ Ativa salvamento automático
+    ativarSalvamentoAutomatico(userId);
+});
+</script>
   document.getElementById("logoutBtn").addEventListener("click", async () => {
     await supabaseClient.auth.signOut();
     window.location.href = "index.html";

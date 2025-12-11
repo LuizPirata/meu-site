@@ -555,6 +555,124 @@ const grupos = {
   L: grupoL
 };
 
+// ======================================================================
+//  SUPABASE – Funções para salvar e carregar palpites da tabela real
+// ======================================================================
+
+// Garante acesso ao client global declarado no HTML
+const supa = window.supabase;
+
+// ---------------------------------------------------------
+// Salva (ou atualiza) um palpite no Supabase
+// ---------------------------------------------------------
+async function salvarPalpiteGrupo(usuarioId, jogoId, palpiteCasa, palpiteFora) {
+    if (!usuarioId) {
+        console.error("Usuário não autenticado ao salvar palpite!");
+        return;
+    }
+
+    const { error } = await supa
+        .from("palpites_grupo")
+        .upsert({
+            usuario_id: usuarioId,
+            jogo_id: jogoId,
+            palpite_casa: palpiteCasa,
+            palpite_fora: palpiteFora
+        }, { onConflict: "usuario_id,jogo_id" });
+
+    if (error) {
+        console.error("Erro ao salvar palpite:", error);
+    } else {
+        console.log(`✔ Palpite salvo (jogo ${jogoId})`);
+    }
+}
+
+
+// ---------------------------------------------------------
+// Carrega todos os palpites do usuário logado
+// ---------------------------------------------------------
+async function carregarPalpitesUsuario(usuarioId) {
+    if (!usuarioId) return {};
+
+    const { data, error } = await supa
+        .from("palpites_grupo")
+        .select("*")
+        .eq("usuario_id", usuarioId);
+
+    if (error) {
+        console.error("Erro ao carregar palpites:", error);
+        return {};
+    }
+
+    // Transforma lista em objeto indexado por jogo_id
+    const mapa = {};
+    data.forEach(p => {
+        mapa[p.jogo_id] = {
+            casa: p.palpite_casa,
+            fora: p.palpite_fora
+        };
+    });
+
+    return mapa;
+}
+
+
+// ======================================================================
+//  INTEGRA PALPITES SALVOS COM OS INPUTS DO HTML
+// ======================================================================
+
+// Esta função preenche os inputs de cada jogo com os palpites do Supabase
+async function aplicarPalpitesNosInputs(usuarioId) {
+    const palpites = await carregarPalpitesUsuario(usuarioId);
+
+    Object.keys(grupos).forEach(g => {
+        const group = grupos[g];
+
+        group.matches.forEach(match => {
+            const palpite = palpites[match.id];
+            if (!palpite) return;
+
+            const homeInput = document.querySelector(match.homeSelector);
+            const awayInput = document.querySelector(match.awaySelector);
+
+            if (homeInput) homeInput.value = palpite.casa ?? "";
+            if (awayInput) awayInput.value = palpite.fora ?? "";
+        });
+
+        // Recalcula tabela depois de preencher
+        recalcularGrupo(g);
+    });
+}
+
+
+// ======================================================================
+//  CONECTA INPUTS AO SALVAMENTO AUTOMÁTICO
+// ======================================================================
+async function ativarSalvamentoAutomatico(usuarioId) {
+    Object.keys(grupos).forEach(g => {
+        const group = grupos[g];
+
+        group.matches.forEach(match => {
+            const homeInput = document.querySelector(match.homeSelector);
+            const awayInput = document.querySelector(match.awaySelector);
+
+            if (!homeInput || !awayInput) return;
+
+            const listener = () => {
+                const casa = homeInput.value === "" ? null : parseInt(homeInput.value);
+                const fora = awayInput.value === "" ? null : parseInt(awayInput.value);
+
+                salvarPalpiteGrupo(usuarioId, match.id, casa, fora);
+                recalcularGrupo(g);
+            };
+
+            homeInput.addEventListener("input", listener);
+            awayInput.addEventListener("input", listener);
+        });
+    });
+}
+
+
 // ==========================================================
 //  MOTOR GENÉRICO
 // ==========================================================
