@@ -2513,32 +2513,29 @@
 
     <div class="sim-grid fase32">
 
-        <!-- 16 jogos da Segunda Fase -->
-        <!-- Cada bloco tem inputs de placar e área de output do vencedor -->
-
-        <!-- MODELO (repete 16 vezes mudando id) -->
-        <!-- jogo-32-1, jogo-32-2, ..., jogo-32-16 -->
-
-        <!-- JOGO 1 -->
-        <div class="sim-jogo" id="jogo-32-1">
-            <div class="sim-time-linha">
-                <img class="sim-flag home-flag">
-                <span class="sim-time home-name">Time A</span>
-                <input type="number" class="sim-placar home-gols">
-            </div>
-
-            <div class="sim-x">X</div>
-
-            <div class="sim-time-linha">
-                <img class="sim-flag away-flag">
-                <span class="sim-time away-name">Time B</span>
-                <input type="number" class="sim-placar away-gols">
-            </div>
-
-            <div class="sim-vencedor">
-                <strong>Vencedor:</strong> <span class="winner-name"></span>
-            </div>
+    <!-- MODELO QUE SERÁ CLONADO -->
+    <div class="sim-jogo modelo" id="jogo-32-modelo">
+        <div class="sim-time-linha">
+            <img class="sim-flag home-flag">
+            <span class="sim-time home-name">Time A</span>
+            <input type="number" class="sim-placar home-gols">
         </div>
+
+        <div class="sim-x">X</div>
+
+        <div class="sim-time-linha">
+            <img class="sim-flag away-flag">
+            <span class="sim-time away-name">Time B</span>
+            <input type="number" class="sim-placar away-gols">
+        </div>
+
+        <div class="sim-vencedor">
+            <strong>Vencedor:</strong> <span class="winner-name"></span>
+        </div>
+    </div>
+
+</div>
+
 
         <!-- Geração automática dos outros jogos -->
         <!-- Basta duplicar este bloco com ids de 1 a 16 -->
@@ -2727,6 +2724,37 @@ document.querySelectorAll(".top-menu-btn").forEach(btn => {
     });
 });
 </script>
+
+<script>
+// ======================================================
+//  GERADOR AUTOMÁTICO DOS 16 JOGOS DA SEGUNDA FASE
+// ======================================================
+document.addEventListener("DOMContentLoaded", () => {
+    
+    const container = document.querySelector(".fase32");
+    const modelo = document.getElementById("jogo-32-modelo");
+
+    if (!container || !modelo) {
+        console.error("Erro: container da fase 32 ou modelo não encontrado!");
+        return;
+    }
+
+    // Remove qualquer jogo existente (além do modelo)
+    container.querySelectorAll(".sim-jogo:not(.modelo)").forEach(j => j.remove());
+
+    // Criar os jogos 1 a 16
+    for (let i = 1; i <= 16; i++) {
+        const novo = modelo.cloneNode(true);
+        novo.id = `jogo-32-${i}`;
+        novo.classList.remove("modelo");
+        container.appendChild(novo);
+    }
+
+    // Ocultar o modelo após clonar
+    modelo.style.display = "none";
+});
+</script>
+
 
 </body>
 </html>
